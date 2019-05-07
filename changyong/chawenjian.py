@@ -1,9 +1,8 @@
 import csv,sys
 import os
 
-
-def chawenjianla():
-    pici = r'C:\Users\a7825\Desktop\工作空间\语音数据\RWCP-SP96-要切\第一批 - 副本 (2)'
+def chawenjianla(path):
+    pici = path
     #批次的目录
 
     keka = 'keka'
@@ -50,7 +49,7 @@ def chawenjianla():
             for i in b:
                 # print(i)
                 # os.system('pause')
-                if i[0] == 'sentence1:  。' or i[0] == '<input rejected by short input>':
+                if i[0] == 'sentence1:  。' or i[0] == '<input rejected by short input>'or i[0] =='<search failed>':
                     print(x)
 
                     path_shan_2_out = os.path.join(pici_2,x)

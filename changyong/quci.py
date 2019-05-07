@@ -4,13 +4,11 @@
 #记住，必须要重新在linux中新建一个.ref文件，把在windows上生成的,ref文件的内容复制到这个新建的文件中去，才能被scoring识别
 import csv
 import os
-import dianlog as di
 
-path = r'C:\Users\a7825\Desktop\工作空间\语音数据\RWCP-SP96-要切\第三批'
+path = r'C:\Users\a7825\Desktop\工作空间\语音数据\RWCP-SP96-要切\第一批 - 副本 (2)'
 
 for mulu in os.listdir(path):
 
-    jushiqi = 0
     file_dir = os.path.join(path,mulu)
     #chasen的出力文件的地址以及整理之后的文件的地址
 
@@ -42,7 +40,6 @@ for mulu in os.listdir(path):
 
         elif i[0]=='EOS':#发现EOS就删除这个列表开头的第一个元素
             banyun_1.pop(0)
-            jushiqi = jushiqi +1
 
             banyun_2.append(banyun_1)
             banyun_1 = []
@@ -59,14 +56,8 @@ for mulu in os.listdir(path):
 
     with open(files_dir_1, 'w') as f:#把正解文一句一句地写入新的txt文件
         name = os.listdir(file_dir_2)
-
-        if jushiqi != len(name):
-            print("请注意，正解文的数量跟.out文件的数量不一样")
-            print(mulu)
-
-        #注意，这部分是RWCP专用
-        # name.sort(key=lambda ele: int(ele.split('_')[1]))  # 把每个元素都用split函数拆开，以第二个字符串的大小为基准，进行排序
-        # name.sort(key=lambda ele: ele.split('_')[0])  # 然后再以拆开的第一个字符串为基准进行排序
+        name.sort(key=lambda ele: int(ele.split('_')[1]))  # 把每个元素都用split函数拆开，以第二个字符串的大小为基准，进行排序
+        name.sort(key=lambda ele: ele.split('_')[0])  # 然后再以拆开的第一个字符串为基准进行排序
 
         n = 0
         for u in data_1:
@@ -74,8 +65,7 @@ for mulu in os.listdir(path):
                 # print(len(data_1))
                 # print("n的值为%d"%n)
                 # os.system("pause")
+                print(mulu)
                 f.writelines(name[n].replace(".out",'') + '\n')#记住，删除字符串中的某一段用replace
                 f.writelines(u+'\n')#每写一句就空一行
                 n=n+1
-
-di.logwen(path)
