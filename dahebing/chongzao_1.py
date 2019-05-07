@@ -5,7 +5,6 @@ import copy
 # import strQ2B
 
 
-
 def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list/scoring之后的识别结果/通过.out文件解析出来的list/文件ID
 
     # kakasi = pykakasi.kakasi()

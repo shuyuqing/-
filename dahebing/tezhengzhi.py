@@ -5,7 +5,6 @@ import numpy as np
 import os
 import muluzai as muluz
 
-basedir = r"C:\Users\a7825\Desktop\工作空间\语音数据\UUDB\第一次实验\打标签\第五批"
 
 def tiqu(path):
 
@@ -26,7 +25,7 @@ def tiqu(path):
         for ad_file in os.listdir(input_dir):
             (fs, audio) = wav.read(input_dir + "/" + ad_file)
             # feature_m, feature_n = fbank(audio, fs, winfunc=np.hamming)
-            log = logfbank(audio,fs,nfilt=25)
+            log = logfbank(audio,fs,nfilt=40)
             # mf = mfcc(audio)
             # np.savetxt(output_dir1 + "/" + ad_file + ".csv", feature_m, delimiter=',')
             np.savetxt(output_dir2 + "/" + ad_file + ".csv", log, delimiter=',')

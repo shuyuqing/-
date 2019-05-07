@@ -34,7 +34,7 @@ def hencyou_1(path):
 
         for i in os.listdir(indir):
             a = np.loadtxt(os.path.join(indir, i), delimiter=',', skiprows=0).astype(np.float32)
-            lin = np.zeros((63,np.shape(a)[1]))#注意这里的行数等于block减去一，而且给矩阵补了零
+            lin = np.zeros((31,np.shape(a)[1]))#注意这里的行数等于block减去一，而且给矩阵补了零
             c = np.vstack((a,lin))
 
             np.savetxt(os.path.join(indir, i), c,delimiter=',')
