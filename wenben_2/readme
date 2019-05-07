@@ -11,7 +11,8 @@ hencyou:#删除fbank的前五行，再在后面补零，再做変調スペクト
 tezhengzhi:#提取各种特征值
 shanchuhang:#删除一个文件中的前几行跟后面几行
 shanchongfu:把未能被julius识别的音频文件都删除掉,julius认识之后，把全部.out文件都挑出来(shanchongfu跟yidong_1合并了,并且引用了shanchongfu)
-yidong_1:julius认识之后，把全部.out文件都挑出来(直接使用shanchongfu把，已经合并了)
+yidong_1:julius认识之后，把全部.out文件都挑出来
+yidong_2:julius认识之后，把全部.out文件都挑出来，然后把不符合要求的.out文件都删除了
 chuangjian:用一个文件列表创建一串空的新建文件，并在新建文件夹里面创建wav,keka,正解文.txt等文件
 duiyingshanchu:以wav文件的列表为参照，删掉.out文件中多出来的那些文件（有时候需要手动删掉）
 dianlog:#根据原有的.out文件生成能被scoring所识别的标准日志文件(.log文件)(被quci引用了)

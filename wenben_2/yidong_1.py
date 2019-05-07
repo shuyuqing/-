@@ -4,12 +4,12 @@ import muluzai as mulu
 
 str = ".out"
 
-path = r"C:\Users\a7825\Desktop\工作空间\语音数据\CSJ\WAV\第一批"#批次
+path = r"C:\Users\a7825\Desktop\shiyan\symbol"#批次
 
 
 for filename in os.listdir(path):
     path_1 = os.path.join(path,filename,'wav')#这里要根据实际的目录进行修改
-    path_out = os.path.join(path,filename,'keka')
+    path_out = os.path.join(path,filename,'keka_yinsu')
     mulu.mkdir(path_out)
 
     for filename_1 in os.listdir(path_1):
