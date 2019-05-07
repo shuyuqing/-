@@ -4,7 +4,7 @@ import shanchuhang as sc
 import tezhengzhi as te
 import zhengjie_RWCP as zR
 import os
-import pipei_s as pipei
+import pipei_s_yinsu as pipei
 import quci_RWCP_SP96 as quci
 import balangsu as bl
 import qiediao_5 as qie
@@ -14,7 +14,7 @@ import zhaocuo
 import zhengli,zhuanyi
 
 
-path = r'C:\Users\shu\Desktop\gongxiang\symbol'#批次
+path = r'C:\Users\a7825\Desktop\shiyan\dabiaoqian\symbol'#批次
 
 
 # sh.shanchongfu_1(path)
@@ -52,7 +52,7 @@ path = r'C:\Users\shu\Desktop\gongxiang\symbol'#批次
 
 
 
-# pipei.dabiaoqian(path,guanjianzi_1 = 'log',guanjianzi_2 = 'xinde_log')#打标签
+pipei.dabiaoqian(path,guanjianzi_1 = 'log',guanjianzi_2 = 'xinde_log')#打标签
 # pipei.dabiaoqian(path,guanjianzi_1 = 'mizhichuli_log',guanjianzi_2 = 'xinde_mizhichuli')
 
 
@@ -76,46 +76,46 @@ path = r'C:\Users\shu\Desktop\gongxiang\symbol'#批次
 
 
 
-for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-
-    path_1 = os.path.join(path, wenjian, 'xinde_log')
-    path_new = os.path.join(path, wenjian, 'xinde_log_1')
-    path_qiediao = os.path.join(path,wenjian,'qiediao_log')
-
-    mu.mkdir(path_new)
-    mu.mkdir(path_qiediao)
-
-    for wenjian_1 in os.listdir(path_1):
-        path_2 = os.path.join(path_1, wenjian_1)
-        qie.qiexiao(path_2,wenjian_1,path_new,path_qiediao)
-
-
-
-
-bl.pingheng(path,guanjianzi = 'xinde_log_1')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+#
+#     path_1 = os.path.join(path, wenjian, 'xinde_log')
+#     path_new = os.path.join(path, wenjian, 'xinde_log_1')
+#     path_qiediao = os.path.join(path,wenjian,'qiediao_log')
+#
+#     mu.mkdir(path_new)
+#     mu.mkdir(path_qiediao)
+#
+#     for wenjian_1 in os.listdir(path_1):
+#         path_2 = os.path.join(path_1, wenjian_1)
+#         qie.qiexiao(path_2,wenjian_1,path_new,path_qiediao)
 
 
 
 
-for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-
-    path_1 = os.path.join(path, wenjian, 'xinde_mizhichuli')
-    path_new = os.path.join(path, wenjian, 'xinde_mizhichuli_1')
-    path_qiediao = os.path.join(path, wenjian, 'qiediao_mizhichuli')
-
-    mu.mkdir(path_new)
-    mu.mkdir(path_qiediao)
-
-    for wenjian_1 in os.listdir(path_1):
-        path_2 = os.path.join(path_1, wenjian_1)
-        qie.qiexiao(path_2,wenjian_1,path_new,path_qiediao)
-
-
-bl.pingheng(path,guanjianzi = 'xinde_mizhichuli_1')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+# bl.pingheng(path,guanjianzi = 'xinde_log_1')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
 
 
 
-zhengli.zhengli(path)#把opentest,closetest,整理出来
+
+# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+#
+#     path_1 = os.path.join(path, wenjian, 'xinde_mizhichuli')
+#     path_new = os.path.join(path, wenjian, 'xinde_mizhichuli_1')
+#     path_qiediao = os.path.join(path, wenjian, 'qiediao_mizhichuli')
+#
+#     mu.mkdir(path_new)
+#     mu.mkdir(path_qiediao)
+#
+#     for wenjian_1 in os.listdir(path_1):
+#         path_2 = os.path.join(path_1, wenjian_1)
+#         qie.qiexiao(path_2,wenjian_1,path_new,path_qiediao)
+
+
+# bl.pingheng(path,guanjianzi = 'xinde_mizhichuli_1')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+
+
+
+# zhengli.zhengli(path)#把opentest,closetest,整理出来
 
 
 

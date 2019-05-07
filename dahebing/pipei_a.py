@@ -7,10 +7,7 @@ import strQ2B
 import make_kana_convertor
 import chongzao_1 as cz
 
-#打标签的思路是：因为CCSS的符号是跟正解文,识别结果两个中比较长的一个对应的，这个是最大的难点，所以要做的是先去找标志文件里面的C,
-#也就是正确认识的单词，然后返回这些C的索引，然后根据索引去识别结果(正解文)中找被正确识别的单词，注意只有识别结果才对应帧数表，找到之后把单词顺序插入到一个list中去，
-#在用识别结果里的单词去对应这个list,按顺序一个单词一个单词地对，每成功对应上一个单词就从list中把这个单词删除掉，并获取这个单词
-#的帧数表，然后打上标签0，没有对应上的单词就在这个单词的范围内打上标签1
+
 #为了处理那些因为表示方式不同而被打错标签的单词，先把错误单词的索引找出，再把单词转变成字母，然后再比较
 
 def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
@@ -72,13 +69,13 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                 ID = biaozhiwenjian_1[i][0].replace('id: ', '')
 
-                l_zhengjie = biaozhiwenjian_1[i + 1][0].split()
+                l_zhengjie = biaozhiwenjian_1[i + 1][0].split()#取REF
                 l_zhengjie.pop(0)
 
-                l_jieguo = biaozhiwenjian_1[i + 2][0].split()
+                l_jieguo = biaozhiwenjian_1[i + 2][0].split()#取HYP
                 l_jieguo.pop(0)
 
-                l_biaozhi = biaozhiwenjian_1[i + 3][0].split()
+                l_biaozhi = biaozhiwenjian_1[i + 3][0].split()#取EVAL
                 l_biaozhi.pop(0)
 
                 # try:
@@ -104,26 +101,26 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                 for i in l_biaozhi:
 
-                    if i == "D":
+                    if i == "D":#删除错误
                         l_zhengjie_1.append(l_zhengjie[jishuqi_zhengjie])
-                        l_jieguo_1.append('')
+                        l_jieguo_1.append('')#发生删除错误，就在识别结果的列表里面加上一个空格
                         jishuqi_zhengjie += 1
                         jishuqi_biaozhi += 1
 
-                    if i == "C":
+                    if i == "C":#正解
                         l_zhengjie_1.append(l_zhengjie[jishuqi_zhengjie])
-
+                        #正确的话就在识别结果和正解文两个列表里面都加入单词
                         # print('l_jieguo')
                         # print(l_jieguo)
                         # os.system('pause')
-                        l_jieguo_1.append(l_jieguo[jishuqi_jieguo])
+                        l_jieguo_1.append(l_jieguo[jishuqi_jieguo])#
                         jishuqi_zhengjie += 1
                         jishuqi_jieguo += 1
                         jishuqi_biaozhi += 1
 
-                    if i == "I":
+                    if i == "I":#插入错误
                         l_jieguo_1.append(l_jieguo[jishuqi_jieguo])
-                        l_zhengjie_1.append('')
+                        l_zhengjie_1.append('')#发生插入错误，就在正解文的里面加入空格
                         jishuqi_jieguo += 1
                         jishuqi_biaozhi += 1
 
@@ -202,7 +199,7 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                 end_1 = len(t_file_list)-1
 
                 for i in range(start + 1):
-                    t_file_list[i].insert(0, '9')  # 最前面的无音区间全部都打标签9,把它们当做正确认识来处理
+                    t_file_list[i].insert(0, '9')  #最前面的无音区间全部都打标签9,把它们当做正确认识来处理
 
                 for i in range(start_1, end_1 + 1):
                     t_file_list[i].insert(0, '9')
@@ -229,6 +226,8 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                 # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
                 for i in dianout_chongzao:
 
+                #想要在音素上进行比较，得看标签为S的部分
+
                     start, end = i[1]
                     if i[2] == 'C':
 
@@ -238,7 +237,7 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                     else:
 
                         for i in range(start, end + 1):
-                            t_file_list[i].insert(0, '1')
+                            t_file_list[i].insert(0, '1')#标记为I或者S的单词的特征值需要打上标签1
 
                 path_xinde_tezhengzhi = os.path.join(path_xinde, ID + '.csv')
 
