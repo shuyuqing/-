@@ -3,6 +3,8 @@ import pipei_yinsu as pei
 
 def yinsu(zhengjie,start_1,end_1,ID_1,path):
 
+    print("zhengjie是")
+    print(zhengjie)
     shouzimu = zhengjie[0]
     weizimu =zhengjie[-1]
 
@@ -41,10 +43,10 @@ def yinsu(zhengjie,start_1,end_1,ID_1,path):
     print("音素的开始帧数是")
     print(start_2)
 
-    if start_2 == 0 and end_2 == 0:
-
-        print("因音素上找不到对应")
-        print("文件ID为%s"%ID_1)
-        os.system('pause')
+    # if start_2 == 0 and end_2 == 0:
+    #
+    #     print("因音素上找不到对应")
+    #     print("文件ID为%s"%ID_1)
+    #     os.system('pause')
 
     return start_2,end_2
