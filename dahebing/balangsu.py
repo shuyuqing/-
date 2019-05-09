@@ -23,7 +23,7 @@ def pingheng(path,guanjianzi):#把标签都是0的文件找出来
 
     liebiao = os.listdir(path)
 
-    quanshi0= os.path.join(r'C:\Users\a7825\Desktop\table','quanshi0_' + guanjianzi)
+    quanshi0= os.path.join(os.path.join(os.path.expanduser("~"), 'Desktop'),'table','quanshi0_' + guanjianzi)
 
     mu.mkdir(quanshi0)
 
