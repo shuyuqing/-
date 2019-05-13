@@ -16,7 +16,7 @@ import zhengli,zhuanyi
 import zhaocuo
 import numpy as np
 import suanzhenshu as sz
-import zhengguihua as zheng
+import zhengguihua_1 as zheng
 
 
 #注意每次看看标志文件是aglin还是symbol.txt
@@ -34,11 +34,11 @@ path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'#批次
 
 
 
-sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
+# sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
 
-he.hencyou_1(path)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+# he.hencyou_1(path)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 # print("把左右两个声道的正解文都合并一下,然后输入chasen吧")
 # os.system("pause")
 
@@ -52,71 +52,71 @@ he.hencyou_1(path)#删除文件的前几行，补上零，然后做変調スペ�
 
 
 
-zheng.zhenggui(path,guanjianzi = 'log')#正则化处理
-zheng.zhenggui(path,guanjianzi = 'mizhichuli_log')
+# zheng.zhenggui(path,guanjianzi = 'log')#正则化处理
+# zheng.zhenggui(path,guanjianzi = 'mizhichuli_log')
 
 
-pipei.dabiaoqian(path,guanjianzi_1 = 'log_zhengzehua',guanjianzi_2 = 'xinde_log_zhengzehua')#打标签
-pipei.dabiaoqian(path,guanjianzi_1 = 'mizhichuli_log',guanjianzi_2 = 'xinde_mizhichuli_zhengzehua')
-
-
-
-
-bl.kongwenjian(path,guanjianzi='xinde_log_zhengzehua')#把大小为0的文件都删除了
-bl.kongwenjian(path,guanjianzi='xinde_mizhichuli_zhengzehua')#把大小为0的文件都删除了
+# pipei.dabiaoqian(path,guanjianzi_1 = 'log_zhengzehua',guanjianzi_2 = 'xinde_log_zhengzehua')#打标签
+# pipei.dabiaoqian(path,guanjianzi_1 = 'mizhichuli_log',guanjianzi_2 = 'xinde_mizhichuli_zhengzehua')
 
 
 
 
-bl.pingheng(path,guanjianzi='xinde_log_zhengzehua')#把标签全部是0的文件都移动到桌面去
-bl.pingheng(path,guanjianzi='xinde_mizhichuli_zhengzehua')#把标签全部是0的文件都移动到桌面去
+# bl.kongwenjian(path,guanjianzi='xinde_log_zhengzehua')#把大小为0的文件都删除了
+# bl.kongwenjian(path,guanjianzi='xinde_mizhichuli_zhengzehua')#把大小为0的文件都删除了
 
 
 
 
-bl.pingheng_1(path,guanjianzi='xinde_log_zhengzehua')#把标签全部是1的文件都移动到桌面上去
-bl.pingheng_1(path,guanjianzi='xinde_mizhichuli_zhengzehua')#把标签全部是1的文件都移动到桌面去
+# bl.pingheng(path,guanjianzi='xinde_log_zhengzehua')#把标签全部是0的文件都移动到桌面去
+# bl.pingheng(path,guanjianzi='xinde_mizhichuli_zhengzehua')#把标签全部是0的文件都移动到桌面去
 
 
 
 
-for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-
-    path_1 = os.path.join(path, wenjian, 'xinde_log_zhengzehua')
-    path_new = os.path.join(path, wenjian, 'xinde_log_pingheng_zhengzehua')
-
-    mu.mkdir(path_new)
-
-    for wenjian_1 in os.listdir(path_1):
-        path_2 = os.path.join(path_1, wenjian_1)
-        qie5.qiexiao(path_2,wenjian_1,path_new)
-
-
-bl.kongwenjian(path,guanjianzi='xinde_log_pingheng_zhengzehua')#把大小为0的文件都删除了
-bl.pingheng(path,guanjianzi = 'xinde_log_pingheng_zhengzehua')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+# bl.pingheng_1(path,guanjianzi='xinde_log_zhengzehua')#把标签全部是1的文件都移动到桌面上去
+# bl.pingheng_1(path,guanjianzi='xinde_mizhichuli_zhengzehua')#把标签全部是1的文件都移动到桌面去
 
 
 
 
-for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-    path_1 = os.path.join(path, wenjian, 'xinde_mizhichuli_zhengzehua')
-    path_new = os.path.join(path, wenjian, 'xinde_mizhichuli_pingheng_zhengzehua')
-
-    mu.mkdir(path_new)
-
-    for wenjian_1 in os.listdir(path_1):
-        path_2 = os.path.join(path_1, wenjian_1)
-        qie5.qiexiao(path_2,wenjian_1,path_new)
-
-
-
-bl.kongwenjian(path,guanjianzi = 'xinde_mizhichuli_pingheng_zhengzehua')#把大小为0的文件都删除了
-bl.pingheng(path,guanjianzi = 'xinde_mizhichuli_pingheng_zhengzehua')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+#
+#     path_1 = os.path.join(path, wenjian, 'xinde_log_zhengzehua')
+#     path_new = os.path.join(path, wenjian, 'xinde_log_pingheng_zhengzehua')
+#
+#     mu.mkdir(path_new)
+#
+#     for wenjian_1 in os.listdir(path_1):
+#         path_2 = os.path.join(path_1, wenjian_1)
+#         qie5.qiexiao(path_2,wenjian_1,path_new)
 
 
+# bl.kongwenjian(path,guanjianzi='xinde_log_pingheng_zhengzehua')#把大小为0的文件都删除了
+# bl.pingheng(path,guanjianzi = 'xinde_log_pingheng_zhengzehua')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
 
 
-zhengli.zhengli(path,guanjianzi_1='xinde_log_pingheng_zhengzehua',guanjianzi_2 = 'xinde_mizhichuli_pingheng_zhengzehua')#把opentest,closetest,整理出来
+
+
+# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+#     path_1 = os.path.join(path, wenjian, 'xinde_mizhichuli_zhengzehua')
+#     path_new = os.path.join(path, wenjian, 'xinde_mizhichuli_pingheng_zhengzehua')
+#
+#     mu.mkdir(path_new)
+#
+#     for wenjian_1 in os.listdir(path_1):
+#         path_2 = os.path.join(path_1, wenjian_1)
+#         qie5.qiexiao(path_2,wenjian_1,path_new)
+
+
+
+# bl.kongwenjian(path,guanjianzi = 'xinde_mizhichuli_pingheng_zhengzehua')#把大小为0的文件都删除了
+# bl.pingheng(path,guanjianzi = 'xinde_mizhichuli_pingheng_zhengzehua')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+
+
+
+
+# zhengli.zhengli(path,guanjianzi_1='xinde_log_pingheng_zhengzehua',guanjianzi_2 = 'xinde_mizhichuli_pingheng_zhengzehua')#把opentest,closetest,整理出来
 
 # sz.suanzhenshu(path)
 
@@ -155,14 +155,12 @@ zhengli.zhengli(path,guanjianzi_1='xinde_log_pingheng_zhengzehua',guanjianzi_2 =
 # ps.pishan(path,guanjianzi='xinde_mizhichuli',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
 # ps.pishan(path,guanjianzi='xinde_log_1',guanjianzi_1 = 'mulu')
 # ps.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
-# ps.pishan(path,guanjianzi='mizhichuli_log',guanjianzi_1 = 'mulu')
-# ps.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
-# ps.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
-# ps.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')
-# ps.pishan(path,guanjianzi='bulin',guanjianzi_1 = 'mulu')
+ps.pishan(path,guanjianzi='mizhichuli_log',guanjianzi_1 = 'mulu')
+ps.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
+ps.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
+ps.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')
+ps.pishan(path,guanjianzi='bulin',guanjianzi_1 = 'mulu')
 # ps.pishan(path,guanjianzi='xinde_mizhichuli_1',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
-# ps.pishan(path,guanjianzi='qiediao_log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
-# ps.pishan(path,guanjianzi='qiediao_mizhichuli',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
 
 
 
