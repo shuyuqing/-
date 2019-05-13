@@ -2,7 +2,7 @@ import math,os
 import numpy as np
 import muluzai as mu
 
-def zhenggui_1(path,guanjianzi):#先正规化之后再打标签
+def zhenggui(path,guanjianzi):#先正规化之后再打标签
 
     for wenjianming in os.listdir(path):
 
