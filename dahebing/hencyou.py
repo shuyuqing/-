@@ -39,4 +39,4 @@ def hencyou_1(path,chuangkou):
 
             np.savetxt(os.path.join(indir, i), c,delimiter=',')
 
-    fu.mizhichuli(baseindir)#进行変調スペクトル的计算
+    fu.mizhichuli(baseindir,chuangkou)#进行変調スペクトル的计算

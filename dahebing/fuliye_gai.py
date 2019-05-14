@@ -7,7 +7,7 @@ import os
 import math as ma
 import muluzai as mulu
 
-def mizhichuli(basedir):
+def mizhichuli(basedir,chuangkou):
 
     bulin = 'bulin'
 
@@ -38,7 +38,7 @@ def mizhichuli(basedir):
 
             global block, start, end, huishu
             start = 0
-            block = 32
+            block = chuangkou
             # block是窗口的大小
             huishu = hang - block + 1
             # 每一列要做的傅里叶变化的次数
