@@ -29,6 +29,7 @@ qiediao_5:#把特征值文件切成只由一段1和一段0组成的，一段一�
 suanzhenshu:计算一批数据的最长帧数，平均帧数以及最短帧数
 zhengguihua:把学习数据正规化(沿着时间轴做)
 zhengguihua_1:把学习数据正规化(沿着周期轴做)
+zhengguihua_2:老师介绍的方法，把每个周期bin上的值缩小，让每个bin的平均能量变成1
 
 其他
 make_kana_convertor:#可以把英语字母转化为片假名

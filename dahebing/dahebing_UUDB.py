@@ -22,17 +22,19 @@ import muluzai as mu
 import pishan as ps
 import zhaocuo
 import zhengli,zhuanyi
-import zhengguihua_1 as zheng_1
+import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 
 
-path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'#批次
+path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'#批次
 
 
 weidu = 24
 chuangkou = 32
 zhengguihua = F
-zhengguihua_1 = T
+zhengguihua_2 = T
+logenergy = F
+energy = T
 
 
 
@@ -47,7 +49,7 @@ zhengguihua_1 = T
 
 
 
-te.tiqu(path,weidu)#提取wav文件的特征值
+te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
@@ -81,13 +83,13 @@ if zhengguihua == True:
     s2_1 = 'mizhichuli_zhengguihua_biaoqian'
 
 
-if zhengguihua_1 == True:
-    zheng_1.zhenggui(path,guanjianzi = s1)#正则化处理
-    zheng_1.zhenggui(path,guanjianzi = s2)
-    s1 = 'log_zhengguihua_1'
-    s1_1 = 'log_zhengguihua_1_biaoqian'
-    s2 = 'mizhichuli_zhengguihua_1'
-    s2_1 = 'mizhichuli_zhengguihua_1_biaoqian'
+if zhengguihua_2 == True:
+    zheng_2.zhenggui(path,guanjianzi = s1)#正则化处理
+    zheng_2.zhenggui(path,guanjianzi = s2)
+    s1 = 'log_zhengguihua_2'
+    s1_1 = 'log_zhengguihua_2_biaoqian'
+    s2 = 'mizhichuli_zhengguihua_2'
+    s2_1 = 'mizhichuli_zhengguihua_2_biaoqian'
 
 
 

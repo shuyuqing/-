@@ -1,11 +1,11 @@
 import re
 import pykakasi #把平假名或片假名转化为读音
 import math
-import  MeCab
+import numpy as np
 
-str = "となりの隣がとなりのトトロ"
-tagger = MeCab.Tagger("-d /path-to-NEoligd")
-print(tagger.parse(str))
+# str = "となりの隣がとなりのトトロ"
+# tagger = MeCab.Tagger("-d /path-to-NEoligd")
+# print(tagger.parse(str))
 
 
 
@@ -55,3 +55,4 @@ print(tagger.parse(str))
 # a = math.sqrt()
 # a = math.pow(0.51823924,2)+math.pow(0.85523569,2)
 # print(a)
+print(np.log())
