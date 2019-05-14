@@ -14,7 +14,7 @@ import zhaocuo
 import zhengli,zhuanyi
 
 
-path = r'C:\Users\a7825\Desktop\shiyan\dabiaoqian\symbol'#批次
+path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'#批次
 
 
 # sh.shanchongfu_1(path)
@@ -51,9 +51,13 @@ path = r'C:\Users\a7825\Desktop\shiyan\dabiaoqian\symbol'#批次
 
 
 
+# zheng.zhenggui(path,guanjianzi = 'log')#正则化处理
+# zheng.zhenggui(path,guanjianzi = 'mizhichuli_log')
 
-pipei.dabiaoqian(path,guanjianzi_1 = 'log',guanjianzi_2 = 'xinde_log')#打标签
-# pipei.dabiaoqian(path,guanjianzi_1 = 'mizhichuli_log',guanjianzi_2 = 'xinde_mizhichuli')
+
+
+# pipei.dabiaoqian(path,guanjianzi_1 = 'log_zhengzehua',guanjianzi_2 = 'xinde_log_zhengzehua_1')#打标签
+# pipei.dabiaoqian(path,guanjianzi_1 = 'mizhichuli_log',guanjianzi_2 = 'xinde_mizhichuli_zhengzehua_1')
 
 
 
@@ -83,11 +87,10 @@ pipei.dabiaoqian(path,guanjianzi_1 = 'log',guanjianzi_2 = 'xinde_log')#打标签
 #     path_qiediao = os.path.join(path,wenjian,'qiediao_log')
 #
 #     mu.mkdir(path_new)
-#     mu.mkdir(path_qiediao)
 #
 #     for wenjian_1 in os.listdir(path_1):
 #         path_2 = os.path.join(path_1, wenjian_1)
-#         qie.qiexiao(path_2,wenjian_1,path_new,path_qiediao)
+#         qie.qiexiao(path_2,wenjian_1,path_new)
 
 
 
@@ -104,18 +107,17 @@ pipei.dabiaoqian(path,guanjianzi_1 = 'log',guanjianzi_2 = 'xinde_log')#打标签
 #     path_qiediao = os.path.join(path, wenjian, 'qiediao_mizhichuli')
 #
 #     mu.mkdir(path_new)
-#     mu.mkdir(path_qiediao)
 #
 #     for wenjian_1 in os.listdir(path_1):
 #         path_2 = os.path.join(path_1, wenjian_1)
-#         qie.qiexiao(path_2,wenjian_1,path_new,path_qiediao)
+#         qie.qiexiao(path_2,wenjian_1,path_new)
 
 
 # bl.pingheng(path,guanjianzi = 'xinde_mizhichuli_1')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
 
 
 
-# zhengli.zhengli(path)#把opentest,closetest,整理出来
+# zhengli.zhengli(path,guanjianzi_1='xinde_log_pingheng_zhengzehua',guanjianzi_2 = 'xinde_mizhichuli_pingheng_zhengzehua')#把opentest,closetest,整理出来
 
 
 
@@ -144,7 +146,6 @@ pipei.dabiaoqian(path,guanjianzi_1 = 'log',guanjianzi_2 = 'xinde_log')#打标签
 # ps.pishan(path,guanjianzi='xinde_log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
 # ps.pishan(path,guanjianzi='xinde_mizhichuli',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
 # ps.pishan(path,guanjianzi='xinde_log_1',guanjianzi_1 = 'mulu')
-# ps.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
 # ps.pishan(path,guanjianzi='mizhichuli_log',guanjianzi_1 = 'mulu')
 # ps.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
 # ps.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
