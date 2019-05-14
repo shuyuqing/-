@@ -27,7 +27,7 @@ def tiqu(path,weidu,logenergy,energy_1):
             (fs, audio) = wav.read(input_dir + "/" + ad_file)
 
             if energy_1 == True:
-                feat, energy, spectro = fbank(audio, fs, nfilt=weidu)
+                feat, energy = fbank(audio, fs, nfilt=weidu)
                 np.savetxt(output_dir2 + "/" + ad_file + ".csv", feat, delimiter=',')
 
             if logenergy == True:
