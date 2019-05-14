@@ -8,7 +8,7 @@ def zhenggui(path,guanjianzi):#先正规化之后再打标签
 
         path_1 = os.path.join(path, wenjianming, guanjianzi)
 
-        path_new = os.path.join(path, wenjianming, guanjianzi + '_zhengzehua_1')
+        path_new = os.path.join(path, wenjianming, guanjianzi + '_zhengguihua_1')
 
         mu.mkdir(path_new)
 

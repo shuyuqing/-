@@ -6,7 +6,7 @@ import os
 import muluzai as muluz
 
 
-def tiqu(path):
+def tiqu(path,weidu):
 
     basedir = path
     for mulu in os.listdir(basedir):
@@ -25,7 +25,7 @@ def tiqu(path):
         for ad_file in os.listdir(input_dir):
             (fs, audio) = wav.read(input_dir + "/" + ad_file)
             # feature_m, feature_n = fbank(audio, fs, winfunc=np.hamming)
-            log = logfbank(audio,fs,nfilt=40)
+            log = logfbank(audio,fs,nfilt=weidu)
             # mf = mfcc(audio)
             # np.savetxt(output_dir1 + "/" + ad_file + ".csv", feature_m, delimiter=',')
             np.savetxt(output_dir2 + "/" + ad_file + ".csv", log, delimiter=',')

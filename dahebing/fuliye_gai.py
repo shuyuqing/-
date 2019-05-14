@@ -11,7 +11,7 @@ def mizhichuli(basedir):
 
     bulin = 'bulin'
 
-    mizhichuli_log = 'mizhichuli_log'
+    mizhichuli_log = 'mizhichuli'
 
     for mulu_1 in os.listdir(basedir):
         lujing = os.path.join(basedir, mulu_1, mizhichuli_log)
@@ -38,7 +38,7 @@ def mizhichuli(basedir):
 
             global block, start, end, huishu
             start = 0
-            block = 64
+            block = 32
             # block是窗口的大小
             huishu = hang - block + 1
             # 每一列要做的傅里叶变化的次数

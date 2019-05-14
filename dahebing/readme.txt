@@ -1,6 +1,13 @@
 dahebing_RWCP_SP96:RWCP_SP96专用的，从mmfs27中获得识别结果之后，到标签全部被打上去的一整个过程
 dahebing_UUDB:UUDB专用
 xinlaidu:使用信赖度来判断是否出现错误识别ベースラインシステム
+pipei_a:在单词单位上打标签(scoring文件是align1)
+pipei_a_yinsu:在音素单位上打标签(scoring文件是align1),识别结果和正解单词比较的时候要转化为音素去比较
+pipei_a_yinsu_1:在音素单位上打标签(scoring文件是align1),识别结果和正解单词比较的时候直接比较汉字
+pipei_s:在单词单位上打标签(scoring文件是symbol.txt)
+pipei_s_yinsu:在音素单位上打标签(scoring文件是symbol.txt),识别结果和正解单词比较的时候要转化为音素去比较
+pipei_s_yinsu_1:在音素单位上打标签(scoring文件是symbol.txt),识别结果和正解单词比较的时候直接比较汉字
+
 
 以下是用来提取特征值,计算変調スペクトル,整理学习数据
 zhengjie_RWCP:先给正解文加句号，(合并了jiajuhao)然后把RWCP的正解文提取出来，RWCP专用

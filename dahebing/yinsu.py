@@ -3,8 +3,6 @@ import pipei_yinsu as pei
 
 def yinsu(zhengjie,start_1,end_1,ID_1,path):
 
-    print("zhengjie是")
-    print(zhengjie)
     shouzimu = zhengjie[0]
     weizimu =zhengjie[-1]
 

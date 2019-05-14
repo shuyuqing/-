@@ -255,7 +255,7 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                            start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
 
-                           if start_yinsu == end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
+                           if start_yinsu==0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
 
                                for b in range(start, end+ 1):
                                    t_file_list[b].insert(0, '1')
@@ -286,7 +286,7 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                            start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
 
-                           if start_yinsu == end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
+                           if start_yinsu ==0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
 
                                for b in range(start, end+ 1):
                                    t_file_list[b].insert(0, '1')
@@ -306,7 +306,7 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                            start_yinsu, end_yinsu = y.yinsu(conv.do(i[4]),start,end,ID,path_1)
                            #把一个单词中被正确识别的那几个音素以及这个单词的帧数范围传进去
 
-                           if start_yinsu == end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
+                           if start_yinsu == 0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
 
                                for b in range(start, end+ 1):
                                    t_file_list[b].insert(0, '1')

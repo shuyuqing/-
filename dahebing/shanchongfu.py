@@ -31,7 +31,7 @@ def shanchongfu_1(path_1):
 
     for filename in os.listdir(path):
         path_1 = os.path.join(path,filename,'wav')#这里要根据实际的目录进行修改
-        path_out = os.path.join(path,filename,'keka')
+        path_out = os.path.join(path,filename,'keka_yinsu')
         mulu.mkdir(path_out)
 
         for filename_1 in os.listdir(path_1):

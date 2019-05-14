@@ -5,7 +5,7 @@ import numpy as np
 
 fenshu = 5#这里的5是全部数据的五分之一作为测试数据
 
-def zhengli(path):
+def zhengli(path,guanjianzi_1,guanjianzi_2):
 
     path_data = os.path.join(path,'data')
     muluzai.mkdir(path_data)
@@ -39,8 +39,8 @@ def zhengli(path):
 
         if wenjian != 'data':
             path_1 = os.path.join(path,wenjian)
-            path_2 = os.path.join(path_1,'xinde_log_1')
-            path_3 = os.path.join(path_1,'xinde_mizhichuli_1')
+            path_2 = os.path.join(path_1,guanjianzi_1)
+            path_3 = os.path.join(path_1,guanjianzi_2)
 
             #这个部分是fbank的部分
             for u in os.listdir(path_2):

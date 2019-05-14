@@ -8,7 +8,6 @@ import make_kana_convertor
 import chongzao_yinsu as cz
 import yinsu as y
 
-
 #为了处理那些因为表示方式不同而被打错标签的单词，先把错误单词的索引找出，再把单词转变成字母，然后再比较
 
 def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
@@ -42,8 +41,8 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
         path_tezheng = os.path.join(path_1, name_tezheng)
 
-        #biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r', encoding='EUC-JP'))  # 把标志文件读进来
-        biaozhiwenjian = csv.reader(open(os.path.join(path_1, name2), 'r', encoding='utf-8')) #如果标志文件是.txt文件
+        biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r', encoding='EUC-JP'))  # 把标志文件读进来
+        # biaozhiwenjian = csv.reader(open(os.path.join(path_1, name2), 'r', encoding='utf-8')) #如果标志文件是.txt文件
 
         biaozhiwenjian_1 = [i for i in biaozhiwenjian]  # 转化为list,但是内容是list里面套list
         #[['id: l_8840_9810_T1_F_01'],['REF:  そう です か 、 はい 。 '],['HYP:  そう です か    はい 。 '],['EVAL: C    C    C  D  C    C  '],[],['id: l_10800_13190_T1_F_01']]
@@ -246,12 +245,13 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                     elif i[2] == 'S':
 
-                        if conv.do(i[0]) in conv.do(i[3]):#如果识别结果（scoring）包含在正解文的单词中就打标签0
+                        # if conv.do(i[0]) in conv.do(i[3]):#如果识别结果（scoring）包含在正解文的单词中就打标签0
+                        if i[0] in i[3]:#如果识别结果（scoring）包含在正解文的单词中就打标签0
 
                             for b in range(start, end+1):
                                 t_file_list[b].insert(0, '0')
 
-                        elif conv.do(i[3]) in conv.do(i[0]) and len(conv.do(i[3]))!=len(conv.do(i[0])):#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+                        elif i[3] in i[0] and len(i[3])!=len(i[0]):#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
 
                            start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
 
@@ -277,12 +277,12 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                     elif i[2] == 'I':#插入错误的话，如果这个单词跟它的前一个或者后一个单词音素相同的话，就算正确
 
-                        if (conv.do(i[0]) in conv.do(i[3]) and conv.do(i[3]) != '') or (conv.do(i[0]) in conv.do(i[4]) and conv.do(i[4]) != ''):
+                        if i[0] in i[3] and i[3] != '' or i[0] in i[4] and i[4] != '':
 
                             for i in range(start, end + 1):
                                 t_file_list[i].insert(0, '0')
 
-                        elif conv.do(i[3]) in conv.do(i[0]) and len(conv.do(i[3]))!=len(conv.do(i[0])) and conv.do(i[3]) != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+                        elif i[3] in i[0] and len(i[3])!=len(i[0]) and i[3] != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
 
                            start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
 
@@ -301,7 +301,7 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                                    if len(t_file_list[i]) == changdu:
                                        t_file_list[i].insert(0, '0')
 
-                        elif conv.do(i[4]) in conv.do(i[0]) and len(conv.do(i[4]))!=len(conv.do(i[0])) and conv.do(i[4]) != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+                        elif i[4] in i[0] and len(i[4])!=len(i[0]) and i[4] != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
 
                            start_yinsu, end_yinsu = y.yinsu(conv.do(i[4]),start,end,ID,path_1)
                            #把一个单词中被正确识别的那几个音素以及这个单词的帧数范围传进去
