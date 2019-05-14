@@ -2,7 +2,7 @@ import os,shutil
 import muluzai as mu
 import numpy as np
 
-def kongwenjian(path,guanjianzi):#删除大小为零的文件aaa
+def kongwenjian(path,guanjianzi):#删除大小为零的文件aaa45665465
 
     for name in os.listdir(path):
 
