@@ -2,13 +2,13 @@ import math,os
 import numpy as np
 import muluzai as mu
 
-def zhenggui(path,guanjianzi):#先正规化之后再打标签
+def zhenggui(path,guanjianzi,guanjianzi_1):#先正规化之后再打标签
 
     for wenjianming in os.listdir(path):
 
         path_1 = os.path.join(path, wenjianming, guanjianzi)
 
-        path_new = os.path.join(path, wenjianming, guanjianzi + '_zhengguihua_1')
+        path_new = os.path.join(path, wenjianming, guanjianzi + '_'+guanjianzi_1)
 
         mu.mkdir(path_new)
 
