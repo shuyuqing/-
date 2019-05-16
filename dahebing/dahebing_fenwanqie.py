@@ -26,7 +26,7 @@ import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 
 
-path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'#批次
+path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'#批次f
 
 
 weidu = 24
