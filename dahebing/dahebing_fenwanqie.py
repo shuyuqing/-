@@ -109,12 +109,12 @@ if zhengguihua_2 == True:
 
 
 
-zhengli.zhengli(path,guanjianzi_1 = s1_1,guanjianzi_2 = s2_1)#把opentest,closetest,整理出来
+zhengli.zhengli(path,guanjianzi_1 = 'log_zhengguihua_2_biaoqian',guanjianzi_2 ='mizhichuli_zhengguihua_2_biaoqian')#把opentest,closetest,整理出来
 
 
 
-#只切割测试数据
-path_2 = os.path.join(path,'data','fbank','opentest')
+#只切割学习数据
+path_2 = os.path.join(path,'data','fbank','xuexi')
 for wenjian in os.listdir(path_2):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
     path_1 = os.path.join(path_2,wenjian)
     qie.qiexiao(path_1,wenjian,path_2)
