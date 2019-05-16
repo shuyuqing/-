@@ -90,3 +90,36 @@ def pingheng_1(path,guanjianzi):  # 把标签都是1的文件找出来
                 else:
 
                     shutil.move(path_2, quanshi1)
+
+def pingheng_houqie(path):#把标签都是0的文件找出来
+
+    liebiao = os.listdir(path)
+
+    quanshi0= os.path.join(os.path.join(os.path.expanduser("~"), 'Desktop'),'table','quanshi0')
+
+    mu.mkdir(quanshi0)
+
+    for name in liebiao:
+
+        path_2 = os.path.join(path,name)
+
+        f = open(path_2, 'r')
+
+        print(path_2)
+        a = np.loadtxt(f, delimiter=',', skiprows=0).astype(np.float32)
+
+        Labeltrain = a[:, 0:1]
+        f.close()
+
+        if 1 not in Labeltrain:
+
+            print("标签全是零的文件" + path_2)
+
+            if os.path.exists(os.path.join(quanshi0, os.path.split(path_2)[1])): # 把文件名从路径中剥离出来，如果早已存在，就把它删除了，再覆盖掉
+
+                os.remove(os.path.join(quanshi0, os.path.split(path_2)[1]))
+                shutil.move(path_2, quanshi0)
+
+            else:
+
+                shutil.move(path_2, quanshi0)
