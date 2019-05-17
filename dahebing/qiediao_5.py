@@ -11,6 +11,7 @@ def qiexiao(path,wenjian_1,path_new):
             a = np.loadtxt(f, delimiter=',', skiprows=0).astype(np.float32)
             Labeltrain = a[:, 0:1]
             f.close()
+            os.remove(path_2)
 
             jishuqi_0 = 0
             jishuqi_1 = 0

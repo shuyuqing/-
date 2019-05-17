@@ -55,4 +55,4 @@ import numpy as np
 # a = math.sqrt()
 # a = math.pow(0.51823924,2)+math.pow(0.85523569,2)
 # print(a)
-print(np.log())
+print(np.log(999999999555555599))

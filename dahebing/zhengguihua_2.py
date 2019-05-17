@@ -61,5 +61,5 @@ def zhenggui(path,guanjianzi,guanjianzi_1):#先正规化之后再打标签
 
             np.savetxt(path_new + "/" + wenjian, zhenggui_list_2,delimiter=',')
 
-
+    return guanjianzi_1
 # zhenggui(path = r'C:\Users\a7825\Desktop\新建文件夹 (4)',guanjianzi ='log' )

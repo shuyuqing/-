@@ -42,3 +42,7 @@ def tiqu(path,weidu,logenergy,energy_1):
             # np.savetxt(output_dir2 + "/" + ad_file + ".csv", log, delimiter=',')
             # np.savetxt(output_dir3 + "/" + ad_file + ".csv", mf, delimiter=',')
             # 拼接字符串，把单引号改成双引号居然好使
+
+    return weidu
+
+# tiqu(path=r'C:\Users\a7825\Desktop\新建文件夹 (4)',weidu=26,logenergy=False,energy_1=True)

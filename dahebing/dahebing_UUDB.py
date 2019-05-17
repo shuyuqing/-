@@ -47,13 +47,13 @@ zhengguihua_2 = T
 
 
 
-# te.tiqu(path,weidu)#提取wav文件的特征值
+te.tiqu(path,weidu)#提取wav文件的特征值
 # sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
 
 
-# he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 # print("把左右两个声道的正解文都合并一下,然后输入chasen吧")
 # os.system("pause")
 
@@ -90,7 +90,6 @@ if zhengguihua_2 == True:
     s2_1 = 'mizhichuli_zhengguihua_2_biaoqian'
 
 
-print(s1)
 # os.system('pause')
 
 # pa.dabiaoqian(path,guanjianzi_1 = s1,guanjianzi_2 = s1_1)#打标签
@@ -161,12 +160,12 @@ print(s1)
 
 
 
-pis.pishan(path,guanjianzi='log_zhengguihua_1',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
-pis.pishan(path,guanjianzi='mizhichuli_biaoqian',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
-pis.pishan(path,guanjianzi='mizhichuli_biaoqian_pinghen',guanjianzi_1 = 'mulu')
-pis.pishan(path,guanjianzi='mizhichuli_zhengguihua_1',guanjianzi_1 = 'mulu')
-pis.pishan(path,guanjianzi='log_biaoqian_pinghen',guanjianzi_1 = 'mulu')
-pis.pishan(path,guanjianzi='log_biaoqian',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='log_zhengguihua_1',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
+# pis.pishan(path,guanjianzi='mizhichuli_biaoqian',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
+# pis.pishan(path,guanjianzi='mizhichuli_biaoqian_pinghen',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='mizhichuli_zhengguihua_1',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='log_biaoqian_pinghen',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='log_biaoqian',guanjianzi_1 = 'mulu')
 
 
 
