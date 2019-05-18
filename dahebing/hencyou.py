@@ -41,4 +41,4 @@ def hencyou_1(path,chuangkou):
 
     fu.mizhichuli(baseindir,chuangkou)#进行変調スペクトル的计算
 
-    return chuangkou
+    return str(chuangkou)
