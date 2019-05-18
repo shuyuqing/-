@@ -47,7 +47,7 @@ def zhengli(path,guanjianzi_1,guanjianzi_2,dataname_1,dataname_2):
 
     for wenjian in os.listdir(path):
 
-        if wenjian != 'data':
+        if wenjian != dataname:
             path_1 = os.path.join(path,wenjian)
             path_2 = os.path.join(path_1,guanjianzi_1)
             path_3 = os.path.join(path_1,guanjianzi_2)
