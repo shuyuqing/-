@@ -7,7 +7,6 @@ fenshu = 5#这里的5是全部数据的五分之一作为测试数据
 
 def zhengli(path,guanjianzi_1,guanjianzi_2,dataname_1,dataname_2):
 
-
     if len(dataname_1) > len(dataname_2):
 
         dataname = dataname_1
@@ -15,7 +14,6 @@ def zhengli(path,guanjianzi_1,guanjianzi_2,dataname_1,dataname_2):
     else:
 
         dataname = dataname_2
-
 
     path_data = os.path.join(path,dataname)
     muluzai.mkdir(path_data)

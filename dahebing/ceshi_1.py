@@ -2,6 +2,11 @@ import re
 import pykakasi #把平假名或片假名转化为读音
 import math
 import numpy as np
+import  socket
+
+hostName = socket.gethostname()
+
+print(hostName)
 
 
 
