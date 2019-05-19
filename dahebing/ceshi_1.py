@@ -2,6 +2,11 @@ import re
 import pykakasi #把平假名或片假名转化为读音
 import math
 import numpy as np
+import  socket
+
+hostName = socket.gethostname()
+
+print(hostName)
 
 # str = "となりの隣がとなりのトトロ"
 # tagger = MeCab.Tagger("-d /path-to-NEoligd")
@@ -55,4 +60,4 @@ import numpy as np
 # a = math.sqrt()
 # a = math.pow(0.51823924,2)+math.pow(0.85523569,2)
 # print(a)
-print(np.log(999999999555555599))
+# print(np.log(999999999555555599))
