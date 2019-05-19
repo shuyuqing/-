@@ -29,24 +29,24 @@ hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
+    path = r'C:\Users\shu\Desktop\gongxiang\symbol'  # 批次
 else:
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
+    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
 
 
 
 
-weidu = 24
+weidu = 26
 chuangkou = 32
 energy = F
 logenergy = T
 
 zhengguihua = F
-zhengguihua_2 = T
+zhengguihua_2 = F
 
 s1='log'
 s2='mizhichuli'
-dataname = 'ag1'
+dataname = 'symbol'
 
 
 
@@ -63,9 +63,9 @@ dataname = 'ag1'
 
 
 
-# te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
-dataname = dataname + str(weidu) + '_'
+dataname = dataname +'_'+ str(weidu) + '_'
 
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
@@ -90,8 +90,8 @@ dataname_1 = dataname_2 = dataname
 
 
 if zhengguihua == True:
-    zheng.zhenggui(path,guanjianzi = s1)#正则化处理
-    zheng.zhenggui(path,guanjianzi = s2)
+    # zheng.zhenggui(path,guanjianzi = s1)#正则化处理
+    # zheng.zhenggui(path,guanjianzi = s2)
     s1 = s1 + '_' + 'zhengguihua'
     s2 = s2 + '_' + 'zhengguihua'
     dataname_1 = dataname_1 + '_' + 'zhengguihua_2'
@@ -100,8 +100,8 @@ if zhengguihua == True:
 
 
 if zhengguihua_2 == True:
-    zheng_2.zhenggui(path,guanjianzi = s1,guanjianzi_1='zhengguihua_2')#正则化处理
-    zheng_2.zhenggui(path,guanjianzi = s2,guanjianzi_1='zhengguihua_2')
+    # zheng_2.zhenggui(path,guanjianzi = s1,guanjianzi_1='zhengguihua_2')#正则化处理
+    # zheng_2.zhenggui(path,guanjianzi = s2,guanjianzi_1='zhengguihua_2')
 
     s1 = s1 + '_' + 'zhengguihua_2'
     s2 = s2 + '_' + 'zhengguihua_2'

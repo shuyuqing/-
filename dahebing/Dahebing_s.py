@@ -29,14 +29,14 @@ hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
+    path = r'C:\Users\shu\Desktop\gongxiang\symbol'  # 批次
 else:
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
+    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
 
 
 
 
-weidu = 24
+weidu = 26
 chuangkou = 32
 energy = F
 logenergy = T
@@ -46,7 +46,7 @@ zhengguihua_2 = F
 
 s1='log'
 s2='mizhichuli'
-dataname = 'ag1'
+dataname = 'symbol'
 
 
 
@@ -63,16 +63,16 @@ dataname = 'ag1'
 
 
 
-# te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
-dataname = dataname + str(weidu) + '_'
+dataname = dataname +'_'+ str(weidu) + '_'
 
-# sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
-
-
+sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
-# he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+
+
+he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
 dataname = dataname + str(chuangkou) + '_'
 dataname_1 = dataname_2 = dataname
