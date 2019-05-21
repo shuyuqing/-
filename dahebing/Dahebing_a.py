@@ -46,7 +46,7 @@ zhengguihua_2 = F
 
 s1='log'
 s2='mizhichuli'
-dataname = 'symbol'
+dataname = 'ag1'
 
 
 
