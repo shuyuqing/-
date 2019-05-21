@@ -36,7 +36,7 @@ else:
 
 
 
-weidu = 26
+weidu = 28
 chuangkou = 32
 energy = F
 logenergy = T

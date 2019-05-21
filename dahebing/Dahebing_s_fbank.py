@@ -30,19 +30,19 @@ hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
+    path = r'C:\Users\shu\Desktop\gongxiang\symbol'  # 批次
 else:
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
+    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
 
 
 
 
-weidu = 24
+weidu = 28
 energy = F
 logenergy = T
 
 zhengguihua = F
-zhengguihua_2 = T
+zhengguihua_2 = F
 
 s1='log'
 dataname = 'symbol'
@@ -64,7 +64,7 @@ dataname = 'symbol'
 
 te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
-dataname = dataname + str(weidu) + '_'
+dataname = dataname+ '_'+ str(weidu) + '_'
 
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
