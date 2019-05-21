@@ -19,30 +19,39 @@ log = logfbank(x, fs)
 # np.savetxt(indir_1 + ".csv", log, delimiter=',')
 
 ig, ax = plt.subplots()
-# log= np.swapaxes(log, 0 ,1)
+log= np.swapaxes(log, 0 ,1)
 cax = ax.imshow(log, interpolation='nearest', origin='lower', aspect='auto')
 
 
-ax.set_title('fbank')
+ax.set_title('fbank(log)')
 plt.show()
-plt.plot(log)
-plt.show()
+# plt.plot(log)
+# plt.show()
 
 # 显示メルフィルタバンク的图
-# x, fs = li.load(indir,sr=16000)
 (fs, x) = wav.read(indir)
 log,energy = fbank(x, fs)
 
-# np.savetxt(indir_1 + ".csv", log, delimiter=',')
+np.savetxt(indir + ".csv", log, delimiter=',')
 
 ig, ax = plt.subplots()
-# log= np.swapaxes(log, 0 ,1)
+log= np.swapaxes(log, 0 ,1)
 cax = ax.imshow(log, interpolation='nearest', origin='lower', aspect='auto')
 
 
 ax.set_title('fbank')
 plt.show()
-plt.plot(log)
+# plt.plot(log)
+# plt.show()
+
+log = zhengguihua.zhenggui(indir + ".csv")
+
+ig, ax = plt.subplots()
+log= np.swapaxes(log, 0 ,1)
+cax = ax.imshow(log, interpolation='nearest', origin='lower', aspect='auto')
+
+
+ax.set_title('seikika')
 plt.show()
 
 

@@ -8,9 +8,6 @@ def zhenggui(path_2):#先正规化之后再打标签
 
     tezheng_1 = np.transpose(tezheng_1)  # 为了方便计算，先转置
 
-    tezheng_1 = np.transpose(tezheng_1)#为了方便计算，先转置
-
-
     N = tezheng_1.shape[1]
 
     # print(tezheng_1)
@@ -45,10 +42,8 @@ def zhenggui(path_2):#先正规化之后再打标签
 
     zhenggui_list_2 = np.transpose(zhenggui_list_2)  # 为了方便计算，先转置
 
-    # print(zhenggui_list_2)
-
-    # print(zhenggui_list_2)
+    # np.savetxt(path_2+"zhenggui"+'_'+ ".csv", zhenggui_list_2, delimiter=',')
 
     return zhenggui_list_2
 
-# zhenggui(path = r'C:\Users\a7825\Desktop\新建文件夹 (4)',guanjianzi ='log' )
+# zhenggui(path_2 = r'C:\Users\a7825\Desktop\工作空间\セミナー\语音\wav/C001L_061.wav.csv')
