@@ -64,7 +64,7 @@ dataname = 'ag1'
 
 te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
-dataname = dataname+ '_'+ str(weidu) + '_'
+dataname = dataname+ '_' + str(weidu)
 
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 

@@ -65,7 +65,7 @@ dataname = 'symbol'
 
 te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
-dataname = dataname +'_'+ str(weidu) + '_'
+dataname = dataname +'_'+ str(weidu)
 
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
@@ -74,7 +74,7 @@ sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
-dataname = dataname + str(chuangkou) + '_'
+dataname = dataname +'_'+ str(chuangkou)
 dataname_1 = dataname_2 = dataname
 
 
