@@ -12,17 +12,24 @@ def zhaocuo(path,guanjianzi):
 
             path_xinde_log_1 = os.path.join(path_xinde_log,name_1)
 
-            a = np.loadtxt(path_xinde_log_1, delimiter=',', skiprows=0).astype(np.float32)
+            # print(path_xinde_log_1)
 
-            Labeltrain = a[:, 0:1]
+            # a = np.loadtxt(path_xinde_log_1, delimiter=',', skiprows=0).astype(np.float32)
+            #
+            # Labeltrain = a[:, 0:1]
 
-            for i in Labeltrain:
+            f = open(path_xinde_log_1, 'r', encoding='utf-8')
+            tezhengzhi = csv.reader(f)
+            t_file_list = [i for i in tezhengzhi]
+            f.close()
 
-                if i!=1 or i!=0:
+            for i in t_file_list:
+
+                if i[0]!='1' and i[0]!='0':
 
                     print("这个文件的标签不是0或1")
                     print(path_xinde_log_1)
-                    os.remove(path_xinde_log_1)
+                    # os.remove(path_xinde_log_1)
 
                     break
 
