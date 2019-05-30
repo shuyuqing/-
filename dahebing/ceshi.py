@@ -25,11 +25,12 @@ import zhengli,zhuanyi
 import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 import  socket
+import zuixiao as zx
 
-path = r'C:\Users\a7825\Desktop\新建文件夹 (6)'
+path = r'C:\Users\shu\Desktop\gongxiang\symbol'
 
 
-weidu = 26
+weidu = 40
 chuangkou = 32
 energy = F
 logenergy = T
@@ -39,7 +40,7 @@ zhengguihua_2 = F
 
 s1='log'
 s2='mizhichuli'
-dataname = 'ag1'
+dataname = 'symbol'
 
 
 # sh.shanchongfu_1(path)
@@ -53,16 +54,16 @@ dataname = 'ag1'
 
 
 
-te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+# te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
-# dataname = dataname +'_'+ str(weidu)
+dataname = dataname +'_'+ str(weidu)
 
 # sc.shanchuhang(path)#
 
-he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+# he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
-# dataname = dataname +'_'+ str(chuangkou)
-# dataname_1 = dataname_2 = dataname
+dataname = dataname +'_'+ str(chuangkou)
+dataname_1 = dataname_2 = dataname
 
 
 # print("把左右两个声道的正解文都合并一下,然后输入chasen吧")
@@ -101,58 +102,62 @@ he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変
 
 
 # pa.dabiaoqian(path,guanjianzi_1 = s1,guanjianzi_2 = s1+'_'+'biaoqian')#打标签
+# zx.zuixiao(path,guanjianzi=s1)
 # bl.kongwenjian(path,guanjianzi=s1+'_'+'biaoqian')#把大小为0的文件都删除了
 # bl.pingheng(path,guanjianzi= s1+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
 # bl.pingheng_1(path,guanjianzi=s1+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面上去
-# s1 = s1+'_'+'biaoqian'
-# dataname_1 = dataname_1 + '_' + 'biaoqian'
+s1 = s1+'_'+'biaoqian'
+dataname_1 = dataname_1 + '_' + 'biaoqian'
 
 
 
 
-pa.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
+# pa.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
+zx.zuixiao(path,guanjianzi=s2)
 # bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
-# bl.pingheng(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
-# bl.pingheng_1(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
-# s2 = s2+'_'+'biaoqian'
-# dataname_2 = dataname_2 + '_' + 'biaoqian'
+bl.pingheng(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
+bl.pingheng_1(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
+s2 = s2+'_'+'biaoqian'
+dataname_2 = dataname_2 + '_' + 'biaoqian'
 
 
 
 
-# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-#     path_1 = os.path.join(path, wenjian, s1)
-#     path_new = os.path.join(path, wenjian, s1+'_'+'pingheng')
-#     mu.mkdir(path_new)
-#     for wenjian_1 in os.listdir(path_1):
-#         path_2 = os.path.join(path_1, wenjian_1)
-#         qie.qiexiao(path_2,wenjian_1,path_new)
-# bl.pingheng(path, guanjianzi=s1+'_'+'pingheng')  # 把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+    path_1 = os.path.join(path, wenjian, s1)
+    path_new = os.path.join(path, wenjian, s1+'_'+'pingheng')
+    mu.mkdir(path_new)
+    for wenjian_1 in os.listdir(path_1):
+        path_2 = os.path.join(path_1, wenjian_1)
+        qie.qiexiao(path_2,wenjian_1,path_new)
+bl.pingheng(path, guanjianzi=s1+'_'+'pingheng')  # 把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+zx.zuixiao(path,guanjianzi=s1)
 
-# s1 = s1+'_'+'pingheng'
-# dataname_1 = dataname_1 + '_' + 'pingheng'
-
-
-
-
-
-
-# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-#     path_1 = os.path.join(path, wenjian, s2)
-#     path_new = os.path.join(path, wenjian, s2+'_'+'pingheng')
-#     mu.mkdir(path_new)
-#     for wenjian_1 in os.listdir(path_1):
-#         path_2 = os.path.join(path_1, wenjian_1)
-#         qie.qiexiao(path_2,wenjian_1,path_new)
-# bl.pingheng(path,guanjianzi = s2+'_'+'pingheng')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
-
-# s2 = s2+'_'+'pingheng'
-# dataname_2 = dataname_2 + '_' + 'pingheng'
+s1 = s1+'_'+'pingheng'
+dataname_1 = dataname_1 + '_' + 'pingheng'
 
 
 
 
-# zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2 =dataname_2)#把opentest,closetest,整理出来
+
+
+for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+    path_1 = os.path.join(path, wenjian, s2)
+    path_new = os.path.join(path, wenjian, s2+'_'+'pingheng')
+    mu.mkdir(path_new)
+    for wenjian_1 in os.listdir(path_1):
+        path_2 = os.path.join(path_1, wenjian_1)
+        qie.qiexiao(path_2,wenjian_1,path_new)
+bl.pingheng(path,guanjianzi = s2+'_'+'pingheng')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+zx.zuixiao(path,guanjianzi=s2)
+
+s2 = s2+'_'+'pingheng'
+dataname_2 = dataname_2 + '_' + 'pingheng'
+
+
+
+
+zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2 =dataname_2)#把opentest,closetest,整理出来
 
 
 

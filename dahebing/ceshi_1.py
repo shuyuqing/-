@@ -71,6 +71,6 @@ import  socket
 # print(np.log(999999999555555599))
 
 
-list_1 = [1,2,3,1,8,1,1,2,3,2,3,2,2,1,2,1]
-tezheng_2 = nf.fft(list_1)
-print(tezheng_2)
+# list_1 = [1,2,3,1,8,1,1,2,3,2,3,2,2,1,2,1]
+# tezheng_2 = nf.fft(list_1)
+# print(tezheng_2)
