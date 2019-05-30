@@ -28,7 +28,8 @@ def shanchuhang(path):
         for i in os.listdir(indir):
         # for i in list:  # 循环读取同文件夹下的csv文件
             i = os.path.join(indir, i)
-            d=open(i).readlines()
+            d_1 = open(i)
+            d = d_1.readlines()
             # 删除第一行
             for x in [0, 1, 2, 3, 4]:
                  d[x] = ''
@@ -40,5 +41,6 @@ def shanchuhang(path):
 
             # with open(outdir+'/'+i,'w') as f:
         #正好把原文件覆盖了
+            d_1.close()
             with open(i, 'w') as f:
                 f.writelines(d)
