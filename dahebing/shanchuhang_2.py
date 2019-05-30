@@ -10,7 +10,8 @@ def shanchuhang(lujin):
     for i in os.listdir(indir):
     # for i in list:  # 循环读取同文件夹下的csv文件
         i = os.path.join(indir, i)
-        d = open(i).readlines()
+        d_1 = open(i)
+        d = d_1.readlines()
         # 删除第一行
         # for x in [0, 1, 2, 3, 4]:
         #     d[x] = ''
@@ -25,6 +26,8 @@ def shanchuhang(lujin):
                 d[jishu] = ''#要想确实地改变d的内容，就只能通过一个计数器jishu来作为下标去改变d里面的内容
 
             jishu = jishu + 1
+
+        d_1.close()
 
         # with open(outdir+'/'+i,'w') as f:
     #正好把原文件覆盖了
