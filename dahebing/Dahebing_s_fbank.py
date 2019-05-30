@@ -35,9 +35,7 @@ else:
     path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
 
 
-
-
-weidu = 28
+weidu = 30
 energy = F
 logenergy = T
 
@@ -46,8 +44,6 @@ zhengguihua_2 = F
 
 s1='log'
 dataname = 'symbol'
-
-
 
 
 

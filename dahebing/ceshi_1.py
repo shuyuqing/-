@@ -3,18 +3,19 @@ import pykakasi #把平假名或片假名转化为读音
 import math
 import numpy as np
 import  socket
+import numpy.fft as nf
 
-hostName = socket.gethostname()
-
-print(hostName)
+# hostName = socket.gethostname()
+#
+# print(hostName)
 
 
 
 import  socket
 
-hostName = socket.gethostname()
-
-print(hostName)
+# hostName = socket.gethostname()
+#
+# print(hostName)
 # str = "となりの隣がとなりのトトロ"
 # tagger = MeCab.Tagger("-d /path-to-NEoligd")
 # print(tagger.parse(str))
@@ -68,3 +69,8 @@ print(hostName)
 # a = math.pow(0.51823924,2)+math.pow(0.85523569,2)
 # print(a)
 # print(np.log(999999999555555599))
+
+
+list_1 = [1,2,3,1,8,1,1,2,3,2,3,2,2,1,2,1]
+tezheng_2 = nf.fft(list_1)
+print(tezheng_2)

@@ -1,65 +1,159 @@
+T = True
+F = False
+import hencyou_1 as he
+import shanchongfu as sh
+import shanchuhang as sc
+import tezhengzhi as te
+import zhengjie_RWCP as zR
 import os
-import re
-FRAMES_ADD = 1
 
-def read_out(file_path):
-    """
-    解析out文件中的数据，
-    :param file_path: out文件的路径
-    :return: list [[识别结果, [帧数， 帧数], ... ]
-    """
-    # 打开识别几个的文件
-    text_file = open(file_path, 'r', encoding='utf-8')
-    text = text_file.read()#read()读全部,readline()读一行,readlines()读所有行
-    info_list = []  # {'值': [1,9]}
-    info_list_1 = []
-    info = ''
-    # 解析出来带[]部分的内容
-    # i = re.findall(r'\[.*', text)
-    # print(i)
-    # os.system('pause')
+import pipei_s as ps
+import pipei_s_yinsu as psy
+import pipei_s_yinsu_1 as psy1
+import pipei_zhenze as pa
+import pipei_a_yinsu as pay
+import pipei_a_yinsu_1 as pay1
 
-    for i in re.findall(r'\[.*\]', text):
-    # for i in re.findall(r'\[.*', text):
+import pipei
+import quci_RWCP_SP96 as quci
+import balangsu as bl
+import qiediao_5 as qie
+import muluzai as mu
+import pishan as pis
+import zhaocuo
+import zhengli,zhuanyi
+import zhengguihua_2 as zheng_2
+import zhengguihua as zheng
+import  socket
 
-        #这里的话\就相当于/，在[的前面加上\就相当于我要匹配"["
-        #这里的.匹配除了换行符之外的所有东西
-        #*是重复的意思，例如，ca*t 将匹配 'ct' (0个 'a' 字符)，'cat' (1个``'a')，` `'caaat' (3个 'a' 字符)，等等。
-        #findall返回的是一个列表
-        #split()会返回分割后的字符串列表。
-
-        # print (re.findall(r'\[.*\]', text))
-
-        print(i)
-        print(re.match(r'\[(?P<value>\s+\d+\s+\d+)\]',i).group('value'))
-        #"+的"意思是大于等于一个
-        # os.system("pause")
-        #(?P<value>\s+\d+\s+\d+),这里使用了捕获组来获取[]里面的值
+path = r'C:\Users\a7825\Desktop\新建文件夹 (6)'
 
 
-        try:
-            info = [int(i) + FRAMES_ADD - 1 for i in re.match(r'\[(?P<value>\s+\d+\s+\d+)\]',i).group('value').split()]
-            #match只匹配开头部分,函数group()可以返回被匹配到的字符串
-        except:
-            info = [int(i) + FRAMES_ADD - 1 for i in re.match(r'\[(?P<value>\d+\s+\d+)\]', i).group('value').split()]
+weidu = 26
+chuangkou = 32
+energy = F
+logenergy = T
 
-        print(info)
+zhengguihua = F
+zhengguihua_2 = F
 
-        info_list_1 = [re.search(r'\s+\[(?P<value>.*)\]',i).group('value'), info]
-        #这里使用捕获组来获取了[]里面的文字
+s1='log'
+s2='mizhichuli'
+dataname = 'ag1'
 
-        print(info_list_1)
-        os.system("pause")
 
-        info_list.append(info_list_1)
-        # print(i)
-
-    #print(info_list)
-    #return info_list
-    #最后的效果:[['', [0, 18]], ['お', [19, 24]], ['願い', [25, 49]], ['三', [50, 82]], ['。', [83, 86]]]
-
-    #[  37   58]  0.562999  で+接続詞	[で]
+# sh.shanchongfu_1(path)
+# #删除不能被识别的wav文件，找出不符合要求的.out文件，并把对应的.out文件跟.wav文件都删除掉
+#特别注意：这个删除不能随便乱用，只有当wav文件和.out文件同时在同一个文件夹下才能够使用，如果wav文件和.out文件分开了
+#那么所有的wav文件都会被删除掉
 
 
 
-read_out(file_path = r'C:\Users\a7825\Desktop\C001L/C001L_007_2.out')
+# zR.zhengjie(path)#在正解文的最后加上句号，然后提取出需要的正解文
+
+
+
+te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+
+# dataname = dataname +'_'+ str(weidu)
+
+# sc.shanchuhang(path)#
+
+he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+
+# dataname = dataname +'_'+ str(chuangkou)
+# dataname_1 = dataname_2 = dataname
+
+
+# print("把左右两个声道的正解文都合并一下,然后输入chasen吧")
+# os.system("pause")
+
+
+
+
+#quci.qu(path)#生成.ref文件，即正解文文件，生成.log文件，即识别结果
+# print("把带有SSSCCC标志的文件都整理好吧")
+# os.system("pause")
+
+
+# if zhengguihua == True:
+#     # zheng.zhenggui(path,guanjianzi = s1)#正则化处理
+#     # zheng.zhenggui(path,guanjianzi = s2)
+#     s1 = s1 + '_' + 'zhengguihua'
+#     s2 = s2 + '_' + 'zhengguihua'
+#     dataname_1 = dataname_1 + '_' + 'zhengguihua_2'
+#     dataname_2 = dataname_2 + '_' + 'zhengguihua_2'
+
+
+
+# if zhengguihua_2 == True:
+    # zheng_2.zhenggui(path,guanjianzi = s1,guanjianzi_1='zhengguihua_2')#正则化处理
+    # zheng_2.zhenggui(path,guanjianzi = s2,guanjianzi_1='zhengguihua_2')
+
+    # s1 = s1 + '_' + 'zhengguihua_2'
+    # s2 = s2 + '_' + 'zhengguihua_2'
+
+    # dataname_1 = dataname_1 + '_' + 'zhengguihua_2'
+    # dataname_2 = dataname_2 + '_' + 'zhengguihua_2'
+
+
+
+
+
+# pa.dabiaoqian(path,guanjianzi_1 = s1,guanjianzi_2 = s1+'_'+'biaoqian')#打标签
+# bl.kongwenjian(path,guanjianzi=s1+'_'+'biaoqian')#把大小为0的文件都删除了
+# bl.pingheng(path,guanjianzi= s1+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
+# bl.pingheng_1(path,guanjianzi=s1+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面上去
+# s1 = s1+'_'+'biaoqian'
+# dataname_1 = dataname_1 + '_' + 'biaoqian'
+
+
+
+
+pa.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
+# bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
+# bl.pingheng(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
+# bl.pingheng_1(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
+# s2 = s2+'_'+'biaoqian'
+# dataname_2 = dataname_2 + '_' + 'biaoqian'
+
+
+
+
+# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+#     path_1 = os.path.join(path, wenjian, s1)
+#     path_new = os.path.join(path, wenjian, s1+'_'+'pingheng')
+#     mu.mkdir(path_new)
+#     for wenjian_1 in os.listdir(path_1):
+#         path_2 = os.path.join(path_1, wenjian_1)
+#         qie.qiexiao(path_2,wenjian_1,path_new)
+# bl.pingheng(path, guanjianzi=s1+'_'+'pingheng')  # 把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+
+# s1 = s1+'_'+'pingheng'
+# dataname_1 = dataname_1 + '_' + 'pingheng'
+
+
+
+
+
+
+# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+#     path_1 = os.path.join(path, wenjian, s2)
+#     path_new = os.path.join(path, wenjian, s2+'_'+'pingheng')
+#     mu.mkdir(path_new)
+#     for wenjian_1 in os.listdir(path_1):
+#         path_2 = os.path.join(path_1, wenjian_1)
+#         qie.qiexiao(path_2,wenjian_1,path_new)
+# bl.pingheng(path,guanjianzi = s2+'_'+'pingheng')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+
+# s2 = s2+'_'+'pingheng'
+# dataname_2 = dataname_2 + '_' + 'pingheng'
+
+
+
+
+# zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2 =dataname_2)#把opentest,closetest,整理出来
+
+
+
+# zhaocuo.zhaocuo(path)#作用于特征值文件，用于检查打标签的时候第一个空是不是全部被打上了1或者是0,并且统计标签为1的数据的比重

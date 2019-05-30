@@ -70,8 +70,6 @@ dataname = dataname +'_'+ str(weidu)
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
-
-
 he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
 dataname = dataname +'_'+ str(chuangkou)
