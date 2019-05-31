@@ -26,13 +26,14 @@ import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 import zhengli_fbank as zhengli
 import  socket
-hostName = socket.gethostname()
-print(hostName)
-
-if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
-else:
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
+# hostName = socket.gethostname()
+# print(hostName)
+#
+# if hostName == 'shu-VAIO':
+#     path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
+# else:
+#     path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
+path=r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
 
 
 

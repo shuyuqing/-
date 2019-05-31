@@ -34,4 +34,4 @@ def zhaocuo(path,guanjianzi):
                     break
 
 
-zhaocuo(path=r'C:\Users\a7825\Desktop\新建文件夹 (6)',guanjianzi=r'log_biaoqian')
+# zhaocuo(path=r'C:\Users\a7825\Desktop\新建文件夹 (6)',guanjianzi=r'log_biaoqian')

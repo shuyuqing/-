@@ -41,8 +41,8 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
         path_tezheng = os.path.join(path_1, name_tezheng)
 
-        #biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r', encoding='EUC-JP'))  # 把标志文件读进来
-        biaozhiwenjian = csv.reader(open(os.path.join(path_1, name2), 'r', encoding='utf-8')) #如果标志文件是.txt文件
+        biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r', encoding='EUC-JP'))  # 把标志文件读进来
+        #biaozhiwenjian = csv.reader(open(os.path.join(path_1, name2), 'r', encoding='utf-8')) #如果标志文件是.txt文件
 
         biaozhiwenjian_1 = [i for i in biaozhiwenjian]  # 转化为list,但是内容是list里面套list
         #[['id: l_8840_9810_T1_F_01'],['REF:  そう です か 、 はい 。 '],['HYP:  そう です か    はい 。 '],['EVAL: C    C    C  D  C    C  '],[],['id: l_10800_13190_T1_F_01']]
@@ -200,16 +200,16 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                 if end_1 > start:#为了防止开始的第一个单词的start就比文件的帧数长
 
-                    print("ID")
-                    print(ID)
-
-                    print("l_biaozhi")
-                    print(l_biaozhi)
-                    print("l_jieguo_1")
-                    print(l_jieguo_1)
-
-                    print("dianout")
-                    print(dianout)
+                    # print("ID")
+                    # print(ID)
+                    #
+                    # print("l_biaozhi")
+                    # print(l_biaozhi)
+                    # print("l_jieguo_1")
+                    # print(l_jieguo_1)
+                    #
+                    # print("dianout")
+                    # print(dianout)
 
 
 
@@ -223,8 +223,8 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                     dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID)  # 生成新的dianoutlist,以后就靠它了
 
-                    print('dianout_chongzao')
-                    print(dianout_chongzao)
+                    # print('dianout_chongzao')
+                    # print(dianout_chongzao)
 
                     #通过得到的新的list,开始打标签
                     # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
