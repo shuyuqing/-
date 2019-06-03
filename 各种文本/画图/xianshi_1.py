@@ -16,15 +16,16 @@ indir = r'C:\Users\a7825\Desktop\工作空间\セミナー\语音\wav/C001L_061.
 (fs, x) = wav.read(indir)
 log = logfbank(x, fs, nfilt=40)
 
-# np.savetxt(indir_1 + ".csv", log, delimiter=',')
+np.savetxt(indir + ".csv", log, delimiter=',')
 
 ig, ax = plt.subplots()
 log= np.swapaxes(log, 0 ,1)
+print(log)
 cax = ax.imshow(log, interpolation='nearest', origin='lower', aspect='auto')
 
 plt.xlabel('Modulation frequency(Hz)')
 plt.ylabel('Filterbank index')
-plt.xticks([0,20,40,60,80,100],['0','10','20','30','40','50'])
+plt.xticks([0,20,40,60,80,100],['0.0','0.2','0.4','0.6','0.8','1.0'])
 plt.yticks([0,5,10,15,20,25,30,35,39],['0','5','10','15','20','25','30','35','40'])
 
 # ax.set_title('logfbank')

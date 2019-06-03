@@ -13,4 +13,8 @@ xipo_henncyou:升级版画语谱图文本(henncyou)
 zhengguihua:#对一个向量进行正规化，然后返回
 hencyou_tuxiang:#只用一个block对logfbank进行正规化之后再进行henncyou的结果，然后画图
 xianshi_1:自己写的可以显示各种图形的代码
+dandu:#把单独一个向量的画在图像上，就像冲击函数
+yihang:#自己造一个数组，把这个数组画出来
+shuzu:#把logbank抽取出来画图
+chongji:#画出类似冲击函数那样的图
 
