@@ -29,9 +29,9 @@ hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\symbol'  # 批次
+    path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
 else:
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
+    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
 
 
 
