@@ -74,3 +74,13 @@ import  socket
 # list_1 = [1,2,3,1,8,1,1,2,3,2,3,2,2,1,2,1]
 # tezheng_2 = nf.fft(list_1)
 # print(tezheng_2)
+audio_15 = [1,2,3,4,5,6,7,8,9,10]
+
+print(len(audio_15))
+
+quan = len(audio_15)
+ban = int(len(audio_15)/2)
+
+
+audio_15 = audio_15[ban:quan]
+print(audio_15)
