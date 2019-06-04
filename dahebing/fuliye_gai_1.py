@@ -94,7 +94,9 @@ def mizhichuli(basedir,chuangkou):
                     # print("第%d列的第%d波"%(i,m))
                     # print(tezheng_2)
                     q = int(block / 2)
-                    for n in range(q, block):  # 之前括号里面的值是block,因为要扔掉一半所以改了
+                    # for n in range(q, block):  # 之前括号里面的值是block,因为要扔掉一半所以改了
+                    for n in range(0, q):  # 要取前半部分
+
                         zhongzhuan = []
                         zhongzhuan.append(ma.sqrt(ma.pow(tezheng_2[n].imag, 2) + ma.pow(tezheng_2[n].real, 2)))
                         tezheng_3[m].extend(zhongzhuan)
