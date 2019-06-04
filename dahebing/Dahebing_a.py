@@ -1,6 +1,6 @@
 T = True
 F = False
-import hencyou as he
+import hencyou_1 as he
 import shanchongfu as sh
 import shanchuhang as sc
 import tezhengzhi as te
@@ -10,7 +10,7 @@ import os
 import pipei_s as ps
 import pipei_s_yinsu as psy
 import pipei_s_yinsu_1 as psy1
-import pipei_a as pa
+import pipei_zhenze_a as pa
 import pipei_a_yinsu as pay
 import pipei_a_yinsu_1 as pay1
 
@@ -25,18 +25,20 @@ import zhengli,zhuanyi
 import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 import  socket
+import zuixiao as zx
+
 hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\symbol'  # 批次
+    path = r'C:\Users\shu\Desktop\gongxiang\ag1'  # 批次
 else:
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
+    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
 
 
 
 
-weidu = 26
+weidu = 40
 chuangkou = 32
 energy = F
 logenergy = T
@@ -112,6 +114,7 @@ if zhengguihua_2 == True:
 
 
 pa.dabiaoqian(path,guanjianzi_1 = s1,guanjianzi_2 = s1+'_'+'biaoqian')#打标签
+zx.zuixiao(path,guanjianzi=s1)
 bl.kongwenjian(path,guanjianzi=s1+'_'+'biaoqian')#把大小为0的文件都删除了
 bl.pingheng(path,guanjianzi= s1+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
 bl.pingheng_1(path,guanjianzi=s1+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面上去
@@ -122,6 +125,7 @@ dataname_1 = dataname_1 + '_' + 'biaoqian'
 
 
 pa.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
+zx.zuixiao(path,guanjianzi=s2)
 bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
 bl.pingheng(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
 bl.pingheng_1(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
@@ -139,6 +143,7 @@ for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一�
         path_2 = os.path.join(path_1, wenjian_1)
         qie.qiexiao(path_2,wenjian_1,path_new)
 bl.pingheng(path, guanjianzi=s1+'_'+'pingheng')  # 把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+zx.zuixiao(path,guanjianzi=s1)
 
 s1 = s1+'_'+'pingheng'
 dataname_1 = dataname_1 + '_' + 'pingheng'
@@ -156,6 +161,7 @@ for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一�
         path_2 = os.path.join(path_1, wenjian_1)
         qie.qiexiao(path_2,wenjian_1,path_new)
 bl.pingheng(path,guanjianzi = s2+'_'+'pingheng')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+zx.zuixiao(path,guanjianzi=s2)
 
 s2 = s2+'_'+'pingheng'
 dataname_2 = dataname_2 + '_' + 'pingheng'

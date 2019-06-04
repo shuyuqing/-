@@ -7,7 +7,7 @@ import tezhengzhi as te
 import zhengjie_RWCP as zR
 import os
 
-import pipei_zhenze as ps
+import pipei_zhenze_s as ps
 import pipei_s_yinsu as psy
 import pipei_s_yinsu_1 as psy1
 import pipei_a as pa
