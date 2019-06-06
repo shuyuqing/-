@@ -200,140 +200,143 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                 end_1 = len(t_file_list)-1
                 changdu = len(t_file_list[0])#为了给音素上打标签做准备
 
-                for i in range(start + 1):
-                    t_file_list[i].insert(0, '9')  #最前面的无音区间全部都打标签9,把它们当做正确认识来处理
+                if start< len(t_file_list):#如果.out文件的空白部分的帧数范围大于特征值的行数，就扔了
 
-                for i in range(start_1, end_1 + 1):
-                    t_file_list[i].insert(0, '9')
 
-                l_jieguo_1.pop(-1)#最后句号的部分已经打过标签了，需要把它pop掉
+                    for i in range(start + 1):
+                        t_file_list[i].insert(0, '9')  #最前面的无音区间全部都打标签9,把它们当做正确认识来处理
 
-                print("ID")
-                print(ID)
+                    for i in range(start_1, end_1 + 1):
+                        t_file_list[i].insert(0, '9')
 
-                print("l_biaozhi")
-                print(l_biaozhi)
-                print("l_jieguo_1")
-                print(l_jieguo_1)
+                    l_jieguo_1.pop(-1)#最后句号的部分已经打过标签了，需要把它pop掉
 
-                print("dianout")
-                print(dianout)
+                    print("ID")
+                    print(ID)
 
-                dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID, l_zhengjie_1)  # 生成新的dianoutlist,以后就靠它了
+                    print("l_biaozhi")
+                    print(l_biaozhi)
+                    print("l_jieguo_1")
+                    print(l_jieguo_1)
 
-                print('dianout_chongzao')
-                print(dianout_chongzao)
+                    print("dianout")
+                    print(dianout)
 
-                #通过得到的新的list,开始打标签
-                # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
-                for i in dianout_chongzao:
+                    dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID, l_zhengjie_1)  # 生成新的dianoutlist,以后就靠它了
 
-                #想要在音素上进行比较，得看标签为S的部分
+                    print('dianout_chongzao')
+                    print(dianout_chongzao)
 
-                    print(i)
+                    #通过得到的新的list,开始打标签
+                    # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
+                    for i in dianout_chongzao:
 
-                    # print(i[0])
-                    # print(i[1])
-                    # print(i[2])
-                    # os.system('pause')
+                    #想要在音素上进行比较，得看标签为S的部分
 
-                    start, end = i[1]
+                        print(i)
 
-                    if i[2] == 'C':
+                        # print(i[0])
+                        # print(i[1])
+                        # print(i[2])
+                        # os.system('pause')
 
-                        for b in range(start, end+1):
-                            t_file_list[b].insert(0, '0')
+                        start, end = i[1]
 
-                    elif i[2] == 'S':
-
-                        if conv.do(i[0]) in conv.do(i[3]):#如果识别结果（scoring）包含在正解文的单词中就打标签0
+                        if i[2] == 'C':
 
                             for b in range(start, end+1):
                                 t_file_list[b].insert(0, '0')
 
-                        elif conv.do(i[3]) in conv.do(i[0]) and len(conv.do(i[3]))!=len(conv.do(i[0])):#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+                        elif i[2] == 'S':
 
-                           start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
+                            if conv.do(i[0]) in conv.do(i[3]):#如果识别结果（scoring）包含在正解文的单词中就打标签0
 
-                           if start_yinsu==0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
+                                for b in range(start, end+1):
+                                    t_file_list[b].insert(0, '0')
 
-                               for b in range(start, end+ 1):
-                                   t_file_list[b].insert(0, '1')
-                           else:
+                            elif conv.do(i[3]) in conv.do(i[0]) and len(conv.do(i[3]))!=len(conv.do(i[0])):#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
 
-                               for b in range(start_yinsu, end_yinsu + 1):
-                                   t_file_list[b].insert(0, '1')
+                               start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
 
-                               for b in range(start,end+1):
+                               if start_yinsu==0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
 
-                                   if len(t_file_list[b]) == changdu:
-                                       t_file_list[b].insert(0, '0')
+                                   for b in range(start, end+ 1):
+                                       t_file_list[b].insert(0, '1')
+                               else:
+
+                                   for b in range(start_yinsu, end_yinsu + 1):
+                                       t_file_list[b].insert(0, '1')
+
+                                   for b in range(start,end+1):
+
+                                       if len(t_file_list[b]) == changdu:
+                                           t_file_list[b].insert(0, '0')
+
+                            else:
+
+                                for b in range(start, end + 1):
+                                    t_file_list[b].insert(0, '1')
+
+
+                        elif i[2] == 'I':#插入错误的话，如果这个单词跟它的前一个或者后一个单词音素相同的话，就算正确
+
+                            if (conv.do(i[0]) in conv.do(i[3]) and conv.do(i[3]) != '') or (conv.do(i[0]) in conv.do(i[4]) and conv.do(i[4]) != ''):
+
+                                for i in range(start, end + 1):
+                                    t_file_list[i].insert(0, '0')
+
+                            elif conv.do(i[3]) in conv.do(i[0]) and len(conv.do(i[3]))!=len(conv.do(i[0])) and conv.do(i[3]) != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+
+                               start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
+
+                               if start_yinsu ==0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
+
+                                   for b in range(start, end+ 1):
+                                       t_file_list[b].insert(0, '1')
+                               else:
+
+
+                                   for i in range(start_yinsu, end_yinsu + 1):
+                                       t_file_list[i].insert(0, '1')
+
+                                   for i in range(start,end+1):
+
+                                       if len(t_file_list[i]) == changdu:
+                                           t_file_list[i].insert(0, '0')
+
+                            elif conv.do(i[4]) in conv.do(i[0]) and len(conv.do(i[4]))!=len(conv.do(i[0])) and conv.do(i[4]) != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+
+                               start_yinsu, end_yinsu = y.yinsu(conv.do(i[4]),start,end,ID,path_1)
+                               #把一个单词中被正确识别的那几个音素以及这个单词的帧数范围传进去
+
+                               if start_yinsu == 0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
+
+                                   for b in range(start, end+ 1):
+                                       t_file_list[b].insert(0, '1')
+                               else:
+
+                                   for i in range(start_yinsu, end_yinsu + 1):
+                                       t_file_list[i].insert(0, '1')
+
+                                   for i in range(start,end + 1):
+
+                                       if len(t_file_list[i]) == changdu:
+                                           t_file_list[i].insert(0, '0')
+
+                            else:
+
+                                for i in range(start, end + 1):
+                                    t_file_list[i].insert(0, '1')
 
                         else:
 
-                            for b in range(start, end + 1):
-                                t_file_list[b].insert(0, '1')
-
-
-                    elif i[2] == 'I':#插入错误的话，如果这个单词跟它的前一个或者后一个单词音素相同的话，就算正确
-
-                        if (conv.do(i[0]) in conv.do(i[3]) and conv.do(i[3]) != '') or (conv.do(i[0]) in conv.do(i[4]) and conv.do(i[4]) != ''):
-
                             for i in range(start, end + 1):
-                                t_file_list[i].insert(0, '0')
+                                t_file_list[i].insert(0, '1')#标记为I或者S的单词的特征值需要打上标签1
 
-                        elif conv.do(i[3]) in conv.do(i[0]) and len(conv.do(i[3]))!=len(conv.do(i[0])) and conv.do(i[3]) != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
+                    path_xinde_tezhengzhi = os.path.join(path_xinde, ID + '.csv')
 
-                           start_yinsu, end_yinsu = y.yinsu(conv.do(i[3]),start,end,ID,path_1)
-
-                           if start_yinsu ==0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
-
-                               for b in range(start, end+ 1):
-                                   t_file_list[b].insert(0, '1')
-                           else:
-
-
-                               for i in range(start_yinsu, end_yinsu + 1):
-                                   t_file_list[i].insert(0, '1')
-
-                               for i in range(start,end+1):
-
-                                   if len(t_file_list[i]) == changdu:
-                                       t_file_list[i].insert(0, '0')
-
-                        elif conv.do(i[4]) in conv.do(i[0]) and len(conv.do(i[4]))!=len(conv.do(i[0])) and conv.do(i[4]) != '':#如果正解文单词包函在识别结果单词（scoring）中，就具体看音素
-
-                           start_yinsu, end_yinsu = y.yinsu(conv.do(i[4]),start,end,ID,path_1)
-                           #把一个单词中被正确识别的那几个音素以及这个单词的帧数范围传进去
-
-                           if start_yinsu == 0 or end_yinsu == 0:#如果跟本没有发现匹配的音素，就当做是完全识别错误，打标签1
-
-                               for b in range(start, end+ 1):
-                                   t_file_list[b].insert(0, '1')
-                           else:
-
-                               for i in range(start_yinsu, end_yinsu + 1):
-                                   t_file_list[i].insert(0, '1')
-
-                               for i in range(start,end + 1):
-
-                                   if len(t_file_list[i]) == changdu:
-                                       t_file_list[i].insert(0, '0')
-
-                        else:
-
-                            for i in range(start, end + 1):
-                                t_file_list[i].insert(0, '1')
-
-                    else:
-
-                        for i in range(start, end + 1):
-                            t_file_list[i].insert(0, '1')#标记为I或者S的单词的特征值需要打上标签1
-
-                path_xinde_tezhengzhi = os.path.join(path_xinde, ID + '.csv')
-
-                with open(path_xinde_tezhengzhi, 'w+', encoding='utf-8') as mergen_file:
-                    for i in t_file_list:
-                        mergen_file.write('%s\n' % ','.join(i))
+                    with open(path_xinde_tezhengzhi, 'w+', encoding='utf-8') as mergen_file:
+                        for i in t_file_list:
+                            mergen_file.write('%s\n' % ','.join(i))
 
         shanchu.shanchuhang(path_xinde)  # 把有标记9的特征值全部都删除掉

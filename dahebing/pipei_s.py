@@ -202,50 +202,53 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                 end_1 = len(t_file_list)-1
 
-                for i in range(start + 1):
-                    t_file_list[i].insert(0, '9')  # 最前面的无音区间全部都打标签9,把它们当做正确认识来处理
+                if start< len(t_file_list):#如果.out文件的空白部分的帧数范围大于特征值的行数，就扔了
 
-                for i in range(start_1, end_1 + 1):
-                    t_file_list[i].insert(0, '9')
 
-                l_jieguo_1.pop(-1)#最后句号的部分已经打过标签了，需要把它pop掉
+                    for i in range(start + 1):
+                        t_file_list[i].insert(0, '9')  # 最前面的无音区间全部都打标签9,把它们当做正确认识来处理
 
-                print("ID")
-                print(ID)
+                    for i in range(start_1, end_1 + 1):
+                        t_file_list[i].insert(0, '9')
 
-                print("l_biaozhi")
-                print(l_biaozhi)
-                print("l_jieguo_1")
-                print(l_jieguo_1)
+                    l_jieguo_1.pop(-1)#最后句号的部分已经打过标签了，需要把它pop掉
 
-                print("dianout")
-                print(dianout)
+                    print("ID")
+                    print(ID)
 
-                dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID)  # 生成新的dianoutlist,以后就靠它了
+                    print("l_biaozhi")
+                    print(l_biaozhi)
+                    print("l_jieguo_1")
+                    print(l_jieguo_1)
 
-                print('dianout_chongzao')
-                print(dianout_chongzao)
+                    print("dianout")
+                    print(dianout)
 
-                #通过得到的新的list,开始打标签,这个list中的单词是scoring工具输出的识别结果的单词，也就是被拼凑过的
-                # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
-                for \
-                        i in dianout_chongzao:
+                    dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID)  # 生成新的dianoutlist,以后就靠它了
 
-                    start, end = i[1]
-                    if i[2] == 'C':
+                    print('dianout_chongzao')
+                    print(dianout_chongzao)
 
-                        for i in range(start, end + 1):
-                            t_file_list[i].insert(0, '0')
+                    #通过得到的新的list,开始打标签,这个list中的单词是scoring工具输出的识别结果的单词，也就是被拼凑过的
+                    # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
+                    for \
+                            i in dianout_chongzao:
 
-                    else:
+                        start, end = i[1]
+                        if i[2] == 'C':
 
-                        for i in range(start, end + 1):
-                            t_file_list[i].insert(0, '1')
+                            for i in range(start, end + 1):
+                                t_file_list[i].insert(0, '0')
 
-                path_xinde_tezhengzhi = os.path.join(path_xinde, ID + '.csv')
+                        else:
 
-                with open(path_xinde_tezhengzhi, 'w+', encoding='utf-8') as mergen_file:
-                    for i in t_file_list:
-                        mergen_file.write('%s\n' % ','.join(i))
+                            for i in range(start, end + 1):
+                                t_file_list[i].insert(0, '1')
+
+                    path_xinde_tezhengzhi = os.path.join(path_xinde, ID + '.csv')
+
+                    with open(path_xinde_tezhengzhi, 'w+', encoding='utf-8') as mergen_file:
+                        for i in t_file_list:
+                            mergen_file.write('%s\n' % ','.join(i))
 
         shanchu.shanchuhang(path_xinde)  # 把有标记9的特征值全部都删除掉
