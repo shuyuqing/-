@@ -22,7 +22,7 @@ def shanchuhang(lujin):
         for m in d:
             # print(m[0])
             # os.system("pause")
-            if m[0] == '9':
+            if m[0]!='0' and m[0]!='1':
                 d[jishu] = ''#要想确实地改变d的内容，就只能通过一个计数器jishu来作为下标去改变d里面的内容
 
             jishu = jishu + 1
