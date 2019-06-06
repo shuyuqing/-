@@ -1,7 +1,7 @@
 import math,os
 import numpy as np
 
-def zhenggui(zhenggui_4,block):
+def zg(zhenggui_4,block):
 
     zhenggui_list_1 = []
 

@@ -24,6 +24,7 @@ import zhaocuo
 import zhengli,zhuanyi
 import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
+import zuixiao as zx
 
 
 path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'#批次f
@@ -97,12 +98,16 @@ if zhengguihua_2 == True:
 # os.system('pause')
 
 # pa.dabiaoqian(path,guanjianzi_1 = s1,guanjianzi_2 = s1_1)#打标签
+zx.zuixiao(path,guanjianzi=s1_1,xiaxian=10)
+
 # bl.kongwenjian(path,guanjianzi=s1_1)#把大小为0的文件都删除了
 # bl.pingheng(path,guanjianzi= s1_1)#把标签全部是0的文件都移动到桌面去
 # bl.pingheng_1(path,guanjianzi=s1_1)#把标签全部是1的文件都移动到桌面上去
 
 
 # pa.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2_1)
+zx.zuixiao(path,guanjianzi=s2_1,xiaxian=10)
+
 # bl.kongwenjian(path,guanjianzi=s2_1)#把大小为0的文件都删除了
 # bl.pingheng(path,guanjianzi= s2_1)#把标签全部是0的文件都移动到桌面去
 # bl.pingheng_1(path,guanjianzi=s2_1)#把标签全部是1的文件都移动到桌面去
@@ -133,6 +138,7 @@ bl.pingheng_houqie(path_2)#把标签全部是0的文件都移动到桌面去,因
 #         path_2 = os.path.join(path_1, wenjian_1)
 #         qie.qiexiao(path_2,wenjian_1,path_new)
 # bl.pingheng(path,guanjianzi = s2_1_1)#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+zx.zuixiao(path,guanjianzi=s2_1_1,xiaxian=10)
 
 
 

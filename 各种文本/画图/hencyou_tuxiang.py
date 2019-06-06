@@ -45,20 +45,20 @@ def mizhichuli(basedir,block,weidu):
 
 
     #以下是正规化
-    for m in tezheng_3:#一列列去正规化
-
-        zheng = zg.zhenggui(m,block)
-
-        print(zheng)
-        print('分割')
-
-        tezheng_5.append(zheng)
-
-    tezheng_5 = np.array(tezheng_5)
+    # for m in tezheng_3:#一列列去正规化
+    #
+    #     zheng = zg.zg(m,block)
+    #
+    #     print(zheng)
+    #     print('分割')
+    #
+    #     tezheng_5.append(zheng)
+    #
+    # tezheng_5 = np.array(tezheng_5)
     #以上是正规化
 
     #以下是非正规化
-    # tezheng_5 = np.array(tezheng_3)
+    tezheng_5 = np.array(tezheng_3)
     #以上是非正规化
 
 
@@ -106,11 +106,11 @@ def mizhichuli(basedir,block,weidu):
     log = np.swapaxes(tezheng_7, 0, 1)
     cax = ax.imshow(log, interpolation='nearest', origin='lower', aspect='auto')
 
-    # plt.colorbar(cax)#加上了参考的棒棒
+    plt.colorbar(cax)#加上了参考的棒棒
 
 
-
-    # plt.xticks([0, 20, 40, 60, 80, 100], ['0', '10', '20', '30', '40', '50'])
+    n = 3.1
+    plt.xticks([0,n*1,n*2,n*3,n*4,n*5], ['0', '10', '20', '30', '40', '50'])
     plt.yticks([0, 5, 10, 15, 20, 25, 30, 35, 39.5], ['0', '5', '10', '15', '20', '25', '30', '35', '40'])
 
     plt.xlabel('Modulation frequency(Hz)')

@@ -1,7 +1,7 @@
 import os,shutil,csv
 import numpy as np
 
-def zuixiao(path,guanjianzi):  # 把标签都是1的文件找出来
+def zuixiao(path,guanjianzi,xiaxian):  # 把标签都是1的文件找出来
 
     liebiao = os.listdir(path)
 
@@ -18,8 +18,10 @@ def zuixiao(path,guanjianzi):  # 把标签都是1的文件找出来
             t_file_list = [i for i in tezhengzhi]
             f.close()
 
-            if len(t_file_list) <= 10:
+            if int(len(t_file_list)) <= int(xiaxian):
                 print('移除文件')
                 print(path_2)
 
                 os.remove(path_2)
+
+# zuixiao(path = r'C:\Users\a7825\Desktop\新建文件夹',guanjianzi = 'mizhichuli_biaoqian',xiaxian=10)

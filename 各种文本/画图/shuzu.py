@@ -16,7 +16,7 @@ indir = r'C:\Users\a7825\Desktop\工作空间\セミナー\语音\wav/C001L_061.
 (fs, x) = wav.read(indir)
 log = logfbank(x, fs, nfilt=40)
 
-np.savetxt(indir + ".csv", log, delimiter=',')
+np.savetxt(indir +'.fbank'+ ".csv", log, delimiter=',')
 
 ig, ax = plt.subplots()
 log= np.swapaxes(log, 0 ,1)
