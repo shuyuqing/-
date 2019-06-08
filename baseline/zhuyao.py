@@ -8,12 +8,13 @@ import dahebing.chongzao_1 as cz
 import xinlaidu as xd
 import yuce as yucezhi
 import zhenshi
+import numpy as np
 
 #为了处理那些因为表示方式不同而被打错标签的单词，先把错误单词的索引找出，再把单词转变成字母，然后再比较
 
 from pykakasi import kakasi#把单词转化为音素
 
-path=r'C:\Users\a7825\Desktop\新建文件夹 (6)'
+path = r'C:\Users\a7825\Desktop\新建文件夹 (6)'
 
 fazhi = 0.5
 
@@ -52,7 +53,12 @@ for i in os.listdir(path):
     # path_xinde = os.path.join(path_1, xinde)
     # mulu.mkdir(path_xinde)
 
+    shuju = []#把一对一对的list放到这个list中去
+
     for i in range(0, len(biaozhiwenjian_1)):  # 这里的每一轮可以产生一个
+
+
+        yidui = []#可以放下预测值和真实值一对list
 
         try:
             biaozhi = biaozhiwenjian_1[i][0]
@@ -173,7 +179,27 @@ for i in os.listdir(path):
             #通过得到的新的list,开始打标签
             # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
             # for i in dianout_chongzao:
+            zhen = zhenshi.zhenshi(dianout_chongzao_1)#真实的标签
 
-            # yuce = yucezhi.yucezhi(dianout_chongzao_1,fazhi)#根据阀值取得预测值
+            yuce = yucezhi.yucezhi(dianout_chongzao_1,fazhi)#根据阀值取得预测值
 
-            zhen = zhenshi.zhenshi(dianout_chongzao_1)
+            yidui.append(yuce)#把预测值的数组放到list中去
+
+            print(yuce)
+
+            yidui.append(zhen)#把真实值的数组放到list中去
+
+            print(zhen)
+
+            print(yidui)
+
+            shuju.append(yidui)
+
+    print(shuju)
+
+    shuju = np.array(shuju)
+    print(shuju.shape)
+
+
+
+    os.system('pause')
