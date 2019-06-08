@@ -226,6 +226,8 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                     # print('dianout_chongzao')
                     # print(dianout_chongzao)
 
+                    # os.system('pause')
+
                     #通过得到的新的list,开始打标签
                     # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
                     for i in dianout_chongzao:

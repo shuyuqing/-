@@ -46,19 +46,18 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
 
                 os.system('pause')
 
+            # print('输出比较的两个值')
+            # print(danci_dianout)
+            # print(danci_l_jieguo_1)
 
-            # if conv.do(danci_dianout) == danci_dianout and danci_dianout != '、':  # 判断是不是字母
-            #
-            #     try:
-            #         danci_dianout = conv.do(make_kana_convertor._make_kana_convertor(strQ2B.strQ2B(danci_dianout)))
-            #
-            #     except:
-            #         danci_dianout = conv.do(make_kana_convertor._make_kana_convertor(danci_dianout))
 
             if danci_dianout == danci_l_jieguo_1:
 
                 dianout_3[jishuqi_dianout].append(l_biaozhi[jishuqi_l_jieguo_1])
                 dianout_1.append(dianout_3[jishuqi_dianout])#往新构建的list中加入元来dianout中的单词
+
+                # print('输出单吃')
+                # print(dianout_1)
 
             else:#这里默认.out文件的单词被scoring工具合并了，所以它应该比输出文件的识别结果的单词短
 
@@ -110,8 +109,14 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
             jishuqi_l_jieguo_1 += 1
             jishuqi_dianout += 1
 
+
+
         else:
 
             jishuqi_l_jieguo_1 += 1
+
+        # print('输出单词')
+        # print(dianout_1)
+        # os.system('pause')
 
     return dianout_1

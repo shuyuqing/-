@@ -114,4 +114,8 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
 
             jishuqi_l_jieguo_1 += 1
 
+    if dianout_1[-1][0] == '。':
+
+        dianout_1.pop(-1)#把最后一个句号pop掉
+
     return dianout_1

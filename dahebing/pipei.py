@@ -24,8 +24,6 @@ def read_out(file_path):
         # findall返回的是一个列表
         # split()会返回分割后的字符串列表。
 
-
-
         # print(i)
         # os.system("pause")
 
