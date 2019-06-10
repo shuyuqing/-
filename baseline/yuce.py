@@ -1,5 +1,6 @@
 import os
 import re
+import numpy as np
 FRAMES_ADD = 1
 
 def yucezhi(list,fazhi):
@@ -32,6 +33,7 @@ def yucezhi(list,fazhi):
     # print(len(list_yuce))
 
     # os.system('pause')
+    list_yuce = np.array(list_yuce)
 
     return list_yuce
 
