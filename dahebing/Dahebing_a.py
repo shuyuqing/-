@@ -35,11 +35,19 @@ if hostName == 'shu-VAIO':
 else:
     path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1'
 
-
+# path = r'C:\Users\a7825\Desktop\新建文件夹'
 
 
 weidu = 40
-chuangkou = 32
+chuangkou = 64
+#进行正则化的窗口
+
+lintianchong = T
+#是否进行零补充
+fftwindow = 64
+#fft时候的窗口
+
+
 energy = F
 logenergy = T
 
@@ -51,8 +59,11 @@ s2='mizhichuli'
 dataname = 'ag1'
 
 
+if lintianchong == True:
 
-
+    padding = fftwindow - chuangkou#需要填充的0的数量
+else:
+    padding = 0
 
 # sh.shanchongfu_1(path)
 # #删除不能被识别的wav文件，找出不符合要求的.out文件，并把对应的.out文件跟.wav文件都删除掉
@@ -65,14 +76,14 @@ dataname = 'ag1'
 
 
 
-te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+# te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
 dataname = dataname +'_'+ str(weidu)
 
 sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
-he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
 dataname = dataname +'_'+ str(chuangkou)
 dataname_1 = dataname_2 = dataname
@@ -92,8 +103,10 @@ dataname_1 = dataname_2 = dataname
 if zhengguihua == True:
     # zheng.zhenggui(path,guanjianzi = s1)#正则化处理
     # zheng.zhenggui(path,guanjianzi = s2)
+
     s1 = s1 + '_' + 'zhengguihua'
     s2 = s2 + '_' + 'zhengguihua'
+
     dataname_1 = dataname_1 + '_' + 'zhengguihua_2'
     dataname_2 = dataname_2 + '_' + 'zhengguihua_2'
 
@@ -176,5 +189,4 @@ zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1
 
 
 
-# zhaocuo.zhaocuo(path)#作用于特征值文件，用于检查打标签的时候第一个空是不是全部被打上了1或者是0,并且统计标签为1的数据的比重
-
+# zhaocuo.zhaocuo(path)#作用于特征值文件，用于检查打标签的时候第一个空是不是全部被打上了1�

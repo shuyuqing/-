@@ -24,6 +24,7 @@ chawenjian:检查.out文件是否会出现空文件，或者是识别结果只�
 dianlog_RWCP_SP96:RWCP_SP96专用的,根据原有的.out文件生成能被scoring所识别的标准日志文件(.log文件)
 fuliye_gai:计算変調スペクトル
 fuliye_gai_1:正则化之后再计算変調スペクトル
+fuliye_gai_2:正则化和fft的窗口分开搞(为了统一维度，fft的时候要0padding)
 hencyou:#删除fbank的前五行，再在后面补零，再做変調スペクトル的计算
 hencyou_1:#不要0填充，正规化之后再做hencyou.
 jiajuhao:#如果一行的末尾没有句号就加上一个句号。删除句子中的.,把，都改成、这个是RWCP专用的

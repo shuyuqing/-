@@ -7,7 +7,7 @@ import os,math
 import math as ma
 import muluzai as mulu
 
-def mizhichuli(basedir,chuangkou):
+def mizhichuli(basedir,chuangkou,padding,lintianchong):
 
     bulin = 'log_qian5'
 
@@ -85,6 +85,17 @@ def mizhichuli(basedir,chuangkou):
 
                     zhenggui_list_1 = np.array(zhenggui_list_1)
 
+                    if lintianchong == True:#如果要进行零填充，这个变量就要设置为True
+
+                        # print(zhenggui_list_1)
+                        # os.system('pause')
+
+                        lin = np.zeros(padding)#进行零补充
+                        zhenggui_list_1 = np.hstack((zhenggui_list_1, lin))
+
+                        # print(zhenggui_list_1)
+                        # os.system('pause')
+
                     # print(zhenggui_list_1)
 
                     tezheng_2 = nf.fft(zhenggui_list_1)
@@ -93,8 +104,13 @@ def mizhichuli(basedir,chuangkou):
 
                     # print("第%d列的第%d波"%(i,m))
                     # print(tezheng_2)
-                    q = int(block / 2)
-                    # for n in range(q, block):  # 之前括号里面的值是block,因为要扔掉一半所以改了
+                    block_1 = block + padding
+
+                    # print('输出block')
+                    # print(block_1)
+
+                    q = int(block_1 / 2)
+                    # for n in range(q, block_1):  # 之前括号里面的值是block_1,因为要扔掉一半所以改了
                     for n in range(0, q):  # 要取前半部分
 
                         zhongzhuan = []

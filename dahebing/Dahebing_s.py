@@ -41,7 +41,15 @@ else:
 
 
 weidu = 40
-chuangkou = 64
+chuangkou = 8
+#进行正则化的窗口
+
+lintianchong = T
+#是否进行零补充
+fftwindow = 16
+#fft时候的窗口
+
+
 energy = F
 logenergy = T
 
@@ -53,6 +61,11 @@ s2='mizhichuli'
 dataname = 'symbol'
 
 
+if lintianchong == True:
+
+    padding = fftwindow - chuangkou#需要填充的0的数量
+else:
+    padding = 0
 
 # sh.shanchongfu_1(path)
 # #删除不能被识别的wav文件，找出不符合要求的.out文件，并把对应的.out文件跟.wav文件都删除掉
@@ -74,7 +87,7 @@ sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
 
-he.hencyou_1(path,chuangkou)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
 dataname = dataname +'_'+ str(chuangkou)
 dataname_1 = dataname_2 = dataname

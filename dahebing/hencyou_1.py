@@ -9,10 +9,10 @@ from shutil import copyfile
 import shangchuhang_qian5_1 as shanchu
 import fuliye_gai_1 as fu
 
-def hencyou_1(path,chuangkou):
+def hencyou_1(path,chuangkou,padding,lintianchong):
 
     baseindir = path
 
     shanchu.shanchuhang(baseindir)#删除前五行
 
-    fu.mizhichuli(baseindir,chuangkou)#进行変調スペクトル的计算
+    fu.mizhichuli(baseindir,chuangkou,padding,lintianchong)#进行変調スペクトル的计算
