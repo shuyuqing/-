@@ -208,21 +208,21 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                     # l_jieguo_1.pop(-1)#最后句号的部分已经打过标签了，需要把它pop掉
 
-                    print("ID")
-                    print(ID)
+                    # print("ID")
+                    # print(ID)
 
-                    print("l_biaozhi")
-                    print(l_biaozhi)
-                    print("l_jieguo_1")
-                    print(l_jieguo_1)
+                    # print("l_biaozhi")
+                    # print(l_biaozhi)
+                    # print("l_jieguo_1")
+                    # print(l_jieguo_1)
 
-                    print("dianout")
-                    print(dianout)
+                    # print("dianout")
+                    # print(dianout)
 
                     dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID)  # 生成新的dianoutlist,以后就靠它了
 
-                    print('dianout_chongzao')
-                    print(dianout_chongzao)
+                    # print('dianout_chongzao')
+                    # print(dianout_chongzao)
 
                     #通过得到的新的list,开始打标签
                     # [['災害', [3, 40], 'C'], ['で', [41, 48], 'C'], ['ござい', [49, 77], 'C'], ['ます', [78, 98], 'C'],['から', [99, 130], 'C'], ['、', [131, 152], 'C'], ['その', [153, 177], 'C'], ['場', [178, 190], 'C'],['で', [191, 209], 'C']]
