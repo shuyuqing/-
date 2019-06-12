@@ -31,7 +31,8 @@ jiajuhao:#如果一行的末尾没有句号就加上一个句号。删除句子�
 quci:#用于从chasen出力文件中取出已经分割好了的单词，生成.ref文件（正解文）和日志文件(.log文件)
 shanchongfu:把未能被julius识别的音频文件都删除掉,julius认识之后，把全部.out文件都挑出来
 shanchuhang:删除一个文件中的前几行跟后面几行
-shanchuhang_2:#删除メルフィルタバンク特征值文件中的前几行跟后面几行（被打上标签“9”的那几行特征值）
+shanchuhang_3:#删除メルフィルタバンク特征值文件中的前几行跟后面几行（被打上标签“9”的那几行特征值）
+shanchuhang_2:#shangchuhang_2的改良，由于它不能谁别数字，只能识别字符串
 shangchuhang_qian5:#为了计算変調スペクトル，把提取出来的fbank的前5帧和后6帧删了
 shangchuhang_qian5_1:#为了计算正规化后的hencyou,把提取出来的fbank的前5帧删了
 tezhengzhi:提取各种特征值
