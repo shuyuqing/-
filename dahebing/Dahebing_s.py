@@ -41,12 +41,12 @@ else:
 
 
 weidu = 40
-chuangkou = 16
+chuangkou = 32
 #进行正则化的窗口
 
 lintianchong = T
 #是否进行零补充
-fftwindow = 16
+fftwindow = 64
 #fft时候的窗口
 
 
