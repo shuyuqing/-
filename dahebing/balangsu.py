@@ -91,6 +91,31 @@ def pingheng_1(path,guanjianzi):  # 把标签都是1的文件找出来
 
                     shutil.move(path_2, quanshi1)
 
+def pingheng_2(path,guanjianzi):#把标签为0的文件全部删除掉
+
+    liebiao = os.listdir(path)
+
+    for name in liebiao:
+
+        path_1 = os.path.join(path,name,guanjianzi)
+
+        for name_1 in os.listdir(path_1):
+
+            path_2 = os.path.join(path_1,name_1)
+
+            f = open(path_2, 'r')
+
+            print(path_2)
+            a = np.loadtxt(f, delimiter=',', skiprows=0).astype(np.float32)
+
+            Labeltrain = a[:, 0:1]
+            f.close()
+
+            if 1 not in Labeltrain:
+
+                print("标签全是零的文件" + path_2)
+                os.remove(path_2)  # 删除文件
+
 def pingheng_houqie(path):#把标签都是0的文件找出来
 
     liebiao = os.listdir(path)
