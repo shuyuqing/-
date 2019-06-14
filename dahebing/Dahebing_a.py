@@ -75,6 +75,11 @@ else:
 
 # zR.zhengjie(path)#在正解文的最后加上句号，然后提取出需要的正解文
 
+pis.pishan(path,guanjianzi='log_biaoqian',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
+pis.pishan(path,guanjianzi='log_biaoqian_pingheng',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='mizhichuli_biaoqian_pingheng',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='mizhichuli_biaoqian',guanjianzi_1 = 'mulu')
 
 
 # te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
@@ -187,6 +192,10 @@ dataname_2 = dataname_2 + '_' + 'pingheng'
 
 zhengli_mizhichuli.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2)
 
+pis.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
+pis.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='bulin',guanjianzi_1 = 'mulu')
 
 
 
