@@ -11,7 +11,7 @@ import os
 # print(i)
 
 
-path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol_40_16_16_biaoqian_pingheng\mizhichuli\xuexi'
+path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol_40_16_16_biaoqian_pingheng\mizhichuli\all'
 
 for i in os.listdir(path):
 
