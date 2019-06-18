@@ -20,7 +20,7 @@ from pykakasi import kakasi#把单词转化为音素
 
 path = r'C:\baseline\baseline\baselinetest'
 
-fazhi = 0.5
+fazhi = 0.3
 
 # name_tezheng =
 # 装有特征值的那个文件的文件名
@@ -254,26 +254,18 @@ confuse = confusion_matrix(zhenzhi_2, yucezhi_2)
 
 print('这次测试的混淆矩阵是')
 print(confuse)  # 输入混淆矩阵的是两个list
+
+
 fause = confuse[1][1] / (confuse[1][0] + confuse[1][1])
 fause_1 = confuse[1][1] / (confuse[0][1] + confuse[1][1])
-correct = confuse[0][0] / (confuse[0][0] + confuse[0][1])
-correct_1 = confuse[0][0] / (confuse[0][0] + confuse[1][0])
-c = confuse[0][0] + confuse[0][1]
-f = confuse[1][0] + confuse[1][1]
+c = confuse[1][0] + confuse[1][1]
 all = confuse[0][0] + confuse[0][1] + confuse[1][0] + confuse[1][1]
-fause_rate = f / all
 correct_rate = c / all
-correct_f = (2 * correct * correct_1) / (correct + correct_1)
 fause_f = (2 * fause * fause_1) / (fause + fause_1)
 
 
-
+print("原本就是正确的帧数为:%f,占总帧数的%f" % (c, correct_rate))
 print("总共的帧数是:%d" % all)
 print("错误识别的再现率是：%f" % fause)
-print("原本就是错误的帧数为:%f,占总帧数的%f" % (f, fause_rate))
-print("正确认识的再现率是:%f" % correct)
-print("原本就是正确的帧数为:%f,占总帧数的%f" % (c, correct_rate))
 print("错误识别的适合率是：%f" % fause_1)
-print("正确认识的适合率是：%f" % correct_1)
-print("正确认识的F值为:%f" % correct_f)
 print("错误识别的F值为：%f" % fause_f)
