@@ -16,6 +16,7 @@ pipei_zhenze:#正则化之后再进行hencyou的计算
 
 
 以下是用来提取特征值,计算変調スペクトル,整理学习数据
+jiachuang:#做傅里叶变换之前加窗
 zhengjie_RWCP:先给正解文加句号，(合并了jiajuhao)然后把RWCP的正解文提取出来，RWCP专用
 zhengli:把得到的fbank和変調スペクトル按all，opentest，closetest,xuexi整理出来
 zhengli_fbank:只整理fbank
@@ -61,5 +62,3 @@ tongji:把一批文件中的所有特征值文件的个数统计出来
 废弃物
 zidian:为打标签而建立三个字典
 qiediao_4:#用于把标签0比较多的文件切成小段。
-
-
