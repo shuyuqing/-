@@ -33,11 +33,11 @@ hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\symbol'  # 批次
+    path = r'C:\Users\shu\Desktop\gongxiang\symbol_1'  # 批次
     path_beifeng = r'C:\Users\shu\Desktop\gongxiang\数据库'
 
 elif hostName == 'SHU':
-    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol'
+    path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol_1'
     path_beifeng = r'G:\研究生二年级\数据库'
 
 elif hostName == "symbol2":
@@ -53,7 +53,7 @@ chuangkou = 8
 
 lintianchong = T
 #是否进行零补充
-fftwindow = 8
+fftwindow = 32
 #fft时候的窗口
 
 
