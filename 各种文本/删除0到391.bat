@@ -1,1 +1,0 @@
-@for %%a in (*.csv) do @more +391 "%%a">$&move $ "%%a"
