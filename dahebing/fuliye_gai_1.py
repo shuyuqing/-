@@ -6,12 +6,15 @@ import scipy.fftpack as sc
 import os,math
 import math as ma
 import muluzai as mulu
+import jiachuang as jc
+
 
 def mizhichuli(basedir,chuangkou,padding,lintianchong):
 
+    jiachuang = True
     bulin = 'log_qian5'
-
     mizhichuli_log = 'mizhichuli'
+
 
     for mulu_1 in os.listdir(basedir):
         lujing = os.path.join(basedir, mulu_1, mizhichuli_log)
@@ -95,17 +98,16 @@ def mizhichuli(basedir,chuangkou,padding,lintianchong):
 
                         # print(zhenggui_list_1)
                         # os.system('pause')
+                    if jiachuang == True:
 
-                    # print(zhenggui_list_1)
+                        zhenggui_list_1 = jc.jiachuangzi(zhenggui_list_1)
 
                     tezheng_2 = nf.fft(zhenggui_list_1)
 
                     # print(tezheng_2)
-
                     # print("第%d列的第%d波"%(i,m))
                     # print(tezheng_2)
                     block_1 = block + padding
-
                     # print('输出block')
                     # print(block_1)
 
