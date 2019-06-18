@@ -18,9 +18,9 @@ from sklearn.metrics import confusion_matrix
 
 from pykakasi import kakasi#把单词转化为音素
 
-path = r'C:\baseline\baseline\baselinetest'
+path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\baseline\baselinetest'
 
-fazhi = 0.5
+fazhi = 0.9
 
 # name_tezheng =
 # 装有特征值的那个文件的文件名
