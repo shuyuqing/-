@@ -1,0 +1,9 @@
+buroku:以32帧长度为窗口对fbank进行傅里叶变换，只做一个窗口，沿着y轴
+ceshi:显示buroku处理之后的数据的图像
+ceshi_1:xi的显示スペクトログラム的代码
+fbank_ziji:自己写的显示fbank的代码
+hencyo_ziji:自己写的显示buroku处理之后的数据的代码
+xianshi:跟ceshi_1一样
+xianshi_1:自己写的可以显示各种图形的代码
+yupu:网上找的可以显示语谱图的代码
+yupu_ziji:自己写的可以显示语谱图的代码
