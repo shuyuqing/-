@@ -196,6 +196,6 @@ pis.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='bulin',guanjianzi_1 = 'mulu')
 
-pis.pishan(os.path.join(path_beifeng,dataname_2),guanjianzi='wav',guanjianzi_1 = 'mulu')
+pis.pishan(os.path.join(path_beifeng,dataname_2+'_'+jieweiguanjianzi),guanjianzi='wav',guanjianzi_1 = 'mulu')
 
 # zhaocuo.zhaocuo(path)#作用于特征值文件，用于检查打标签的时候第一个空是不是全部被打上了1�
