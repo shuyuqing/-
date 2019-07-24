@@ -7,6 +7,7 @@ import os,math
 import math as ma
 import muluzai as mulu
 import jiachuang as jc
+import zhengguihua_3 as zg
 
 
 def mizhichuli(basedir,chuangkou,padding,lintianchong):
@@ -60,33 +61,19 @@ def mizhichuli(basedir,chuangkou,padding,lintianchong):
 
                 N = block
 
-                for m in range(huishu):
-
-                    # print(tezheng_1[start:end])
-
-                    #正规化部分
+                for m in range(huishu):#m是tezheng_3这个列表里面的序号
 
                     zhenggui_list_1 = []
 
-                    pingfanghe = 0
-
-                    # print(tezheng_1)
-
-                    for d in tezheng_1[start:end]:
-
-                        # print(d)
-                        pingfanghe += math.pow(d, 2)
-
-                        # print(pingfanghe)
-                        # print(xishu)
-
-                    xishu = math.sqrt(N / pingfanghe)
-
                     for u in tezheng_1[start:end]:
 
-                        zhenggui_list_1.append(u * xishu)
+                        zhenggui_list_1.append(u)
 
                     zhenggui_list_1 = np.array(zhenggui_list_1)
+
+                    if jiachuang == True:
+
+                        zhenggui_list_1 = jc.jiachuangzi(zhenggui_list_1)#加窗
 
                     if lintianchong == True:#如果要进行零填充，这个变量就要设置为True
 
@@ -98,9 +85,6 @@ def mizhichuli(basedir,chuangkou,padding,lintianchong):
 
                         # print(zhenggui_list_1)
                         # os.system('pause')
-                    if jiachuang == True:
-
-                        zhenggui_list_1 = jc.jiachuangzi(zhenggui_list_1)
 
                     tezheng_2 = nf.fft(zhenggui_list_1)
 
@@ -113,18 +97,27 @@ def mizhichuli(basedir,chuangkou,padding,lintianchong):
 
                     q = int(block_1 / 2)
                     # for n in range(q, block_1):  # 之前括号里面的值是block_1,因为要扔掉一半所以改了
+
+                    zhongzhuan = []
+
                     for n in range(0, q):  # 要取前半部分
 
-                        zhongzhuan = []
                         zhongzhuan.append(ma.sqrt(ma.pow(tezheng_2[n].imag, 2) + ma.pow(tezheng_2[n].real, 2)))
-                        tezheng_3[m].extend(zhongzhuan)
+
+                    zhongzhuan = np.array(zhongzhuan)
+
+                    zhongzhuan = zg.zhenggui(zhongzhuan,int(zhongzhuan.shape[0]))#正规化的部分
+
+                    tezheng_3[m].extend(zhongzhuan)
 
                     # print(tezheng_3)
-                        # tezheng_3 = ma.sqrt(ma.pow(tezheng_2[n].imag,2)+ma.pow(tezheng_2[n].real,2))
-                    # print(tezheng_3)
-                    # print("新的特征值")
-                    # print(tezheng_3[m])
-                    # print('下一波')
+                    #
+                    # os.system('pause')
+
+                    # tezheng_3[m] = np.array(tezheng_3[m])
+
+                    # tezheng_3[m] = zg.zhenggui(tezheng_3[m],int(tezheng_3[m].shape[0]))
+
                     start = start + 1
                     end = end + 1
 
