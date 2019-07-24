@@ -13,7 +13,7 @@ def zhengli(path,guanjianzi_2,dataname_1,dataname_2,guanjianzi_3):
 
         dataname = dataname_2
 
-    path_data = os.path.join(path,dataname,guanjianzi_3)
+    path_data = os.path.join(path,dataname+'_'+guanjianzi_3)
     muluzai.mkdir(path_data)
 
     path_mizhichuli = os.path.join(path_data,'mizhichuli')
