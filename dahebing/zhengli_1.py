@@ -23,9 +23,11 @@ def zhengli(path,guanjianzi_2,dataname_1,dataname_2,guanjianzi_3):
 
     muluzai.mkdir(path_mizhichuli_all)
 
+    dataname = dataname + '_' + guanjianzi_3
+
     for wenjian in os.listdir(path):
 
-        if wenjian != dataname:
+        if wenjian != dataname:#把新建的那个ag1_1_40_8_8_biaoqian_pingheng_train的文件跳过去
             path_1 = os.path.join(path,wenjian)
             path_3 = os.path.join(path_1,guanjianzi_2)
 
