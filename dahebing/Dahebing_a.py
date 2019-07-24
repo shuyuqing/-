@@ -27,14 +27,15 @@ import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 import  socket
 import zuixiao as zx
-import zhengli_mizhichuli
+import zhengli_mizhichuli,zhengli_1
 
 hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\ag1_1'  # 批次
-    path_beifeng = r'C:\Users\shu\Desktop\gongxiang\数据库'
+    path = r'C:\Users\shu\Desktop\gongxiang\ag1_1\train'  # 批次
+    path_beifeng = r'C:\Users\shu\Desktop\gongxiang\数据库\train'
+    jieweiguanjianzi = 'train'
 
 elif hostName == 'SHU':
     path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1_1'
@@ -63,7 +64,7 @@ zhengguihua_2 = F
 
 s1='log'
 s2='mizhichuli'
-dataname = 'ag1'
+dataname = 'ag1_1'
 
 
 if lintianchong == True:
@@ -92,7 +93,7 @@ te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
 dataname = dataname +'_'+ str(weidu)
 
-# sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
+sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
 he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
@@ -161,8 +162,6 @@ dataname_1 = dataname_1 + '_' + 'pingheng'
 
 
 
-
-
 pza.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
 zx.zuixiao(path,guanjianzi=s2+'_'+'biaoqian',xiaxian=10)
 bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
@@ -185,12 +184,7 @@ zx.zuixiao(path,guanjianzi=s2+'_'+'pingheng',xiaxian=10)
 s2 = s2+'_'+'pingheng'
 dataname_2 = dataname_2 + '_' + 'pingheng'
 
-
-
-
-# zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2 =dataname_2)#把opentest,closetest,整理出来
-
-zhengli_mizhichuli.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2)
+zhengli_1.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2,guanjianzi_3 = jieweiguanjianzi)
 
 
 path_1 = os.path.dirname(path)
