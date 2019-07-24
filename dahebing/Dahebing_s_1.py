@@ -186,18 +186,16 @@ dataname_2 = dataname_2 + '_' + 'pingheng'
 
 # zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2 =dataname_2)#把opentest,closetest,整理出来
 # zhengli_mizhichuli.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2)
-zhengli_1.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2,guanjianzi_3 =jieweiguanjianzai)
+zhengli_1.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2,guanjianzi_3 = jieweiguanjianzi)
 
-
-path_1 = os.path.dirname(path)
-shutil.move(os.path.join(path,dataname_2),path_1)
-shutil.copytree(os.path.join(path),os.path.join(path_beifeng,dataname_2))
+path_1 = os.path.dirname(path)#返回上一层目录
+shutil.move(os.path.join(path,dataname_2+'_'+jieweiguanjianzi),path_1)#把整理好的特征值移动到path的上一个目录去
+shutil.copytree(os.path.join(path),os.path.join(path_beifeng,dataname_2+'_'+jieweiguanjianzi))
 
 pis.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
 pis.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='bulin',guanjianzi_1 = 'mulu')
 
-pis.pishan(os.path.join(path_beifeng,dataname_2),guanjianzi='wav',guanjianzi_1 = 'mulu')
+pis.pishan(os.path.join(path_beifeng,dataname_2+'_'+jieweiguanjianzi),guanjianzi='wav',guanjianzi_1 = 'mulu')
 
-# zhaocuo.zhaocuo(path)#作用于特征值文件，用于检查打标签的时候第一个空是不是全部被打上了1�
