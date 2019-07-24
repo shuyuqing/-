@@ -21,6 +21,7 @@ zhengjie_RWCP:先给正解文加句号，(合并了jiajuhao)然后把RWCP的正�
 zhengli:把得到的fbank和変調スペクトル按all，opentest，closetest,xuexi整理出来
 zhengli_fbank:只整理fbank
 zhengli_mizhichuli:只整理mizhichuli
+zhengli_1:学习数据和训练数据分开整理
 chawenjian:检查.out文件是否会出现空文件，或者是识别结果只有一个句号,然后检查这个文件夹下wav文件跟.out文件的数量是否相同,然后把费了的文件都删除掉
 dianlog_RWCP_SP96:RWCP_SP96专用的,根据原有的.out文件生成能被scoring所识别的标准日志文件(.log文件)
 fuliye_gai:计算変調スペクトル
