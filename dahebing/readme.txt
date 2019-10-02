@@ -12,7 +12,7 @@ pipei_a_yinsu_1:在音素单位上打标签(scoring文件是align1),识别结果
 pipei_s:在单词单位上打标签(scoring文件是symbol.txt)
 pipei_s_yinsu:在音素单位上打标签(scoring文件是symbol.txt),识别结果和正解单词比较的时候要转化为音素去比较
 pipei_s_yinsu_1:在音素单位上打标签(scoring文件是symbol.txt),识别结果和正解单词比较的时候直接比较汉字
-pipei_zhenze:#正则化之后再进行hencyou的计算
+pipei_zhenze:#正则化之后再进行hencyou的计算,遇到标签s的时候转化为音素再比较，相等就改为标签c
 
 
 以下是用来提取特征值,计算変調スペクトル,整理学习数据
@@ -46,6 +46,7 @@ zhengguihua:把学习数据正规化(沿着时间轴做)
 zhengguihua_1:把学习数据正规化(沿着周期轴做)
 zhengguihua_2:老师介绍的方法，把每个周期bin上的值缩小，让每个bin的平均能量变成1
 zuixiao:#把帧数少于...的文件都删掉
+shujuzhengli:#为了把数据放入CRNN中去，把之前的数据转化为npz格式
 
 其他
 make_kana_convertor:#可以把英语字母转化为片假名
