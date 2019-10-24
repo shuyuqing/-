@@ -8,7 +8,6 @@ from IPython import embed
 import os
 from sklearn import preprocessing
 
-
 def load_audio(filename, mono=False, fs=44100):
     """Load audio file into numpy array
     Supports 24-bit wav-format
@@ -35,7 +34,6 @@ def load_audio(filename, mono=False, fs=44100):
 
     sample_rate : integer
         Sample rate
-
     """
 
     file_base, file_extension = os.path.splitext(filename)
@@ -108,7 +106,7 @@ def extract_mbe(_y, _sr, _nfft, _nb_mel):
 #              Main script starts here
 # ###################################################################
 
-is_mono = False
+is_mono = True#单声道
 __class_labels = {
     'brakes squeaking': 0,
     'car': 1,
@@ -120,11 +118,11 @@ __class_labels = {
 
 # location of data.
 folds_list = [1, 2, 3, 4]
-evaluation_setup_folder = 'C:\\Users\\Chen_4260\\Downloads\\TUT-sound-events-2017-development\\evaluation_setup\\'
-audio_folder = 'C:\\Users\\Chen_4260\\Downloads\\TUT-sound-events-2017-development\\audio\\street\\'
+evaluation_setup_folder = r'C:\Users\a7825\Desktop\工作空间\语音数据\新建文件夹\list'
+audio_folder = r'C:\Users\a7825\Desktop\工作空间\语音数据\新建文件夹\audio'
 
 # Output
-feat_folder = 'C:\\Users\\Chen_4260\\Downloads\\development\\'
+feat_folder = r'C:\Users\a7825\Desktop\工作空间\语音数据\新建文件夹\npz'
 utils.create_folder(feat_folder)
 
 # User set parameters
@@ -168,7 +166,7 @@ for audio_filename in os.listdir(audio_folder):
     for ind, val in enumerate(se_class):
         label[frame_start[ind]:frame_end[ind], val] = 1
     tmp_feat_file = os.path.join(feat_folder, '{}_{}.npz'.format(audio_filename, 'mon' if is_mono else 'bin'))
-    np.savez(tmp_feat_file, mbe, label)
+    np.savez(tmp_feat_file, mbe, label)#把每个wav文件的特征值保存为npz格式
 
 # -----------------------------------------------------------------------
 # Feature Normalization
@@ -181,6 +179,7 @@ for fold in folds_list:
     test_dict = load_desc_file(evaluate_file)
 
     X_train, Y_train, X_test, Y_test = None, None, None, None
+
     for key in train_dict.keys():
         tmp_feat_file = os.path.join(feat_folder, '{}_{}.npz'.format(key, 'mon' if is_mono else 'bin'))
         dmp = np.load(tmp_feat_file)
@@ -189,23 +188,39 @@ for fold in folds_list:
             X_train, Y_train = tmp_mbe, tmp_label
         else:
             X_train, Y_train = np.concatenate((X_train, tmp_mbe), 0), np.concatenate((Y_train, tmp_label), 0)
+    #把每一个wav文件的特征值都拼接在一起，形成一个大的矩阵
 
     for key in test_dict.keys():
         tmp_feat_file = os.path.join(feat_folder, '{}_{}.npz'.format(key, 'mon' if is_mono else 'bin'))
         dmp = np.load(tmp_feat_file)
-        tmp_mbe, tmp_label = dmp['arr_0'], dmp['arr_1']
+        tmp_mbe, tmp_label = dmp['arr_0'], dmp['arr_1']#npz文件被读取之后序号'arr_0'是第一个矩阵,‘arr_1’是第二个矩阵
         if X_test is None:
             X_test, Y_test = tmp_mbe, tmp_label
         else:
             X_test, Y_test = np.concatenate((X_test, tmp_mbe), 0), np.concatenate((Y_test, tmp_label), 0)
 
+    # print("X_train")
+    # print(X_train)
+    # print("X_test")
+    # print(X_test)
     # Normalize the training data, and scale the testing data using the training data weights
-    scaler = preprocessing.StandardScaler()
+
+    scaler = preprocessing.StandardScaler()#实例化一个用来对数据进行正则化的对象
     X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+    X_test = scaler.transform(X_test)#根据对之前部分fit的整体指标，对另一批数据使用同样的均值、方差、最大最小值等指标进行转换
+
+    # print("正则化之后")
+    # print("X_train")
+    # print(X_train)
+    # print("X_test")
+    # print(X_test)
+    # os.system('pause')
 
     normalized_feat_file = os.path.join(feat_folder, 'mbe_{}_fold{}.npz'.format('mon' if is_mono else 'bin', fold))
-    np.savez(normalized_feat_file, X_train, Y_train, X_test, Y_test)
+    np.savez(normalized_feat_file, X_train, Y_train, X_test, Y_test)    # 把矩阵保存成npz文件
+
+    #序号arr_0就是矩阵X_train,
+    #arr_1就是矩阵Y_train.
     print('normalized_feat_file : {}'.format(normalized_feat_file))
 
 

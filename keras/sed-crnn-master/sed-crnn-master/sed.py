@@ -77,6 +77,7 @@ def plot_functions(_nb_epoch, _tr_loss, _val_loss, _f1, _er, extension=''):
 
 
 def preprocess_data(_X, _Y, _X_test, _Y_test, _seq_len, _nb_ch):
+    # 把数据_seq_len毎に切开
     # split into sequences
     _X = utils.split_in_seqs(_X, _seq_len)
     _Y = utils.split_in_seqs(_Y, _seq_len)
@@ -93,14 +94,14 @@ def preprocess_data(_X, _Y, _X_test, _Y_test, _seq_len, _nb_ch):
 # MAIN SCRIPT STARTS HERE
 #######################################################################################
 
-is_mono = False  # True: mono-channel input, False: binaural input
+is_mono = True  # True: mono-channel input, False: binaural input
 
-feat_folder = 'C:\\Users\\a7825\\Desktop\\development\\'
+feat_folder = r'C:\Users\a7825\Desktop\工作空间\语音数据\development'
 __fig_name = '{}_{}'.format('mon' if is_mono else 'bin', time.strftime("%Y_%m_%d_%H_%M_%S"))
 
 
 nb_ch = 1 if is_mono else 2
-batch_size = 128    # Decrease this if you want to run on smaller GPU's
+batch_size = 20    # Decrease this if you want to run on smaller GPU's
 seq_len = 256       # Frame sequence length. Input to the CRNN.
 nb_epoch = 500      # Training epochs
 patience = int(0.25 * nb_epoch)  # Patience for early stopping
@@ -120,7 +121,7 @@ __models_dir = 'models/'
 utils.create_folder(__models_dir)
 
 # CRNN model definition
-cnn_nb_filt = 128            # CNN filter size
+cnn_nb_filt = 128           # CNN filter size
 cnn_pool_size = [5, 2, 2]   # Maxpooling across frequency. Length of cnn_pool_size =  number of CNN layers
 rnn_nb = [32, 32]           # Number of RNN nodes.  Length of rnn_nb =  number of RNN layers
 fc_nb = [32]                # Number of FC nodes.  Length of fc_nb =  number of FC layers
@@ -134,11 +135,17 @@ for fold in [1, 2, 3, 4]:
     print('\n\n----------------------------------------------')
     print('FOLD: {}'.format(fold))
     print('----------------------------------------------\n')
+
     # Load feature and labels, pre-process it
     X, Y, X_test, Y_test = load_data(feat_folder, is_mono, fold)
+    # X是训练数据特征值，Y是训练数据的标签, X_test是测试数据特征值，Y_test是测试数据标签
     X, Y, X_test, Y_test = preprocess_data(X, Y, X_test, Y_test, seq_len, nb_ch)
 
-
+    print(X.shape)
+    print(Y.shape)
+    print(X_test.shape)
+    print(Y_test.shape)
+    os.system('pause')
 
     # Load model
     model = get_model(X, Y, cnn_nb_filt, cnn_pool_size, rnn_nb, fc_nb)

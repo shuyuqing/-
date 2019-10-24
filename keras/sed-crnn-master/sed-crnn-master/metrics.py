@@ -10,7 +10,6 @@ import utils
 # Applied Sciences, 6(6):162, 2016
 #####################
 
-
 def f1_overall_framewise(O, T):
     if len(O.shape) == 3:
         O, T = utils.reshape_3Dto2D(O), utils.reshape_3Dto2D(T)
