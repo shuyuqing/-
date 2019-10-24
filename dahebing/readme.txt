@@ -47,11 +47,15 @@ zhengguihua_1:把学习数据正规化(沿着周期轴做)
 zhengguihua_2:老师介绍的方法，把每个周期bin上的值缩小，让每个bin的平均能量变成1
 zuixiao:#把帧数少于...的文件都删掉
 shujuzhengli:#为了把数据放入CRNN中去，把之前的数据转化为npz格式
+bianshuju:#把原来得到的变调数据一帧一帧拿出来，转化为矩阵(之前被立起来了)
+quci_RWCP_SP96_yinsu:#生成正解文和识别结果(音素)的文本,两个函数被合并了
+
 
 其他
 make_kana_convertor:#可以把英语字母转化为片假名
 muluzai:自动创建新的目录
-pipei:#用正则匹配找出认识结果的帧数表的文本
+pipei:#用正则匹配找出认识结果的帧数表的文本(单词单位)
+pipei_yinsu:#用正则匹配找出认识结果的帧数表的文本(音素单位)
 pipei_8:#用于打标签，解决socring把两个单词合并成一个单词的问题,给特征值打标签
 strQ2B:把字符串全角转半角
 chongzao_2:#用于在解析出来的.out文件中加上CCCSSS的标志，解决socring把两个单词合并成一个单词的问题,最后的句号被扔了
@@ -60,6 +64,8 @@ chongzao_yinsu:#用于再音素上重造标志列表
 pishan:批量删除文件夹下的文件夹以及文件
 zhuanyi:把一个文件夹下的文件都剪切，粘贴到另外一个文件夹下
 tongji:把一批文件中的所有特征值文件的个数统计出来
+python_linux:用python调用linux中的命令
+zhuanhuan_linux:用于把chasen.txt文件转化为
 
 废弃物
 zidian:为打标签而建立三个字典
