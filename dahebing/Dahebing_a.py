@@ -27,15 +27,14 @@ import zhengguihua_2 as zheng_2
 import zhengguihua as zheng
 import  socket
 import zuixiao as zx
-import zhengli_mizhichuli,zhengli_1
+import zhengli_mizhichuli
 
 hostName = socket.gethostname()
 print(hostName)
 
 if hostName == 'shu-VAIO':
-    path = r'C:\Users\shu\Desktop\gongxiang\ag1_1\train'  # 批次
-    path_beifeng = r'C:\Users\shu\Desktop\gongxiang\数据库\train'
-    jieweiguanjianzi = 'train'
+    path = r'C:\Users\shu\Desktop\gongxiang\ag1_1'  # 批次
+    path_beifeng = r'C:\Users\shu\Desktop\gongxiang\数据库'
 
 elif hostName == 'SHU':
     path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\ag1_1'
@@ -64,7 +63,7 @@ zhengguihua_2 = F
 
 s1='log'
 s2='mizhichuli'
-dataname = 'ag1_1'
+dataname = 'ag1'
 
 
 if lintianchong == True:
@@ -82,21 +81,21 @@ else:
 
 # zR.zhengjie(path)#在正解文的最后加上句号，然后提取出需要的正解文
 
-# pis.pishan(path,guanjianzi='log_biaoqian',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
-# pis.pishan(path,guanjianzi='log_biaoqian_pingheng',guanjianzi_1 = 'mulu')
-# pis.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
-# pis.pishan(path,guanjianzi='mizhichuli_biaoqian_pingheng',guanjianzi_1 = 'mulu')
-# pis.pishan(path,guanjianzi='mizhichuli_biaoqian',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='log_biaoqian',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
+pis.pishan(path,guanjianzi='log_biaoqian_pingheng',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='mizhichuli_biaoqian_pingheng',guanjianzi_1 = 'mulu')
+pis.pishan(path,guanjianzi='mizhichuli_biaoqian',guanjianzi_1 = 'mulu')
 
 
-# te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
 dataname = dataname +'_'+ str(weidu)
 
 # sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
 
 
-# he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
 dataname = dataname +'_'+ str(chuangkou)+ '_'+str(fftwindow)
 dataname_1 = dataname_2 = dataname
@@ -162,40 +161,47 @@ dataname_1 = dataname_1 + '_' + 'pingheng'
 
 
 
-# pza.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
-# zx.zuixiao(path,guanjianzi=s2+'_'+'biaoqian',xiaxian=10)
-# bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
-# bl.pingheng_2(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
-# bl.pingheng_3(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
+
+
+pza.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
+zx.zuixiao(path,guanjianzi=s2+'_'+'biaoqian',xiaxian=10)
+bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
+bl.pingheng_2(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
+bl.pingheng_3(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
 s2 = s2+'_'+'biaoqian'
 dataname_2 = dataname_2 + '_' + 'biaoqian'
 
 
-# for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
-#     path_1 = os.path.join(path, wenjian, s2)
-#     path_new = os.path.join(path, wenjian, s2+'_'+'pingheng')
-#     mu.mkdir(path_new)
-#     for wenjian_1 in os.listdir(path_1):
-#         path_2 = os.path.join(path_1, wenjian_1)
-#         qie.qiexiao(path_2,wenjian_1,path_new)
-# bl.pingheng_2(path,guanjianzi = s2+'_'+'pingheng')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
-# zx.zuixiao(path,guanjianzi=s2+'_'+'pingheng',xiaxian=10)
+for wenjian in os.listdir(path):#因为特征值里面0太多了，要切掉一些，这个会把文件切成不同小段
+    path_1 = os.path.join(path, wenjian, s2)
+    path_new = os.path.join(path, wenjian, s2+'_'+'pingheng')
+    mu.mkdir(path_new)
+    for wenjian_1 in os.listdir(path_1):
+        path_2 = os.path.join(path_1, wenjian_1)
+        qie.qiexiao(path_2,wenjian_1,path_new)
+bl.pingheng_2(path,guanjianzi = s2+'_'+'pingheng')#把标签全部是0的文件都移动到桌面去,因为切割之后会留下很多标签全是0的文件
+zx.zuixiao(path,guanjianzi=s2+'_'+'pingheng',xiaxian=10)
 
 s2 = s2+'_'+'pingheng'
 dataname_2 = dataname_2 + '_' + 'pingheng'
 
-# zhengli_1.zhengli(path = path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2,guanjianzi_3 = jieweiguanjianzi)
 
 
-path_1 = os.path.dirname(path)#返回上一层目录
-shutil.move(os.path.join(path,dataname_2+'_'+jieweiguanjianzi),path_1)#把整理好的特征值移动到path的上一个目录去
-shutil.copytree(os.path.join(path),os.path.join(path_beifeng,dataname_2+'_'+jieweiguanjianzi))
+
+# zhengli.zhengli(path,guanjianzi_1 = s1,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2 =dataname_2)#把opentest,closetest,整理出来
+
+zhengli_mizhichuli.zhengli(path,guanjianzi_2 = s2,dataname_1 = dataname_1,dataname_2=dataname_2)
+
+
+path_1 = os.path.dirname(path)
+shutil.move(os.path.join(path,dataname_2),path_1)
+shutil.copytree(os.path.join(path),os.path.join(path_beifeng,dataname_2))
 
 pis.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
 pis.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='bulin',guanjianzi_1 = 'mulu')
 
-pis.pishan(os.path.join(path_beifeng,dataname_2+'_'+jieweiguanjianzi),guanjianzi='wav',guanjianzi_1 = 'mulu')
+pis.pishan(os.path.join(path_beifeng,dataname_2),guanjianzi='wav',guanjianzi_1 = 'mulu')
 
 # zhaocuo.zhaocuo(path)#作用于特征值文件，用于检查打标签的时候第一个空是不是全部被打上了1�

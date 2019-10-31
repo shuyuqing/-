@@ -18,7 +18,6 @@ def read_out(file_path):
     # i = re.findall(r'\[.*', text)
     # print(i)
     # os.system('pause')
-
     # for i in re.findall(r'\[.*\]', text):
     bianhao = re.findall(r'\[.*', text)
 
@@ -53,7 +52,7 @@ def read_out(file_path):
             a = i.replace(re.findall(r'\[\S+\_\S+\]', i)[0], '')
             i = a
 
-        print(i)
+        # print(i)
 
         info_list_0 = re.search(r'\s+(?P<value>\S+)\_\w+\-(?P<value1>\S+)\_\w+\+(?P<value2>\S+)\_\w+',i)
 
@@ -65,18 +64,18 @@ def read_out(file_path):
 
         dierge = info_list_0.group('value1')#判定该音素在哪个范围要看.out文件中中间的那个音素
 
-        if dierge == "N":
-            dierge = 'n'
+        # if dierge == "N":
+        #     dierge = 'n'
         if dierge == 'sp':
             dierge = '、'
-        if dierge[-1] == ':':
-
-            if dierge[0] == 'o':
-                dierge = 'ou'
-            else:
-                dierge_1 = dierge[0]+dierge[0]
-                dierge = dierge_1
-
+        # if dierge[-1] == ':':
+        #
+        #     if dierge[0] == 'o':
+        #         dierge = 'ou'
+        #     else:
+        #         dierge_1 = dierge[0]+dierge[0]
+        #         dierge = dierge_1
+        #之前没有用julius工具的时候，用来变换音素用的
 
         # disange = info_list_0.group('value2')
 
@@ -96,7 +95,18 @@ def read_out(file_path):
         info_list.append(info_list_1)
         # print(i)
 
-    print(info_list)
+        info_list_1 = info_list.copy()#这里只能用浅度拷贝不能直接复制
+        n = 0
+        for item in info_list_1:#把逗号pop掉
+
+            if item[0] == '、':
+                info_list.pop(n)
+                n = n -1
+
+            n+=1
+
+
+    # print(info_list)
     # os.system('pause')
     return info_list
 

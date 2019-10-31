@@ -1,7 +1,4 @@
-#用于从chasen出力文件中取出已经分割好了的单词，然后把句子写入新的txt文件中
-#首先我得通过认识结果把需要的正解文从.txt文件中取出来，写入到另外一个.txt文件中去
-#之后就会得到.ref文件，然后去dianlog.py文本中操作
-#记住，必须要重新在linux中新建一个.ref文件，把在windows上生成的,ref文件的内容复制到这个新建的文件中去，才能被scoring识别
+#从chasen文件中把正解文的読み拿出来，准备给音素转化工具使用(C064L_chasen_1.txt)
 import csv
 import os
 import jaconv#把片假名转化为平假名
@@ -63,4 +60,4 @@ def qu(path_1):
                 for xieru in column_1:
                     f.writelines(xieru[0] + '\n')
 
-qu(path_1=r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹')
+# qu(path_1=r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹')

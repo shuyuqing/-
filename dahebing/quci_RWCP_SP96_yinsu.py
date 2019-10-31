@@ -94,8 +94,8 @@ def qu(path_1):#生成正解文的函数
                     f.writelines(u+'\n')#每写一句就空一行
                     n=n+1
 
-            f.writelines(name[n - 1].replace(".out", '') + '\n')  # 为了能够让生成的标志文件的结尾不会出现实心圆点，故意把最后一句话重复写了一遍
-            f.writelines(data_3[-1])
+            # f.writelines(name[n - 1].replace(".out", '') + '\n')  # 为了能够让生成的标志文件的结尾不会出现实心圆点，故意把最后一句话重复写了一遍
+            # f.writelines(data_3[-1])
 
 
 # 根据原有的.out文件生成能被scoring所识别的标准日志文件
@@ -104,6 +104,7 @@ def qu(path_1):#生成正解文的函数
 import csv
 import os
 import pipei_yinsu
+
 def logwen(path):#生成识别结果的函数
 
     for mulu in os.listdir(path):
@@ -134,16 +135,174 @@ def logwen(path):#生成识别结果的函数
                 files_dir = os.path.join(file_dir, i)
                 data = pipei_yinsu.read_out(files_dir)
 
+                # you = False#检查识别结果中有没有冒号
+                # for danci in data:#如果识别结果中出现冒号“：”就把单词单位的识别结果读出来看看到底是“u”还是“-”
+                #     if ':' in danci[0]:
+                #         you = True
+                # if you == True:
+                _data = changpoyin(data, files_dir, i)  # 改造之后的新的列表,
+
                 # print(data)
+                # print(_data)
+                # os.system('pause')
+
                 yinsu_1 = ''
-                for yinsu in data:#把音素一个接一个扔到list里面去
+                for yinsu in _data:#把音素一个接一个扔到list里面去
                     if yinsu[0]!='、':
                         yinsu_1 = yinsu_1 + yinsu[0] + ' '
 
                 f.writelines(wenjianid + i.replace(".out", ".wav") + '\n')
                 f.writelines('sentence1:  '+yinsu_1+ '\n')
 
-            f.writelines(wenjianid + file_dir_list[-1].replace(".out", ".wav") + '\n')
-            f.writelines('sentence1:  '+data[-1][0])
+#从chasen文件中把正解文的読み拿出来，准备给音素转化工具使用(C064L_chasen_1.txt)
+import csv
+import os
+import jaconv#把片假名转化为平假名
 
+def pinjia(path_1):
+
+    path = path_1
+    for mulu in os.listdir(path):#每一个循环读到一个大文件C064L，C064R
+
+        jushiqi = 0
+        file_dir = os.path.join(path,mulu)
+        #chasen的出力文件的地址以及整理之后的文件的地址
+
+        file_dir_2 = os.path.join(file_dir,'keka')
+        #原本的.out文件的路劲，仅仅是想要把文件名取出来
+
+        feature = 'chasen.txt'
+        feature_1 = 'chasen.ref'
+        feature_2 = mulu +'_'+'chasen_1.txt'
+
+        files_dir = os.path.join(file_dir,feature)
+
+        save_dir = os.path.join(file_dir,feature_2)
+
+        with open(files_dir,  'r',encoding='utf-8') as csvfile:
+
+            reader = csv.reader(csvfile)
+
+            column = [row for row in reader]
+
+            column_2 = []
+
+            for xiang in column:
+                column_2.append(xiang[0].split())
+
+            column_1 = []
+            banyun = []
+
+            for xiang in column_2:
+
+                if len(xiang) == 1:
+
+                    banyun.append(xiang[0])
+                    column_1.append(banyun)
+                    banyun = []
+
+                else:
+                    if xiang[0] != '、' and xiang[0] != '。':
+                        if xiang[1] == '未知語':
+                            banyun.append(xiang[0] + ' ' + jaconv.kata2hira(xiang[0]))
+                        else:
+                            banyun.append(xiang[0] + ' ' + jaconv.kata2hira(xiang[1]))
+                        column_1.append(banyun)
+                        banyun = []
+
+            print(column_1)
+
+            with open(save_dir, 'w', encoding='utf-8') as f:  # 把正解文一句一句地写入新的txt文件
+                for xieru in column_1:
+                    f.writelines(xieru[0] + '\n')
+
+
+import pipei
+import make_kana_convertor as ztok#把字母转化成读音
+import copy
+def changpoyin(data,files_dir,i):#把长破音都转化为u,这里的i是文件的id
+
+    from pykakasi import kakasi  # 把单词转化为音素
+    kakasi = kakasi()
+    kakasi.setMode("H", "a")  # Hiragana to ascii, default: no conversion
+    kakasi.setMode("K", "a")  # Katakana to ascii, default: no conversion
+    kakasi.setMode("J", "a")  # Japanese to ascii, default: no conversion
+    kakasi.setMode("r", "Hepburn")  # default: use Hepburn Roman table
+    kakasi.setMode("s", True)  # add space, default: no separator
+    conv = kakasi.getConverter()
+
+    data_1 = copy.deepcopy(data)
+    data_2 = []
+
+    files_dir_1 = os.path.join(files_dir.replace('_yinsu', ''))
+    data_danci = pipei.read_out(files_dir_1)  # 单词级别的识别结果
+
+    for danci in data_1:#每次循环检查一个音素(音素単位)
+
+        if ':' in danci[0]:#如果识别结果中出现冒号“：”就把单词单位的识别结果读出来看看到底是“u”还是“-”
+
+            zhenshu = danci[1][0]
+
+            for danci_1 in data_danci:#每一个循环查看一个单词(単語単位)
+
+                if zhenshu >= danci_1[1][0] and zhenshu <= danci_1[1][1]:  # 找到这个音素对应的汉字
+
+                    print('能找到')
+
+                    tanngou = conv.do(danci_1[0])  # 把这个汉字取出进行转化
+
+                    if danci_1[0] == tanngou:  # 说明是字母
+
+                        tanngou = ztok._make_kana_convertor(danci_1[0])
+
+                    if tanngou[-1] == 'u':#如果结尾是u那就把识别结果里的:转化为u
+
+                        fenjie = (danci[1][0] + danci[1][1])//2
+                        danci_2 = copy.deepcopy(danci)
+                        danci_2[1][1] = fenjie
+                        danci_2[0] = danci_2[0].replace(':','')
+                        danci_3 = copy.deepcopy(danci)
+                        danci_3[1][0] = fenjie + 1
+                        danci_3[0] = 'u'
+                        data_2.append(danci_2)
+                        data_2.append(danci_3)
+
+                    elif zifudingwei(tanngou,danci[0].replace(':','')) == 'u':#把有冒号字母后面的那个字母单独拿出来
+
+                        fenjie = (danci[1][0] + danci[1][1])//2
+                        danci_2 = copy.deepcopy(danci)
+                        danci_2[1][1] = fenjie
+                        danci_2[0] = danci_2[0].replace(':','')
+                        danci_3 = copy.deepcopy(danci)
+                        danci_3[1][0] = fenjie + 1
+                        danci_3[0] = 'u'
+                        data_2.append(danci_2)
+                        data_2.append(danci_3)
+
+                    else:
+                        data_2.append(danci)
+
+                    break
+
+        else:
+            data_2.append(danci)#如果不是包函冒号的音素，就直接加入新的list
+
+    # print(i)
+    # print(data_danci)
+    # print(data)
+    # print(data_2)
+    # os.system('pause')
+
+    return data_2
+
+def zifudingwei(tanngou,danci):#把有冒号的字母后面的那个字母返回来
+
+    n = 0
+    for y in tanngou:
+        if y == danci:
+            n = n+1
+            return tanngou[n]
+        n = n+1
+
+# qu(path_1=r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹')
 logwen(path=r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹')

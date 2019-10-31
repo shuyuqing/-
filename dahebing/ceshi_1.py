@@ -1,92 +1,14 @@
-import re
-import pykakasi #把平假名或片假名转化为读音
-import math
+#提取各种特征值
+import scipy.io.wavfile as wav
+from python_speech_features.base import mfcc,fbank,logfbank
 import numpy as np
-import  socket
-import numpy.fft as nf
-
-# hostName = socket.gethostname()
-#
-# print(hostName)
+import os
+import muluzai as muluz
 
 
-
-import  socket
-
-# hostName = socket.gethostname()
-#
-# print(hostName)
-# str = "となりの隣がとなりのトトロ"
-# tagger = MeCab.Tagger("-d /path-to-NEoligd")
-# print(tagger.parse(str))
+(fs, audio) = wav.read(r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹\C1_F_05\wav/l_289220_295510_C1_F_05.wav')
 
 
 
-# m = re.match(r"(?P<first_name>\w+)(?P<last_name>\w+)", "Malcolm Reynolds")
-# # m = re.match(r"\w+", "Malcolm Reynolds")
-#
-# a = m.group('first_name')
-#
-# b = m.group('last_name')
-#
-# c = m.group(1)
-#
-# print(c)
 
-# a = 2
-# b = 5
-#
-# for i in range(b):
-
-#
-#     print(i)
-
-# a = ''
-# b = 'ab'
-# c = 'abc'
-
-# print(b in a)
-# print(a[-1])
-
-# kakasi = pykakasi.kakasi()
-# kakasi.setMode("H", "a")  # Hiragana to ascii, default: no conversion
-# kakasi.setMode("K", "a")  # Katakana to ascii, default: no conversion
-# kakasi.setMode("J", "a")  # Japanese to ascii, default: no conversion
-# kakasi.setMode("r", "Hepburn")  # default: use Hepburn Roman table
-# kakasi.setMode("s", True)  # add space, default: no separator
-# conv = kakasi.getConverter()
-#
-#
-# a ='B'
-#
-# print(conv.do(a))
-
-
-# a = 'sp_S-a_B+n_I[sp-a_B+n_B]'
-# b = a.replace(re.findall(r'\[.*\]',a)[0], '')
-# print(b)
-# a = math.sqrt()
-# a = math.pow(0.51823924,2)+math.pow(0.85523569,2)
-# print(a)
-# print(np.log(999999999555555599))
-
-
-# list_1 = [1,2,3,1,8,1,1,2,3,2,3,2,2,1,2,1]
-# tezheng_2 = nf.fft(list_1)
-# print(tezheng_2)
-# audio_15 = [1,2,3,4,5,6,7,8,9,10]
-#
-# print(len(audio_15))
-#
-# quan = len(audio_15)
-# ban = int(len(audio_15)/2)
-#
-#
-# audio_15 = audio_15[ban:quan]
-# print(audio_15)
-i=10
-l=14
-
-list_yuce_1 = [1 for i in range(i,l+1)]
-
-print(list_yuce_1)
+# tiqu(path=r'C:\Users\a7825\Desktop\新建文件夹 (4)',weidu=26,logenergy=False,energy_1=True)

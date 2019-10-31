@@ -44,7 +44,7 @@ def logwen(path):
             # print(banyun)
             # os.system("pause")
             # files_dir_1 = os.path.join(file_dir_1,i.replace(".out",".log"))
-        with open(files_dir_1, 'w',encoding='utf-8') as f:  # 把正解文一句一句地写入新的txt文件
+        with open(files_dir_1, 'w',encoding='utf-8') as f:  # 把正解文一句一句地写入新的log文件
             for m in banyun:
                 f.writelines(m+'\n')
 

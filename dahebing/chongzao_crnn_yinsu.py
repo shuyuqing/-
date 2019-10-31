@@ -5,21 +5,14 @@ import copy
 # import strQ2B
 
 
-def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list/scoring之后的识别结果/通过.out文件解析出来的list/文件ID
-
-    # kakasi = pykakasi.kakasi()
-    # kakasi.setMode("H", "a")  # Hiragana to ascii, default: no conversion
-    # kakasi.setMode("K", "a")  # Katakana to ascii, default: no conversion
-    # kakasi.setMode("J", "a")  # Japanese to ascii, default: no conversion
-    # kakasi.setMode("r", "Hepburn")  # default: use Hepburn Roman table
-    # kakasi.setMode("s", True)  # add space, default: no separator
-    # conv = kakasi.getConverter()
+def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID,l_zhengjie_1):#四个参数分别是标志list/scoring之后的识别结果/通过.out文件解析出来的list/文件ID
 
 
     dianout_1 = []#生成的新的.out解析出来的list
 
     jishuqi_l_jieguo_1 = 0#l_biaozhi跟l_jieguo_1是一一对应的，所以这两个list共用一个计数器
     jishuqi_dianout = 0
+    jishuqi_zhengjie = 0
 
     dianout_3 = copy.deepcopy(dianout_2)#为了不改变函数外面的dianout的值
 
@@ -31,7 +24,7 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
         if i != '':
 
             danci_dianout = dianout_3[jishuqi_dianout][0]#原版的.out文件解析出来的list
-            danci_l_jieguo_1 = l_jieguo_1[jishuqi_l_jieguo_1]#经过socring工具之后的align文件中的识别结果的单词
+            danci_l_jieguo_1 = l_jieguo_1[jishuqi_l_jieguo_1]#经过socring工具之后的align文件中的识别结果的单词(可能会被强行拼凑)
 
             if len(danci_l_jieguo_1) < len(danci_dianout):
 
@@ -43,9 +36,7 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
                 print(danci_dianout)
                 print("dianout_1")
                 print(dianout_1)
-
                 os.system('pause')
-
 
             # if conv.do(danci_dianout) == danci_dianout and danci_dianout != '、':  # 判断是不是字母
             #
@@ -58,13 +49,16 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
             if danci_dianout == danci_l_jieguo_1:
 
                 dianout_3[jishuqi_dianout].append(l_biaozhi[jishuqi_l_jieguo_1])
-                dianout_1.append(dianout_3[jishuqi_dianout])#往新构建的list中加入元来dianout中的单词
+                dianout_1.append(dianout_3[jishuqi_dianout])
 
             else:#这里默认.out文件的单词被scoring工具合并了，所以它应该比输出文件的识别结果的单词短
 
                 danci_dianout_1 = dianout_3[jishuqi_dianout][0] + dianout_2[jishuqi_dianout+1][0]
 
                 if danci_dianout_1 == danci_l_jieguo_1:
+
+                    print('拼了一次')
+                    print(ID)
 
                     dianout_3[jishuqi_dianout][0] = danci_dianout_1#把两个单词拼接起来
                     dianout_3[jishuqi_dianout][1][1] = dianout_2[jishuqi_dianout+1][1][1]
@@ -78,6 +72,9 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
                     danci_dianout_1 = dianout_3[jishuqi_dianout][0] + dianout_2[jishuqi_dianout+1][0] + dianout_2[jishuqi_dianout+2][0]
 
                     if danci_dianout_1 == danci_l_jieguo_1:
+                        print('拼了两次')
+                        print(ID)
+
                         dianout_3[jishuqi_dianout][0] = danci_dianout_1  # 把两个单词拼接起来
                         dianout_3[jishuqi_dianout][1][1] = dianout_2[jishuqi_dianout + 2][1][1]
                         dianout_3[jishuqi_dianout].append(l_biaozhi[jishuqi_l_jieguo_1])
@@ -105,17 +102,17 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID):#四个参数分别是标志list
 
                             print(ID)
                             print('拼了四次都没有成功')
+
                             os.system('pause')
+
 
             jishuqi_l_jieguo_1 += 1
             jishuqi_dianout += 1
+            jishuqi_zhengjie += 1
 
         else:
 
             jishuqi_l_jieguo_1 += 1
-
-    if dianout_1[-1][0] == '。':
-
-        dianout_1.pop(-1)#把最后一个句号pop掉
+            jishuqi_zhengjie += 1
 
     return dianout_1

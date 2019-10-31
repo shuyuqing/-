@@ -7,14 +7,6 @@ import copy
 
 def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID,l_zhengjie_1):#四个参数分别是标志list/scoring之后的识别结果/通过.out文件解析出来的list/文件ID
 
-    # kakasi = pykakasi.kakasi()
-    # kakasi.setMode("H", "a")  # Hiragana to ascii, default: no conversion
-    # kakasi.setMode("K", "a")  # Katakana to ascii, default: no conversion
-    # kakasi.setMode("J", "a")  # Japanese to ascii, default: no conversion
-    # kakasi.setMode("r", "Hepburn")  # default: use Hepburn Roman table
-    # kakasi.setMode("s", True)  # add space, default: no separator
-    # conv = kakasi.getConverter()
-
 
     dianout_1 = []#生成的新的.out解析出来的list
 
@@ -44,9 +36,7 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID,l_zhengjie_1):#四个参数分别
                 print(danci_dianout)
                 print("dianout_1")
                 print(dianout_1)
-
                 os.system('pause')
-
 
             # if conv.do(danci_dianout) == danci_dianout and danci_dianout != '、':  # 判断是不是字母
             #
@@ -61,7 +51,7 @@ def chongzao(l_biaozhi,l_jieguo_1,dianout_2,ID,l_zhengjie_1):#四个参数分别
                 dianout_3[jishuqi_dianout].append(l_biaozhi[jishuqi_l_jieguo_1])
                 dianout_1.append(dianout_3[jishuqi_dianout])
 
-                if l_biaozhi[jishuqi_l_jieguo_1] == 'S':  # 如果标志是S，就把这个单词对应的正解加入进的list
+                if l_biaozhi[jishuqi_l_jieguo_1] == 'S':  # 如果标志是S，就把这个单词对应的正解加入进的list，之后转化了看看是不是和识别结果一样
 
                     dianout_3[jishuqi_dianout].append(l_zhengjie_1[jishuqi_zhengjie])
 

@@ -7,7 +7,6 @@ import strQ2B
 import make_kana_convertor
 import chongzao_1 as cz
 
-
 #为了处理那些因为表示方式不同而被打错标签的单词，先把错误单词的索引找出，再把单词转变成字母，然后再比较
 
 def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
@@ -159,10 +158,8 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                             # print("正解list")
                             # print(l_zhengjie_1)
-                            #
                             # print("识别结果list")
                             # print(l_jieguo_1)
-                            #
                             # print("zhuanhuan_jieguo")
                             # print(zhuanhuan_jieguo)
                             # print("zhuanhuan_zhengjie")
