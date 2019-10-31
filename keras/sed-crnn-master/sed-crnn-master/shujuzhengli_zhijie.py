@@ -2,7 +2,7 @@ import os
 import numpy as np
 
 
-def shujuzhengli(path,guanjianzi,dataname):#dataname是关键字,最后的.np文件的文件名
+def shujuzhengli(path,guanjianzi,dataname):
 
     X_train = None
 
@@ -13,8 +13,6 @@ def shujuzhengli(path,guanjianzi,dataname):#dataname是关键字,最后的.np文
         for wenjian in os.listdir(path_1):
 
             wenjian = os.path.join(path_1,wenjian)
-
-            print(wenjian)
 
             f = open(wenjian, 'r')
 
@@ -34,7 +32,7 @@ def shujuzhengli(path,guanjianzi,dataname):#dataname是关键字,最后的.np文
     np.savez(tmp_feat_file, X_train)#把每个wav文件的特征值保存为npz格式
 
 
-shujuzhengli(path = r'C:\Users\a7825\Desktop\工作空间\桌面1\shiyan\symbol_40_8_8_biaoqian_pingheng',
+shujuzhengli(path = r'C:\Users\a7825\Desktop\工作空间\桌面1\shiyan\cnn_3d',
            guanjianzi = 'mizhichuli_biaoqian_pingheng',
            dataname = 'er')
 
@@ -42,3 +40,4 @@ shujuzhengli(path = r'C:\Users\a7825\Desktop\工作空间\桌面1\shiyan\symbol_
 # _X_train = a['arr_0']
 # print(_X_train.shape)
 # print(_X_train[112])
+#

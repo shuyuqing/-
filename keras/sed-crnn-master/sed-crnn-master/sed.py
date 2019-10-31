@@ -138,6 +138,14 @@ for fold in [1, 2, 3, 4]:
 
     # Load feature and labels, pre-process it
     X, Y, X_test, Y_test = load_data(feat_folder, is_mono, fold)
+
+
+    print('切割之前')
+    print(X.shape)
+    print(Y.shape)
+    print(X_test.shape)
+    print(Y_test.shape)
+
     # X是训练数据特征值，Y是训练数据的标签, X_test是测试数据特征值，Y_test是测试数据标签
     X, Y, X_test, Y_test = preprocess_data(X, Y, X_test, Y_test, seq_len, nb_ch)
 

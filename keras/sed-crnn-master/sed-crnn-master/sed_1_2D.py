@@ -150,7 +150,7 @@ __fig_name = '{}_{}'.format('mon' if is_mono else 'bin', time.strftime("%Y_%m_%d
 nb_ch = 1 if is_mono else 2
 batch_size = 1            # Decrease this if you want to run on smaller GPU's
 fft_point = 8
-seq_len = fft_point       # Frame sequence length. Input to the CRNN.
+seq_len = int(fft_point//2)       # Frame sequence length. Input to the CRNN.
 nb_epoch = 500            # Training epochs
 patience = int(0.25 * nb_epoch)  # Patience for early stopping
 
@@ -186,42 +186,60 @@ for fold in [1]:
     print('----------------------------------------------\n')
 
     # Load feature and labels, pre-process it
-    X, Y, X_test, Y_test = load_data(train_tezheng,test_tezheng)
+    # X, Y, X_test, Y_test = load_data(train_tezheng,test_tezheng)
     # X是训练数据特征值，Y是训练数据的标签, X_test是测试数据特征值，Y_test是测试数据标签
     # print('输出学习数据标签')
     # print(Y)
     # print(Y.shape)
     # os.system('pause')
 
+
+    """生成虚拟数据
     a = np.random.rand(2000, 40)
     b = np.random.rand(250, 2)  # 生成标签
     r = [1, 0]
     for wi in range(250):
         b[wi] = np.array(r)
-
     aw = np.random.rand(2000, 40)
     bn = np.random.rand(250, 2)  # 生成标签
-
     r = [1, 0]
-
     for wi in range(250):
         bn[wi] = np.array(r)
-
-
     X = a
     Y = b
     X_test = aw
     Y_test = bn
-
     print('训练数据特征值')
     print(X.shape)
     print("训练数据标签")
     print(Y.shape)
     # os.system('pause')
+    """
+    path_train = r'C:\Users\a7825\Desktop\40_8_8/train.npz'#使用真实数据
+    path_test = r'C:\Users\a7825\Desktop\40_8_8/test.npz'
+    train = np.load(path_train)
+    test = np.load(path_test)
 
-    # X, Y, X_test, Y_test = preprocess_data(X, Y, X_test, Y_test, seq_len, nb_ch)
+    X = train['arr_0']
+    Y = train['arr_1']
+    X_test = test['arr_0']
+    Y_test = test['arr_1']
 
-    X, X_test = preprocess_data_1(X, X_test, seq_len, nb_ch)#标签不需要切割
+    Y = label.label_1(Y)#把标签转化为可以放入神经网络的样子
+    Y_test = label.label_1(Y_test)#把标签转化为可以放入神经网络的样子
+
+    print(X.shape)
+    print(Y.shape)
+    print('测试数据')
+    print(X_test.shape)
+    print(Y_test.shape)
+
+    # os.system('pause')
+
+
+    # X, Y, X_test, Y_test = preprocess_data(X, Y, X_test, Y_test, seq_len, nb_ch)#标签学习数据都切,用于每一帧都对应一个标签那种
+
+    X, X_test = preprocess_data_1(X, X_test, seq_len, nb_ch)#只切割学习数据，用于一个block对应一个标签那种
 
     print('训练数据特征值')
     # print(X)
@@ -235,7 +253,7 @@ for fold in [1]:
     # print('测试数据标签')
     # print(Y_test)
     # print(Y_test.shape)
-    # os.system('pause')
+    os.system('pause')
 
     # Load model
     model = get_model(X, Y, cnn_nb_filt, cnn_pool_size, rnn_nb, fc_nb)

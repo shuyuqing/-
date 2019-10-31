@@ -159,7 +159,7 @@ for fold in [1,2,3,4]:
     print('标签')
     print(Y.shape)
     # print(Y)
-    # os.system('pause')
+    os.system('pause')
 
     # Load model
     # os.system('pause')
