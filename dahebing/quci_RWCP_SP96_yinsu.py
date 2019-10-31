@@ -5,7 +5,7 @@
 import csv
 import os
 
-def qu(path_1):#生成正解文的函数
+def qu(path_1,rwcp):#生成正解文的函数
 
     path = path_1
     for mulu in os.listdir(path):
@@ -73,8 +73,9 @@ def qu(path_1):#生成正解文的函数
             name = os.listdir(file_dir_2)
 
             #以下是RWCP_SP96专用的代码
-            # name.sort(key=lambda ele: int(ele.split('_')[1]))  # 把每个元素都用split函数拆开，以第二个字符串的大小为基准，进行排序
-            # name.sort(key=lambda ele: ele.split('_')[0])  # 然后再以拆开的第一个字符串为基准进行排序
+            if rwcp == True:
+                name.sort(key=lambda ele: int(ele.split('_')[1]))  # 把每个元素都用split函数拆开，以第二个字符串的大小为基准，进行排序
+                name.sort(key=lambda ele: ele.split('_')[0])  # 然后再以拆开的第一个字符串为基准进行排序
 
             if len(data_3) != len(name):
                 print(mulu)
@@ -112,7 +113,7 @@ import csv
 import os
 import pipei_yinsu
 
-def logwen(path):#生成识别结果的函数
+def logwen(path,rwcp):#生成识别结果的函数
 
     for mulu in os.listdir(path):
 
@@ -133,8 +134,9 @@ def logwen(path):#生成识别结果的函数
         file_dir_list = os.listdir(file_dir)
 
         # 注意，这部分是RWCP专用
-        # file_dir_list.sort(key=lambda ele: int(ele.split('_')[1]))  # 把每个元素都用split函数拆开，以第二个字符串的大小为基准，进行排序
-        # file_dir_list.sort(key=lambda ele: ele.split('_')[0])  # 然后再以拆开的第一个字符串为基准进行排序
+        if rwcp == True:
+            file_dir_list.sort(key=lambda ele: int(ele.split('_')[1]))  # 把每个元素都用split函数拆开，以第二个字符串的大小为基准，进行排序
+            file_dir_list.sort(key=lambda ele: ele.split('_')[0])  # 然后再以拆开的第一个字符串为基准进行排序
 
         with open(files_dir_1, 'w', encoding='utf-8') as f:  # 把正解文一句一句地写入新的log文件
 
@@ -377,6 +379,11 @@ def zifudingwei(tanngou,danci,filelist):#把有冒号的字母后面的那个字
             return tanngou[n]
         n = n+1
 
-yomi(path_1=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\train')
-# qu(path_1=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\train')
-logwen(path=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\train')
+
+
+
+RWCP = True#根据数据库是否是rwcp来设定
+
+# yomi(path_1=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\test')
+# qu(path_1=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\test',rwcp=RWCP)
+logwen(path=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\test',rwcp=RWCP)
