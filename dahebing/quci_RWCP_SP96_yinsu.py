@@ -2,6 +2,9 @@
 #首先我得通过认识结果把需要的正解文从.txt文件中取出来，写入到另外一个.txt文件中去
 #之后就会得到.ref文件，然后去dianlog.py文本中操作
 #记住，必须要重新在linux中新建一个.ref文件，把在windows上生成的,ref文件的内容复制到这个新建的文件中去，才能被scoring识别
+
+T = True
+F = False
 import csv
 import os
 
@@ -142,6 +145,7 @@ def logwen(path,rwcp):#生成识别结果的函数
 
             for i in file_dir_list:#每次看一个.out文件
                 files_dir = os.path.join(file_dir, i)
+                print(files_dir)
                 data = pipei_yinsu.read_out(files_dir)
 
                 # you = False#检查识别结果中有没有冒号
@@ -382,8 +386,8 @@ def zifudingwei(tanngou,danci,filelist):#把有冒号的字母后面的那个字
 
 
 
-RWCP = True#根据数据库是否是rwcp来设定
+RWCP = T#根据数据库是否是rwcp来设定
 
-# yomi(path_1=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\test')
-# qu(path_1=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\test',rwcp=RWCP)
-logwen(path=r'C:\Users\tsukuba\Desktop\实验数据\symbol_2\test',rwcp=RWCP)
+# yomi(path_1=r'C:\Users\a7825\Desktop\工作空间\数据库\RWCP')
+# qu(path_1=r'C:\Users\a7825\Desktop\工作空间\数据库\RWCP',rwcp=RWCP)
+logwen(path=r'C:\Users\a7825\Desktop\工作空间\数据库\RWCP',rwcp=RWCP)
