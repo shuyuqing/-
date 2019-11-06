@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
+from libs.base import App as AbstractApp, Logger as Log
 import os
 import numpy as np
 import time
@@ -13,50 +15,42 @@ import utils
 from IPython import embed
 import keras.backend as K
 import label
+import config as cfg
+from keras.optimizers import Adam #为了设置学习率
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+if cfg.gpuzhiding == True:
+    config = tf.ConfigProto(gpu_options=tf.GPUOptions(visible_device_list=cfg.visible_device_list, allow_growth=True))
+    set_session(tf.Session(config=config))
 
 K.set_image_data_format('channels_first')
 plot.switch_backend('agg')
 sys.setrecursionlimit(10000)
 
-
 def load_data(feat_folder_train,feat_folder_test):
-
     train = np.load(feat_folder_train)#把学习数据和训练数据都加载进来
-
     test = np.load(feat_folder_test)
-
     train = train['arr_0']
-
     test = test['arr_0']
-
     Xtrain = train[:, 1:None]
-
     Ytrain = train[:, 0:1]
-
     Ytrain = label.label_1(Ytrain)
-
     Xtest = test[:, 1:None]
-
     Ytest = test[:, 0:1]
-
     Ytest = label.label_1(Ytest)
-
     return Xtrain, Ytrain, Xtest, Ytest
 
-
 def get_model(data_in, data_out, _cnn_nb_filt, _cnn_pool_size, _rnn_nb, _fc_nb):
-
     spec_start = Input(shape=(data_in.shape[-3], data_in.shape[-2], data_in.shape[-1]))
     spec_x = spec_start
     for _i, _cnt in enumerate(_cnn_pool_size):#给列表里面的元素加上序号
-        spec_x = Conv2D(filters=_cnn_nb_filt, kernel_size=(3, 3), padding='same')(spec_x)
+        spec_x = Conv2D(filters=_cnn_nb_filt, kernel_size=cfg.kernel_size, padding='same')(spec_x)
         spec_x = BatchNormalization(axis=1)(spec_x)
         spec_x = Activation('relu')(spec_x)
         spec_x = MaxPooling2D(pool_size=(1, _cnn_pool_size[_i]))(spec_x)
         spec_x = Dropout(dropout_rate)(spec_x)
     spec_x = Permute((2, 1, 3))(spec_x)
     spec_x = Reshape((data_in.shape[-2], -1))(spec_x)
-
     # for _r in _rnn_nb:
     #
     #     print(_r)
@@ -66,60 +60,48 @@ def get_model(data_in, data_out, _cnn_nb_filt, _cnn_pool_size, _rnn_nb, _fc_nb):
     #
     #     spec_x = Bidirectional(GRU(units=_r, activation='tanh', recurrent_dropout=dropout_rate, return_sequences=False), batch_input_shape=(None, 8, 160), merge_mode='mul')(spec_x)
 
-    spec_x = Bidirectional(GRU(units=32, activation='tanh', recurrent_dropout=dropout_rate, return_sequences=True),
+    spec_x = Bidirectional(GRU(units=_rnn_nb[0], activation='tanh', recurrent_dropout=dropout_rate, return_sequences=True),
                            # batch_input_shape=(None, 8, 160),
                            merge_mode='mul')(spec_x)
-    spec_x = Bidirectional(GRU(units=32, activation='tanh', recurrent_dropout=dropout_rate, return_sequences=False),
+    spec_x = Bidirectional(GRU(units=_rnn_nb[1], activation='tanh', recurrent_dropout=dropout_rate, return_sequences=False),
                            # batch_input_shape=(None, 8, 32),
                            merge_mode='mul')(spec_x)
-
-
     # for _f in _fc_nb:
     #     spec_x = TimeDistributed(Dense(_f))(spec_x)
     #     spec_x = Dropout(dropout_rate)(spec_x)
-
     # spec_x = TimeDistributed(Dense(data_out.shape[-1]))(spec_x)
     # spec_x = TimeDistributed(Dense(data_out.shape[-1]))(spec_x)
-
-    spec_x = Dense(2)(spec_x)
-
+    spec_x = Dense(_fc_nb)(spec_x)
     out = Activation('softmax', name='strong_out')(spec_x)
-
     _model = Model(inputs=spec_start, outputs=out)
-    _model.compile(optimizer='Adam', loss='binary_crossentropy')
+    adam = Adam(lr = cfg.lr)
+    _model.compile(optimizer=adam, loss='binary_crossentropy')
     _model.summary()
     return _model
 
-
 def plot_functions(_nb_epoch, _tr_loss, _val_loss, _f1, _er, extension=''):#画图的函数
     plot.figure()
-
     plot.subplot(211)
     plot.plot(range(_nb_epoch), _tr_loss, label='train loss')
     plot.plot(range(_nb_epoch), _val_loss, label='val loss')
     plot.legend()
     plot.grid(True)
-
     plot.subplot(212)
     plot.plot(range(_nb_epoch), _f1, label='f')
     plot.plot(range(_nb_epoch), _er, label='er')
     plot.legend()
     plot.grid(True)
-
     plot.savefig(__models_dir + __fig_name + extension)
     plot.close()
     print('figure name : {}'.format(__fig_name))
-
 
 def preprocess_data(_X, _Y, _X_test, _Y_test, _seq_len, _nb_ch):
     # 把数据_seq_len毎に切开
     # split into sequences
     _X = utils.split_in_seqs(_X, _seq_len)
     _Y = utils.split_in_seqs(_Y, _seq_len)
-
     _X_test = utils.split_in_seqs(_X_test, _seq_len)
     _Y_test = utils.split_in_seqs(_Y_test, _seq_len)
-
     _X = utils.split_multi_channels(_X, _nb_ch)
     _X_test = utils.split_multi_channels(_X_test, _nb_ch)
     return _X, _Y, _X_test, _Y_test
@@ -131,52 +113,41 @@ def preprocess_data_1(_X, _X_test, _seq_len, _nb_ch):
     _X_test = utils.split_in_seqs(_X_test, _seq_len)
     _X = utils.split_multi_channels(_X, _nb_ch)
     _X_test = utils.split_multi_channels(_X_test, _nb_ch)
-
     return _X, _X_test
 
-
 #######################################################################################
-# MAIN SCRIPT STARTS HERE
 #######################################################################################
-
-is_mono = True  # True: mono-channel input, False: binaural input
-
-train_tezheng = r'C:\Users\a7825\Desktop\工作空间\桌面1\shiyan\symbol_40_8_8_biaoqian_pingheng\train.npz'
-test_tezheng = r'C:\Users\a7825\Desktop\工作空间\桌面1\shiyan\symbol_40_8_8_biaoqian_pingheng\test.npz'
-
+is_mono = cfg.is_mono  # True: mono-channel input, False: binaural input
+path_train = cfg.path_train  # 使用真实数据
+path_test = cfg.path_test
 __fig_name = '{}_{}'.format('mon' if is_mono else 'bin', time.strftime("%Y_%m_%d_%H_%M_%S"))
-
-
-nb_ch = 1 if is_mono else 2
-batch_size = 1            # Decrease this if you want to run on smaller GPU's
-fft_point = 8
-seq_len = int(fft_point//2)       # Frame sequence length. Input to the CRNN.
-nb_epoch = 500            # Training epochs
-patience = int(0.25 * nb_epoch)  # Patience for early stopping
-
-# Number of frames in 1 second, required to calculate F and ER for 1 sec segments.
-# Make sure the nfft and sr are the same as in feature.py
-sr = 44100
-nfft = 2048
-frames_1_sec = int(sr/(nfft/2.0))
-
-print('\n\nUNIQUE ID: {}'.format(__fig_name))
-print('TRAINING PARAMETERS: nb_ch: {}, seq_len: {}, batch_size: {}, nb_epoch: {}, frames_1_sec: {}'.format(
-    nb_ch, seq_len, batch_size, nb_epoch, frames_1_sec))
-
-# Folder for saving model and training curves
+nb_ch = cfg.nb_ch
+batch_size = cfg.batch_size            # Decrease this if you want to run on smaller GPU's
+fft_point = cfg.fft_point
+seq_len = cfg.seq_len       # Frame sequence length. Input to the CRNN.
+nb_epoch = cfg.nb_epoch            # Training epochs
+patience = cfg.patience  # Patience for early stopping
+sr = cfg.sr
+nfft = cfg.nfft
+frames_1_sec = cfg.frames_1_sec
+print('TRAINING PARAMETERS: nb_ch: {}, seq_len: {}, batch_size: {}, nb_epoch: {}, frames_1_sec: {}'.format(nb_ch, seq_len, batch_size, nb_epoch, frames_1_sec))
+Log.i('TRAINING PARAMETERS: nb_ch: %d, seq_len: %s, batch_size: %d, nb_epoch: %d, frames_1_sec: %s' % (nb_ch,seq_len,batch_size,nb_epoch,frames_1_sec))
 __models_dir = 'models/'
 utils.create_folder(__models_dir)
+cnn_nb_filt = cfg.cnn_nb_filt           # CNN filter size
+cnn_pool_size = cfg.cnn_pool_size   # Maxpooling across frequency. Length of cnn_pool_size =  number of CNN layers
+rnn_nb = cfg.rnn_nb           # Number of RNN nodes.  Length of rnn_nb =  number of RNN layers                        # rnn的层数等于rnn_nb的长度
+fc_nb = cfg.fc_nb                # Number of FC nodes.  Length of fc_nb =  number of FC layers
+dropout_rate = cfg.dropout_rate          # Dropout after each layer
+############################################################################################
+############################################################################################
 
-# CRNN model definition
-cnn_nb_filt = 32            # CNN filter size
-cnn_pool_size = [2, 2, 2]   # Maxpooling across frequency. Length of cnn_pool_size =  number of CNN layers
-rnn_nb = [32, 32]           # Number of RNN nodes.  Length of rnn_nb =  number of RNN layers
-                            # rnn的层数等于rnn_nb的长度
-fc_nb = [32]                # Number of FC nodes.  Length of fc_nb =  number of FC layers
-dropout_rate = 0.5          # Dropout after each layer
-print('MODEL PARAMETERS:\n cnn_nb_filt: {}, cnn_pool_size: {}, rnn_nb: {}, fc_nb: {}, dropout_rate: {}'.format(
-    cnn_nb_filt, cnn_pool_size, rnn_nb, fc_nb, dropout_rate))
+
+
+
+print('MODEL PARAMETERS:\n cnn_nb_filt: {}, cnn_pool_size: {}, rnn_nb: {}, fc_nb: {}, dropout_rate: {}'.format(cnn_nb_filt, cnn_pool_size, rnn_nb, fc_nb, dropout_rate))
+Log.i('MODEL PARAMETERS: cnn_nb_filt: %d, cnn_pool_size: %d,%d,%d, rnn_nb: %d,%d, fc_nb: %d, dropout_rate: %f'
+      %(cnn_nb_filt,cnn_pool_size[0],cnn_pool_size[1],cnn_pool_size[2],rnn_nb[0],rnn_nb[1],fc_nb,dropout_rate))
 
 avg_f1 = list()
 
@@ -192,7 +163,6 @@ for fold in [1]:
     # print(Y)
     # print(Y.shape)
     # os.system('pause')
-
 
     """生成虚拟数据
     a = np.random.rand(2000, 40)
@@ -215,8 +185,6 @@ for fold in [1]:
     print(Y.shape)
     # os.system('pause')
     """
-    path_train = r'C:\Users\a7825\Desktop\40_8_8/train.npz'#使用真实数据
-    path_test = r'C:\Users\a7825\Desktop\40_8_8/test.npz'
     train = np.load(path_train)
     test = np.load(path_test)
 
@@ -235,8 +203,6 @@ for fold in [1]:
     print(Y_test.shape)
 
     # os.system('pause')
-
-
     # X, Y, X_test, Y_test = preprocess_data(X, Y, X_test, Y_test, seq_len, nb_ch)#标签学习数据都切,用于每一帧都对应一个标签那种
 
     X, X_test = preprocess_data_1(X, X_test, seq_len, nb_ch)#只切割学习数据，用于一个block对应一个标签那种
@@ -253,13 +219,12 @@ for fold in [1]:
     # print('测试数据标签')
     # print(Y_test)
     # print(Y_test.shape)
-    os.system('pause')
 
     # Load model
     model = get_model(X, Y, cnn_nb_filt, cnn_pool_size, rnn_nb, fc_nb)
 
     # Training
-    best_fscore, best_epoch, pat_cnt, best_er, f1_for_best_er, best_conf_mat = 0, 0, 0, 99999, None, None
+    best_fscore, best_epoch, pat_cnt = 0, 0, 0
     tr_loss, val_loss, F_score, f1_overall_1sec_list, er_overall_1sec_list = [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch
 
     for i in range(nb_epoch):
@@ -293,18 +258,20 @@ for fold in [1]:
 
             best_fscore = F_score[i]
             model.save(os.path.join(__models_dir, '{}_fold_{}_model.h5'.format(__fig_name, fold)))
+            # Log.i('save model:%s'%os.path.join(__models_dir, '{}_fold_{}_model.h5'.format(__fig_name, fold)))
             best_epoch = i
             pat_cnt = 0
 
-        print('tr Er : {}, val Er : {}, F1_overall : {}, ER_overall : {} Best ER : {}, best_epoch: {}'.format(
-                tr_loss[i], val_loss[i], f1_overall_1sec_list[i], er_overall_1sec_list[i], best_er, best_epoch))
-        # plot_functions(nb_epoch, tr_loss, val_loss, f1_overall_1sec_list, er_overall_1sec_list, '_fold_{}'.format(fold))#画图的函数
+        print('tr Er : {}, val Er : {}, F1 : {}, best_epoch: {}'.format(tr_loss[i], val_loss[i], F_score[i], best_epoch))
+        Log.i('tr Er : %f, F1 : %f, epoch : %d, val Er : %f,  best_epoch : %d, LR : %f'%(tr_loss[i], F_score[i], i+1,val_loss[i], best_epoch, cfg.lr))
+        plot_functions(nb_epoch, tr_loss, val_loss, f1_overall_1sec_list, er_overall_1sec_list, '_fold_{}'.format(fold))#画图的函数
         if pat_cnt > patience:
             break
 
     avg_f1.append(best_fscore)
     print('saved model for the best_epoch: {} with best_f1: {}'.format(
         best_epoch, best_fscore))
+    Log.i("saved model for the best_epoch: %d with best_f1: %s"%(best_epoch,best_fscore))
     # print('best_conf_mat: {}'.format(best_conf_mat))
     # print('best_conf_mat_diag: {}'.format(np.diag(best_conf_mat)))
 

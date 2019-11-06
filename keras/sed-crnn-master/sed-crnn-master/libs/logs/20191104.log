@@ -1,0 +1,5 @@
+2019-11-04 14:45:39.357 	2fc55c	[info]	LOG Start with ACCESSID=[2fc55c] UNIQUEID=[UNIQID] ACCESSTIME=[2019-11-04 14:45:39.357275 ]
+2019-11-04 14:45:39.358 	2fc55c	[info]	TRAINING PARAMETERS: nb_ch: 1, seq_len: 4, batch_size: 10, nb_epoch: 1, frames_1_sec: 43
+2019-11-04 14:45:39.358 	2fc55c	[info]	MODEL PARAMETERS: cnn_nb_filt: 32, cnn_pool_size: 2,2,2, rnn_nb: 32,32, fc_nb: 2, dropout_rate: 0.000000
+2019-11-04 14:46:14.313 	2fc55c	[info]	tr Er : 0.693143, val Er : 0.693144, F1 : 0.000000,epoch : 1, best_epoch : 0, LR : 0.000100
+2019-11-04 14:46:14.497 	2fc55c	[info]	saved model for the best_epoch: 0 with best_f1: 0

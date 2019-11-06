@@ -1,0 +1,7 @@
+dianlog_UUDB:生成.log文件(识别结果)
+quci:生成ref文件(単語単位的正解文),里面调用了dianlog_UUDB
+quci_yinsu:把ref文件转换为音素表示
+fuliye_gai_yinsu:傅里叶变换
+dahebing_s_1_yinsu:进行文件处理的脚本，主要用于_s_1
+hanshu:把之前进行数据处理的各种函数合并到一起
+
