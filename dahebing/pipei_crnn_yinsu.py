@@ -3,6 +3,7 @@ import re,os,csv
 import pipei_yinsu as pi
 import muluzai as mulu
 import chongzao_crnn_yinsu as cz
+from quci_RWCP_SP96_yinsu import changpoyin
 
 #为了处理那些因为表示方式不同而被打错标签的单词，先把错误单词的索引找出，再把单词转变成字母，然后再比较
 
@@ -26,11 +27,12 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
         path_tezheng = os.path.join(path_1, name_tezheng)
 
-        # biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r', encoding='EUC-JP'))  # 把标志文件读进来
-        biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r'))  # 把标志文件读进来
+        print(os.path.join(path_1, name1))
+
+        biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r', encoding='EUC-JP'))  # 出现错误时候可能是没加encoding
+        # biaozhiwenjian = csv.reader(open(os.path.join(path_1, name1), 'r'))  # 把标志文件读进来
 
         # biaozhiwenjian = csv.reader(open(os.path.join(path_1, name2), 'r', encoding='utf-8')) #如果标志文件是.txt文件
-
         biaozhiwenjian_1 = [i for i in biaozhiwenjian]  # 转化为list,但是内容是list里面套list
         #[['id: l_8840_9810_T1_F_01'],['REF:  そう です か 、 はい 。 '],['HYP:  そう です か    はい 。 '],['EVAL: C    C    C  D  C    C  '],[],['id: l_10800_13190_T1_F_01']]
 
@@ -47,9 +49,6 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                 continue
 
             if 'id:' in biaozhi:
-
-                l_zhengjie_1 = []
-                l_jieguo_1 = []
 
                 ID = biaozhiwenjian_1[i][0].replace('id: ', '')
 
@@ -70,28 +69,20 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
                 for i in l_biaozhi:
 
                     if i == "D":#删除错误
-                        l_zhengjie_1.append(l_zhengjie[jishuqi_zhengjie])
-                        l_jieguo_1.append('')#发生删除错误，就在识别结果的列表里面加上一个空格
                         jishuqi_zhengjie += 1
                         jishuqi_biaozhi += 1
 
                     if i == "C":#正解
-                        l_zhengjie_1.append(l_zhengjie[jishuqi_zhengjie])
-                        l_jieguo_1.append(l_jieguo[jishuqi_jieguo])#
                         jishuqi_zhengjie += 1
                         jishuqi_jieguo += 1
                         jishuqi_biaozhi += 1
 
                     if i == "I":#插入错误
-                        l_jieguo_1.append(l_jieguo[jishuqi_jieguo])
-                        l_zhengjie_1.append('')#发生插入错误，就在正解文的里面加入空格
                         jishuqi_jieguo += 1
                         jishuqi_biaozhi += 1
 
                     if i == "S":#如果是S的话特殊处理一下，转化为字母再比较，如果转化之后相等的话，把标志改为C
 
-                        l_zhengjie_1.append(l_zhengjie[jishuqi_zhengjie])
-                        l_jieguo_1.append(l_jieguo[jishuqi_jieguo])#
                         jishuqi_zhengjie += 1
                         jishuqi_jieguo += 1
                         jishuqi_biaozhi += 1
@@ -125,7 +116,11 @@ def dabiaoqian(path,guanjianzi_1,guanjianzi_2):
 
                     print("ID")
                     print(ID)
-                    dianout_chongzao = cz.chongzao(l_biaozhi, l_jieguo_1, dianout, ID, l_zhengjie_1)  # 生成新的dianoutlist,以后就靠它了
+
+
+                    _dianout = changpoyin(dianout,path_out_1,ID + '.out')#把有长母音的地方处理一下
+
+                    dianout_chongzao = cz.chongzao(l_biaozhi, _dianout, ID)  #生成新的dianoutlist,以后就靠它了
 
                     # print('dianout_chongzao')
                     # print(dianout_chongzao)
@@ -188,4 +183,4 @@ def shanchuhang(lujin):
         with open(i, 'w') as f:
             f.writelines(d)
 
-dabiaoqian(path=r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹',guanjianzi_1=r'mizhichuli',guanjianzi_2=r'mizhichuli_biaoqian_shiyan')
+# dabiaoqian(path=r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹',guanjianzi_1=r'mizhichuli',guanjianzi_2=r'mizhichuli_biaoqian_shiyan')

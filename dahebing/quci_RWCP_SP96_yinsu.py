@@ -153,8 +153,12 @@ def logwen(path,rwcp):#生成识别结果的函数
                 #     if ':' in danci[0]:
                 #         you = True
                 # if you == True:
+                # print(data)
+                # print(files_dir)
+                # print(i)
                 _data = changpoyin(data, files_dir, i)  # 改造之后的新的列表,
-
+                # print(_data)
+                # os.system('pause')
                 # print(data)
                 # print(_data)
                 # os.system('pause')
@@ -260,7 +264,7 @@ def changpoyin(data,files_dir,i):#把长破音都转化为u,这里的i是文件�
 
                 if zhenshu >= danci_1[1][0] and zhenshu <= danci_1[1][1]:  # 找到这个音素对应的汉字
 
-                    print('能找到')
+                    # print('能找到')
 
                     tanngou = conv.do(danci_1[0])  # 把这个汉字取出进行转化
 
@@ -280,17 +284,20 @@ def changpoyin(data,files_dir,i):#把长破音都转化为u,这里的i是文件�
                         data_2.append(danci_2)
                         data_2.append(danci_3)
 
-                    elif tanngou[-1] == 'i':#如果结尾是u那就把识别结果里的:转化为u
-
-                        fenjie = (danci[1][0] + danci[1][1])//2
-                        danci_2 = copy.deepcopy(danci)
-                        danci_2[1][1] = fenjie
-                        danci_2[0] = danci_2[0].replace(':','')
-                        danci_3 = copy.deepcopy(danci)
-                        danci_3[1][0] = fenjie + 1
-                        danci_3[0] = 'i'
-                        data_2.append(danci_2)
-                        data_2.append(danci_3)
+                    #这段代码等做过第一波实验之后再加进去（判断冒号之后是i的情况）
+                    ################################################################
+                    # elif tanngou[-1] == 'i':#如果结尾是u那就把识别结果里的:转化为u
+                    #
+                    #     fenjie = (danci[1][0] + danci[1][1])//2
+                    #     danci_2 = copy.deepcopy(danci)
+                    #     danci_2[1][1] = fenjie
+                    #     danci_2[0] = danci_2[0].replace(':','')
+                    #     danci_3 = copy.deepcopy(danci)
+                    #     danci_3[1][0] = fenjie + 1
+                    #     danci_3[0] = 'i'
+                    #     data_2.append(danci_2)
+                    #     data_2.append(danci_3)
+                    ###############################################################
 
                     elif zifudingwei(tanngou,danci[0].replace(':',''),files_dir_1) == 'u':#把有冒号字母后面的那个字母单独拿出来
 
@@ -384,8 +391,8 @@ def yomi(path_1):
 
 def zifudingwei(tanngou,danci,filelist):#把有冒号的字母后面的那个字母返回来
 
-    print(filelist)
-    print(tanngou)
+    # print(filelist)
+    # print(tanngou)
 
     n = 0
     for y in tanngou:
@@ -398,8 +405,10 @@ def zifudingwei(tanngou,danci,filelist):#把有冒号的字母后面的那个字
 
 
 RWCP = F#根据数据库是否是rwcp来设定
-path = r'C:\Users\shu\Desktop\gongxiang\ag1_1\train'
+path = r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹'
 
-# yomi(path_1=path)
-# qu(path_1=path,rwcp=RWCP)
-logwen(path=path,rwcp=RWCP)
+if __name__ == "__main__":
+
+    # yomi(path_1=path)
+    # qu(path_1=path,rwcp=RWCP)
+    logwen(path=path,rwcp=RWCP)

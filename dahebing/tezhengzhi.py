@@ -24,6 +24,7 @@ def tiqu(path,weidu,logenergy,energy_1):
         muluz.mkdir(output_dir2)
 
         for ad_file in os.listdir(input_dir):
+            print(input_dir + "/" + ad_file)
             (fs, audio) = wav.read(input_dir + "/" + ad_file)
 
             if energy_1 == True:

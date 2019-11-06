@@ -6,7 +6,8 @@ import shanchongfu as sh
 import shanchuhang as sc
 import tezhengzhi as te
 import zhengjie_RWCP as zR
-import pipei_zhenze_s as pzs
+import pipei_zhenze_s as pzs#在单词单位上打标签
+import pipei_crnn_yinsu as pcy#在音素单位上打标签
 import pipei_zhenze_a as pas
 import pipei_s_yinsu as psy
 import pipei_s_yinsu_1 as psy1
@@ -30,12 +31,13 @@ import zuixiao as zx
 hostName = socket.gethostname()
 print(hostName)
 
+
 if hostName == 'shu-VAIO':
     path = r'C:\Users\shu\Desktop\gongxiang\symbol_1'  # 批次
     path_beifeng = r'C:\Users\shu\Desktop\gongxiang\数据库'
 
 elif hostName == 'SHU':
-    path = r'C:\Users\a7825\Desktop\新建文件夹\新建文件夹'
+    path = r'C:\Users\a7825\Desktop\工作空间\数据库\all'
     path_beifeng = r'C:\Users\a7825\Desktop\工作空间\数据库\test'
     jieweiguanjianzai = 'test'
 
@@ -46,12 +48,12 @@ elif hostName == "symbol2":
 # path = r'C:\Users\a7825\Desktop\工作空间\杂物\对比\symbol\新建文件夹 (2)'
 
 weidu = 40
-chuangkou = 16
+chuangkou = 8
 #进行正则化的窗口
 
 lintianchong = T
 #是否进行零补充
-fftwindow = 32
+fftwindow = 8
 #fft时候的窗口
 
 
@@ -81,22 +83,22 @@ else:
 # zR.zhengjie(path)#在正解文的最后加上句号，然后提取出需要的正解文
 
 
-pis.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
-pis.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
-pis.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='log',guanjianzi_1 = 'mulu')#批量删除文件夹下的一些东西，注意，第二个关键字根据要删除的是文件（wenjian）还是目录(mulu)来决定
+# pis.pishan(path,guanjianzi='log_qian5',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='log_yuan',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='mizhichuli_biaoqian_pingheng',guanjianzi_1 = 'mulu')
 pis.pishan(path,guanjianzi='mizhichuli_biaoqian',guanjianzi_1 = 'mulu')
-pis.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
+# pis.pishan(path,guanjianzi='mizhichuli',guanjianzi_1 = 'mulu')
 
 
-te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
+# te.tiqu(path,weidu,logenergy,energy)#提取wav文件的特征值
 
 dataname = dataname +'_'+ str(weidu)
 
-sc.shanchuhang(path)#删除提取特征值的前5行跟后6行
+# sc.shanchuhang(path)#删除提取特征值的前5行跟后6行,如果只用fbank做实验就把这句话加上
 
 
-he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
+# he.hencyou_1(path,chuangkou,padding,lintianchong)#删除文件的前几行，补上零，然后做変調スペクトル的计算
 
 dataname = dataname +'_'+ str(chuangkou)+ '_'+str(fftwindow)
 dataname_1 = dataname_2 = dataname
@@ -158,11 +160,13 @@ dataname_1 = dataname_1 + '_' + 'pingheng'
 
 
 
-pzs.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')
-zx.zuixiao(path,guanjianzi=s2+'_'+'biaoqian',xiaxian=10)
-bl.kongwenjian(path,guanjianzi=s2+'_'+'biaoqian')#把大小为0的文件都删除了
-bl.pingheng_2(path,guanjianzi= s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
-bl.pingheng_3(path,guanjianzi=s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
+pcy.dabiaoqian(path,guanjianzi_1 = s2,guanjianzi_2 = s2+'_'+'biaoqian')#给特征值打标签
+
+os.system('pause')
+zx.zuixiao(path,guanjianzi = s2+'_'+'biaoqian',xiaxian=10)
+bl.kongwenjian(path,guanjianzi = s2+'_'+'biaoqian')#把大小为0的文件都删除了
+bl.pingheng_2(path,guanjianzi = s2+'_'+'biaoqian')#把标签全部是0的文件都移动到桌面去
+bl.pingheng_3(path,guanjianzi = s2+'_'+'biaoqian')#把标签全部是1的文件都移动到桌面去
 s2 = s2+'_'+'biaoqian'
 dataname_2 = dataname_2 + '_' + 'biaoqian'
 
