@@ -268,7 +268,7 @@ def changpoyin(data,files_dir,i):#把长破音都转化为u,这里的i是文件�
 
                         tanngou = ztok._make_kana_convertor(danci_1[0])
 
-                    if tanngou[-1] == 'u':#如果结尾是u那就把识别结果里的:转化为u
+                    if tanngou[-1] == 'u' or tanngou=='nado':#如果结尾是u那就把识别结果里的:转化为u
 
                         fenjie = (danci[1][0] + danci[1][1])//2
                         danci_2 = copy.deepcopy(danci)
@@ -280,6 +280,17 @@ def changpoyin(data,files_dir,i):#把长破音都转化为u,这里的i是文件�
                         data_2.append(danci_2)
                         data_2.append(danci_3)
 
+                    elif tanngou[-1] == 'i':#如果结尾是u那就把识别结果里的:转化为u
+
+                        fenjie = (danci[1][0] + danci[1][1])//2
+                        danci_2 = copy.deepcopy(danci)
+                        danci_2[1][1] = fenjie
+                        danci_2[0] = danci_2[0].replace(':','')
+                        danci_3 = copy.deepcopy(danci)
+                        danci_3[1][0] = fenjie + 1
+                        danci_3[0] = 'i'
+                        data_2.append(danci_2)
+                        data_2.append(danci_3)
 
                     elif zifudingwei(tanngou,danci[0].replace(':',''),files_dir_1) == 'u':#把有冒号字母后面的那个字母单独拿出来
 
@@ -386,8 +397,9 @@ def zifudingwei(tanngou,danci,filelist):#把有冒号的字母后面的那个字
 
 
 
-RWCP = T#根据数据库是否是rwcp来设定
+RWCP = F#根据数据库是否是rwcp来设定
+path = r'C:\Users\shu\Desktop\gongxiang\ag1_1\train'
 
-# yomi(path_1=r'C:\Users\a7825\Desktop\工作空间\数据库\RWCP')
-# qu(path_1=r'C:\Users\a7825\Desktop\工作空间\数据库\RWCP',rwcp=RWCP)
-logwen(path=r'C:\Users\a7825\Desktop\工作空间\数据库\RWCP',rwcp=RWCP)
+# yomi(path_1=path)
+# qu(path_1=path,rwcp=RWCP)
+logwen(path=path,rwcp=RWCP)
