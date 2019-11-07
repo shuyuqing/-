@@ -73,6 +73,16 @@ def hunxiao(juzhen):
     correct_f = (2 * correct * correct_1) / (correct + correct_1)
     fause_f = (2 * fause * fause_1) / (fause + fause_1)
 
+    '''
+       混淆矩阵的形状是
+                   预测值
+                   0   1
+       真实值  0   a   b
+               1   c   d
+       真实值是0，预测值也是0的情况是有a次
+       真实值是0，但是预测值是1的情况有b次。。。。。。
+    '''
+
     return correct_f,fause_f,correct_rate,fause_rate
 
 def hunxiao_1(juzhen):
@@ -80,5 +90,6 @@ def hunxiao_1(juzhen):
     confuse = juzhen
 
     fause_f = (2*confuse[1][1])/(2*confuse[1][1] + confuse[0][1] + confuse[1][0])
+    correct_f = (2*confuse[0][0])/(2*confuse[0][0]+confuse[1][0] + confuse[0][1])
 
-    return fause_f
+    return fause_f,correct_f

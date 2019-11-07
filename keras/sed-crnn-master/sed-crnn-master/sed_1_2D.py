@@ -59,7 +59,6 @@ def get_model(data_in, data_out, _cnn_nb_filt, _cnn_pool_size, _rnn_nb, _fc_nb):
     #     #     merge_mode='mul')(spec_x)
     #
     #     spec_x = Bidirectional(GRU(units=_r, activation='tanh', recurrent_dropout=dropout_rate, return_sequences=False), batch_input_shape=(None, 8, 160), merge_mode='mul')(spec_x)
-
     spec_x = Bidirectional(GRU(units=_rnn_nb[0], activation='tanh', recurrent_dropout=dropout_rate, return_sequences=True),
                            # batch_input_shape=(None, 8, 160),
                            merge_mode='mul')(spec_x)
@@ -146,8 +145,9 @@ dropout_rate = cfg.dropout_rate          # Dropout after each layer
 
 
 print('MODEL PARAMETERS:\n cnn_nb_filt: {}, cnn_pool_size: {}, rnn_nb: {}, fc_nb: {}, dropout_rate: {}'.format(cnn_nb_filt, cnn_pool_size, rnn_nb, fc_nb, dropout_rate))
-Log.i('MODEL PARAMETERS: cnn_nb_filt: %d, cnn_pool_size: %d,%d,%d, rnn_nb: %d,%d, fc_nb: %d, dropout_rate: %f'
-      %(cnn_nb_filt,cnn_pool_size[0],cnn_pool_size[1],cnn_pool_size[2],rnn_nb[0],rnn_nb[1],fc_nb,dropout_rate))
+Log.i('MODEL PARAMETERS: cnn_nb_filt: %d, cnn_pool_size: %d,%d,%d, rnn_nb: %d,%d, fc_nb: %d, dropout_rate: %f,fftpoint: %d'
+      %(cnn_nb_filt,cnn_pool_size[0],cnn_pool_size[1],cnn_pool_size[2],rnn_nb[0],rnn_nb[1],fc_nb,dropout_rate, fft_point))
+Log.i("trainningdata: %s"%(path_train))
 
 avg_f1 = list()
 
@@ -225,7 +225,7 @@ for fold in [1]:
 
     # Training
     best_fscore, best_epoch, pat_cnt = 0, 0, 0
-    tr_loss, val_loss, F_score, f1_overall_1sec_list, er_overall_1sec_list = [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch
+    tr_loss, val_loss, F_score_fause, F_score_correct, f1_overall_1sec_list, er_overall_1sec_list = [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch, [0] * nb_epoch
 
     for i in range(nb_epoch):
         print('Epoch : {} '.format(i), end='')
@@ -243,27 +243,33 @@ for fold in [1]:
         pred = model.predict(X_test)
         pred = np.argmax(pred, axis=1)
         biaoqian = label.label_2(Y_test)
+
+        print(biaoqian)
+        print(pred)
+
+
         confuse = confusion_matrix(biaoqian, pred)#计算混淆矩阵
         # correct_f, fause_f, correct_rate, fause_rate = utils.hunxiao(confuse)#计算f值以及两个种类的比率
-        fause_f = utils.hunxiao_1(confuse)#计算f值以及两个种类的比率
+        fause_f,correct_f = utils.hunxiao_1(confuse)#计算f值以及两个种类的比率
 
         # print('fause_f')
         # print(fause_f)
         # os.system('pause')
 
-        F_score[i] = fause_f
+        F_score_fause[i] = fause_f
+        F_score_correct[i] = correct_f
         pat_cnt = pat_cnt + 1
 
-        if F_score[i] > best_fscore:
+        if F_score_fause[i] > best_fscore:
 
-            best_fscore = F_score[i]
+            best_fscore = F_score_fause[i]
             model.save(os.path.join(__models_dir, '{}_fold_{}_model.h5'.format(__fig_name, fold)))
             # Log.i('save model:%s'%os.path.join(__models_dir, '{}_fold_{}_model.h5'.format(__fig_name, fold)))
             best_epoch = i
             pat_cnt = 0
 
-        print('tr Er : {}, val Er : {}, F1 : {}, best_epoch: {}'.format(tr_loss[i], val_loss[i], F_score[i], best_epoch))
-        Log.i('tr Er : %f, F1 : %f, epoch : %d, val Er : %f,  best_epoch : %d, LR : %f'%(tr_loss[i], F_score[i], i+1,val_loss[i], best_epoch, cfg.lr))
+        print('tr Er : {}, val Er : {}, F1_fause : {}, F1_correct : {}, best_epoch: {}'.format(tr_loss[i], val_loss[i], F_score_fause[i], F_score_correct[i],best_epoch))
+        Log.i('tr Er : %f, F1_fause : %f, F1_correct:%f, epoch : %d, val Er : %f,  best_epoch : %d, LR : %f'%(tr_loss[i], F_score_fause[i], F_score_correct[i],i+1,val_loss[i], best_epoch, cfg.lr))
         plot_functions(nb_epoch, tr_loss, val_loss, f1_overall_1sec_list, er_overall_1sec_list, '_fold_{}'.format(fold))#画图的函数
         if pat_cnt > patience:
             break
