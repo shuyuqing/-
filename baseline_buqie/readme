@@ -1,0 +1,7 @@
+b_pipei:#从.out文件中把需要的列表匹配出来（信赖度也匹配出来）
+yuce:把根据信赖的预测值装入list,
+zhuyao:baseline的主程序
+zhenshi:把真实值装入list，方便最后放入混淆矩阵
+xinlaidu:把信赖度加入到list中去
+shaixuan:#对得到的数据进行筛选，把真实值全是0或者全是1的数据对全部丢掉
+pinghen:#为了让数据平衡，要把数据对里面的数据切一下
