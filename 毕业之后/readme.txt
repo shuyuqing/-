@@ -5,3 +5,4 @@ fileskennsaku.py: #ファイルはあるフォルダに存在しているかど�
 foruta.py: #機能名ことにフィルター作成(機能id+機能名)
 ptshiyousyo.py: #PT仕様書フォーマットのcopy(機能名ごと)
 抽出、修正.sql: 经常用到的sql语句
+临时抽出结果.sql: 把两个sql语句的执行结果合在一起，作为临时结果再提取一遍
