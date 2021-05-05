@@ -13,8 +13,12 @@ import time
 import difflib
 import hashlib
 
+aPath = r"C:\Users\a7825\Desktop\新建文件夹 (2)\1"
+bPath = r"C:\Users\a7825\Desktop\新建文件夹 (2)\2"
 
-def getFileMd5(filename):
+#如果aPath下面有某个bPath中所没有的文件夹，这种情况是检测不出来的，所以aPath和bPath中的文件夹的数量和名称要一摸一样才行
+
+def getFileMd5(filename):#把文件流转化为字符串，不相同的两个文件字符串就不一样
     if not os.path.isfile(filename):
         print('file not exist: ' + filename)
         return
@@ -77,9 +81,8 @@ def dirCompare(apath, bpath):
         for of in sorted(onlyInB):
             print(of)
 
-
 if __name__ == '__main__':
-    aPath = r"C:\Users\a7825\Desktop\新建文件夹 (2)\1"
-    bPath = r"C:\Users\a7825\Desktop\新建文件夹 (2)\2"
+
     dirCompare(aPath, bPath)
     print("\ndone!")
+
