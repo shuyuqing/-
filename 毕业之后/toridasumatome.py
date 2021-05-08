@@ -18,7 +18,7 @@ def matome(afiles):
     newfile=os.path.join(Path,"matome")
     os.makedirs(newfile)#创建文件夹
     for path in afiles:
-        copyfile(path,os.path.join(newfile,os.path.basename(path)))#复制文件
+        copyfile(path,os.path.join(newfile,os.path.basename(path)))#复制文件/从路径中取出末尾文件名
 
 if __name__ == '__main__':
     afiles = getAllFiles(Path)
