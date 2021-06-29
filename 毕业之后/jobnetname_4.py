@@ -1,11 +1,10 @@
+#シェル名を作成
 import os,openpyxl
 
-basedir_1=r"C:\bk\プロジェクト関係\シェル\PN"
-basedir=r"C:\Users\1sn311\Desktop\ファイル名_シェル名(訂正版)_バージョン2.xlsx"
-excel_path = r"C:\bk\プロジェクト関係\シェル\ファイル名_シェル名(訂正版)_新規作成.xlsx.xlsx"
-path = r"C:\Users\1sn311\Desktop\ファイル名_シェル名(訂正版)_バージョン2.xlsx"
+basedir_1=r'C:\プロジェクト関係\シェル(個別層)\OT'
+path = r"C:\プロジェクト関係\ドキュメント\二回目\ファイル名_cobol名.xlsx"
 workbook = openpyxl.load_workbook(path)
-sheet = workbook["PN"]
+sheet = workbook['OT']
 worksheet = workbook.create_sheet(title='新規作成')
 biao1=[]
 biao2=[]
@@ -14,15 +13,15 @@ biao4=[]
 dic={'':{}}
 
 
-for dange in range(2,495):
+for dange in range(1,86):
     file_name = sheet.cell(row=dange, column=1).value
-    sh_name = sheet.cell(row=dange, column=4).value
+    sh_name = sheet.cell(row=dange, column=2).value
     xx = {file_name: {sh_name: 0}}
     dic.update(xx)
 
     if sh_name == "記述なし":
 
-        biao1.append(" ")
+        biao1.append("記述なし")
         biao3.append(" ")
         biao4.append(" ")
 
@@ -124,17 +123,9 @@ for dange in range(2,495):
 # print(dic)
 for ss in biao1:
     print(ss)
-print(len(biao1))
+# print(len(biao1))
                         
-                
-                        
-                        # print(2)
 
-
-                # else:
-                #     biao1.append(ll[2])
-            # print(file_name)
-            # print(biao1)
 
 
 
