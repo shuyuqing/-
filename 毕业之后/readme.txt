@@ -11,3 +11,4 @@ toridasumatome.py: #把目录里面的文件全部都拿出来，统一放到一
 saibunnrui.py: 按照本地的文件夹的目录格式，把server上下载下来的文件分类(判断文件存在，按相同的方式创建文件夹的目录结构)
 kinyuu.py: 使用win32com为excel填入内容且不会改变其格式
 jobnetname_7.py: 以逗号为分隔进行split,把csv中的文件提取出来，放到excel表格里
+grepツール.xlsm: 使用vba实现grep的查找功能
