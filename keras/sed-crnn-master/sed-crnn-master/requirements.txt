@@ -1,5 +1,5 @@
 keras==2.0.8
-numpy==1.14.0
+numpy==1.22.0
 matplotlib==2.0.2
 wave==0.0.2
 librosa==0.5.1
